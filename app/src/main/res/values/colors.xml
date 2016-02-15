@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+
+    <color name="primary">#E43F3F</color>
+    <color name="primary_dark">#E12929</color>
+    <color name="primary_darker">#CC1D1D</color>
+    <color name="accent">#FFFFFF</color>
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#CCCCCC</color>
+    <color name='gray'>#EEEEEE</color>
+    <color name="more">#F7F4F0</color>
+    <color name="white">#FFFFFF</color>
+
+
+    <color name="line_color">#DDDDDD</color>
+
+    <!--个人中心界面的分割线-->
+    <color name="black2">#ffeeeeee</color>
+
+    <!--个人中心：注册/登录按钮-->
+    <color name="btn_register_normal">#2F4F4F</color>
+    <color name="btn_register_pressed">#3A4F8F</color>
+
+
+</resources>

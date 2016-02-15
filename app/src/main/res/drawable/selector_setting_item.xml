@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    个人中心的item，每个item是个textview
+    他们状态将在这里设置，比如选中时的状态等等。
+    可参考http://www.cnblogs.com/tianzhijiexian/p/4296647.html
+-->
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/black2" android:state_pressed="true"/>
+    <item android:drawable="@color/white" android:state_selected="true"/>
+    <item android:drawable="@color/white"/>
+</selector>
