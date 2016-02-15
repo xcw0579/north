@@ -157,10 +157,10 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <!--<ImageView-->
-                        <!--android:layout_width="30.0dip"-->
-                        <!--android:layout_height="30.0dip"-->
-                        <!--android:src="@drawable/icon_self_wait_pay"/>-->
+                        <ImageView
+                        android:layout_width="40.0dip"
+                        android:layout_height="40.0dip"
+                        android:src="@drawable/icon_self_wait_pay"/>
                         <TextView
                             android:text="待付款"
                             android:textStyle="bold"
@@ -177,10 +177,10 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <!--<ImageView-->
-                        <!--android:layout_width="30.0dip"-->
-                        <!--android:layout_height="30.0dip"-->
-                        <!--android:src="@drawable/icon_self_wait_send"/>-->
+                        <ImageView
+                        android:layout_width="40.0dip"
+                        android:layout_height="40.0dip"
+                        android:src="@drawable/icon_self_wait_send"/>
                         <TextView
                             android:text="待发货"
                             android:textStyle="bold"
@@ -197,10 +197,10 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <!--<ImageView-->
-                        <!--android:layout_width="40.0dip"-->
-                        <!--android:layout_height="40.0dip"-->
-                        <!--android:src="@drawable/icon_self_wait_receive"/>-->
+                        <ImageView
+                        android:layout_width="40.0dip"
+                        android:layout_height="40.0dip"
+                        android:src="@drawable/icon_self_wait_receive"/>
                         <TextView
                             android:text="待收货"
                             android:textStyle="bold"
@@ -217,10 +217,10 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <!--<ImageView-->
-                        <!--android:layout_width="32.0dip"-->
-                        <!--android:layout_height="32.0dip"-->
-                        <!--android:src="@drawable/icon_self_wait_comment"/>-->
+                        <ImageView
+                        android:layout_width="38.0dip"
+                        android:layout_height="38.0dip"
+                        android:src="@drawable/icon_self_wait_comment"/>
                         <TextView
                             android:text="待评价"
                             android:textStyle="bold"
@@ -237,10 +237,10 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <!--<ImageView-->
-                        <!--android:layout_width="30.0dip"-->
-                        <!--android:layout_height="30.0dip"-->
-                        <!--android:src="@drawable/icon_self_wait_maintenance"/>-->
+                        <ImageView
+                        android:layout_width="40.0dip"
+                        android:layout_height="40.0dip"
+                        android:src="@drawable/icon_self_wait_maintenance"/>
                         <TextView
                             android:text="售后服务"
                             android:textStyle="bold"
