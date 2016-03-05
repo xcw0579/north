@@ -4,19 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.xcw0754.north.Activities.FragmentActivity;
+import com.xcw0754.north.Libraries.testRecycleView.RecycleActivity;
 
 
 /**
  * 记录一些知识的信息：
  * 1) 绑定事件的三种方式：http://www.nowamagic.net/academy/detail/50120258
+ *  这里讲得更加详细：http://blog.csdn.net/primer_programer/article/details/23056147
  */
-
-
-
-
-
-
 
 
 
@@ -37,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //  切换activity
-        Intent intent = new Intent(this, FragmentActivity.class);
+//        Intent intent = new Intent(this, FragmentActivity.class);
+        Intent intent = new Intent(this, RecycleActivity.class);
         startActivity(intent);
     }
 

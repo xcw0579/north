@@ -1,15 +1,20 @@
 package com.xcw0754.north.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.R;
 
 import java.util.ArrayList;
@@ -17,8 +22,7 @@ import java.util.List;
 
 
 
-
-public class FragmentActivity extends AppCompatActivity implements View.OnClickListener {
+public class FragmentActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
@@ -36,25 +40,59 @@ public class FragmentActivity extends AppCompatActivity implements View.OnClickL
     private ImageButton mSearchImg;
     private ImageButton mSelfImg;
 
-    // 个人中心的每个按钮
-//    private
+
+    private Button btn_self_login;
+    private ImageView iv_self_head;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
-
+        Log.i("dbg", "创建了FragmentActivity。");
 
 
         initViews();
         initEvents();
-        handleSelf();   //个人中心：预处理
+
+//        handleSelf();   //个人中心：所有都自己单独预处理
     }
 
+
+
     private void handleSelf() {
+        if ( iv_self_head == null ){
+            iv_self_head = (ImageView) findViewById(R.id.id_self_iv_head);
+        }
+        if ( btn_self_login == null ){
+            btn_self_login = (Button) findViewById(R.id.id_self_btn_login);
+        }
 
 
+//        如果已经登录过了，就可以直接登录，不用弹出登录头像。
+        String username = "user";
+
+
+        if ( SPUtils.contains(getApplicationContext(), username) ) {
+            //这里其实还可以验证一下密码，后面有必要再做
+
+            //标记为已登录。
+            SPUtils.put(getApplicationContext(), "isLogin", true);
+
+            //显示头像
+            btn_self_login.setVisibility(View.INVISIBLE);
+            iv_self_head.setVisibility(View.VISIBLE);
+        } else {
+            //绑定登陆按钮切换到登录界面
+            btn_self_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(FragmentActivity.this, LoginActivity.class);
+//                    Intent intent = new Intent(FragmentActivity.this, SignupActivity.class);
+                    startActivity( intent );
+                }
+            });
+        }
     }
 
 
@@ -63,7 +101,7 @@ public class FragmentActivity extends AppCompatActivity implements View.OnClickL
      */
     private void initViews() {
 
-        mViewPager = (ViewPager) findViewById(R.id.id_viewpager) ;
+        mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
 
         mTabHome = (LinearLayout) findViewById(R.id.id_tab_home);
         mTabSort = (LinearLayout) findViewById(R.id.id_tab_sort);
@@ -127,23 +165,20 @@ public class FragmentActivity extends AppCompatActivity implements View.OnClickL
      */
     private void initEvents() {
 
-        mTabHome.setOnClickListener(this);
-        mTabSort.setOnClickListener(this);
-        mTabSearch.setOnClickListener(this);
-        mTabSelf.setOnClickListener(this);
+        mTabHome.setOnClickListener(new viewListener());
+        mTabSort.setOnClickListener(new viewListener());
+        mTabSearch.setOnClickListener(new viewListener());
+        mTabSelf.setOnClickListener(new viewListener());
 
         // 监听当前页面是否被切换
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener()
-        {
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             // 更新当前被选中的tab的图标
             @Override
-            public void onPageSelected(int arg0)
-            {
+            public void onPageSelected(int arg0) {
                 int currentItem = mViewPager.getCurrentItem();
                 resetImg();
-                switch (currentItem)
-                {
+                switch (currentItem) {
                     case 0:
                         mHomeImg.setImageResource(R.drawable.tab_icon_01_pressed);
                         break;
@@ -155,20 +190,19 @@ public class FragmentActivity extends AppCompatActivity implements View.OnClickL
                         break;
                     case 3:
                         mSelfImg.setImageResource(R.drawable.tab_icon_01_pressed);
+                        handleSelf();
                         break;
                 }
 
             }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2)
-            {
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
 
             }
 
             @Override
-            public void onPageScrollStateChanged(int arg0)
-            {
+            public void onPageScrollStateChanged(int arg0) {
 
             }
         });
@@ -176,45 +210,49 @@ public class FragmentActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
     /**
      * 将所有的图片切换为暗色（即未选中状态）
      */
-    private void resetImg(){
-        mHomeImg.setImageResource(R.drawable.tab_icon_01_normal);
-        mSortImg.setImageResource(R.drawable.tab_icon_01_normal);
-        mSearchImg.setImageResource(R.drawable.tab_icon_01_normal);
-        mSelfImg.setImageResource(R.drawable.tab_icon_01_normal);
+    private void resetImg() {
+        mHomeImg.setImageResource(R.drawable.tab_icon_home_normal);
+        mSortImg.setImageResource(R.drawable.tab_icon_sort_normal);
+        mSearchImg.setImageResource(R.drawable.tab_icon_search_normal);
+        mSelfImg.setImageResource(R.drawable.tab_icon_self_normal);
     }
 
-    /**
-     * 底下4个图标的单击事件
-     */
-    @Override
-    public void onClick(View v){
-        resetImg();
-        switch (v.getId())
-        {
-            case R.id.id_tab_home:
-                mViewPager.setCurrentItem(0);
-                mHomeImg.setImageResource(R.drawable.tab_icon_01_pressed);
-                break;
-            case R.id.id_tab_sort:
-                mViewPager.setCurrentItem(1);
-                mSortImg.setImageResource(R.drawable.tab_icon_01_pressed);
-                break;
-            case R.id.id_tab_search:
-                mViewPager.setCurrentItem(2);
-                mSearchImg.setImageResource(R.drawable.tab_icon_01_pressed);
-                break;
-            case R.id.id_tab_self:
-                mViewPager.setCurrentItem(3);
-                mSelfImg.setImageResource(R.drawable.tab_icon_01_pressed);
-                break;
-            default:
-                break;
+
+    class viewListener implements View.OnClickListener {
+        /**
+         * 底下4个图标的单击事件
+         */
+        @Override
+        public void onClick(View v) {
+            Log.i("dbg", "四个底图标所产生点击事件。");
+            resetImg();
+            switch (v.getId()) {
+                case R.id.id_tab_home:
+                    mViewPager.setCurrentItem(0);
+                    mHomeImg.setImageResource(R.drawable.tab_icon_home_pressed);
+                    break;
+                case R.id.id_tab_sort:
+                    mViewPager.setCurrentItem(1);
+                    mSortImg.setImageResource(R.drawable.tab_icon_sort_pressed);
+                    break;
+                case R.id.id_tab_search:
+                    mViewPager.setCurrentItem(2);
+                    mSearchImg.setImageResource(R.drawable.tab_icon_search_pressed);
+                    break;
+                case R.id.id_tab_self:
+                    mViewPager.setCurrentItem(3);
+                    mSelfImg.setImageResource(R.drawable.tab_icon_self_pressed);
+                    break;
+                default:
+                    break;
+            }
         }
     }
+
+
 
 
 

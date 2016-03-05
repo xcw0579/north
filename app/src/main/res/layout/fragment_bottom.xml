@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:src="@drawable/tab_icon_01_pressed"/>
+            android:src="@drawable/tab_icon_home_pressed"/>
         <TextView
             android:text="首页"
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:src="@drawable/tab_icon_01_normal"/>
+            android:src="@drawable/tab_icon_sort_normal"/>
         <TextView
             android:text="分类"
             android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:src="@drawable/tab_icon_01_normal"/>
+            android:src="@drawable/tab_icon_search_normal"/>
         <TextView
             android:text="搜索"
             android:layout_width="wrap_content"
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:src="@drawable/tab_icon_01_normal"/>
+            android:src="@drawable/tab_icon_self_normal"/>
         <TextView
             android:text="个人中心"
             android:layout_width="wrap_content"

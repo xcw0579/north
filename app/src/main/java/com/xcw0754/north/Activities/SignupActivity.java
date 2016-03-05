@@ -45,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View v) {
 //                // Finish the registration screen and return to the Login activity
+//                     进行注册：将注册信息存到服务器上。
 //                finish();
 //            }
 //        });
@@ -53,7 +54,8 @@ public class SignupActivity extends AppCompatActivity {
     public void signup() {
         Log.d(TAG, "Signup");
 
-        if (!validate()) {
+        // 验证注册信息
+        if ( !validate() ) {
             onSignupFailed();
             return;
         }
@@ -63,15 +65,22 @@ public class SignupActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
-        progressDialog.show();
+        progressDialog.setMessage("注册中...");
+        progressDialog.show();      // 一直显示注册进度条，直到下面销毁这个activity。
 
+        //  取出注册信息
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
+        // 提交注册信息到数据库
 
+
+        /**
+         * 延迟3秒后调用run()函数。
+         * 真实情况下并不需要延迟，只要注册成功了就可以返回了。
+         */
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -79,24 +88,36 @@ public class SignupActivity extends AppCompatActivity {
                         // depending on success
                         onSignupSuccess();
                         // onSignupFailed();
+
+                        //  隐藏进度条
                         progressDialog.dismiss();
                     }
                 }, 3000);
     }
 
 
+    /**
+     * 注册成功：返回注册的帐号给登录界面，由登录界面来存储登录帐号。
+     */
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         finish();
     }
 
+    /**
+     * 注册失败：进行提示
+     */
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }
 
+
+    /**
+     * 验证注册信息是否符合规范
+     */
     public boolean validate() {
         boolean valid = true;
 

@@ -21,13 +21,10 @@ public class LoginActivity extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 0;
 
 
-    @Bind(R.id.input_email)
-    EditText _emailText;
-    @Bind(R.id.input_password) EditText _passwordText;
-    @Bind(R.id.btn_login)
-    Button _loginButton;
-    @Bind(R.id.link_signup)
-    TextView _signupLink;
+    @Bind(R.id.input_email)     EditText _emailText;
+    @Bind(R.id.input_password)  EditText _passwordText;
+    @Bind(R.id.btn_login)       Button _loginButton;
+    @Bind(R.id.link_signup)     TextView _signupLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,27 +104,34 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        // 按下后退键之后：后退到上一个activity
-        moveTaskToBack(true);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        // 按下后退键之后：直接退出整个界面
+//        moveTaskToBack(true);
+//    }
 
+    /**
+     * 登录成功
+     */
     public void onLoginSuccess() {
-//        登录成功
         _loginButton.setEnabled(true);
         finish();
     }
 
-    public void onLoginFailed() {
-//        登录失败
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
+    /**
+     * 登录失败
+     */
+    public void onLoginFailed() {
+        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
     }
 
+
+    /**
+     * 验证输入是否合法
+     */
     public boolean validate() {
-//        检查注册信息是否合法
         boolean valid = true;
 
         String email = _emailText.getText().toString();
