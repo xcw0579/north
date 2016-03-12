@@ -14,10 +14,6 @@ import java.util.Map;
 
 
 
-
-
-
-
 /**
  * Created by Administrator on 2016/2/14.
  * 一个用于操作SharedPreferences的类，可以以map的形式的xml文件保存用户名及密码等信息。
@@ -31,7 +27,7 @@ public class SPUtils {
     public static final String FILE_NAME = "my_sp";
 
     /**
-     * 保存数据
+     * 增
      */
     public static void put(Context context, String key, Object obj) {
         // 文件默认私有，可以更改。
@@ -54,7 +50,7 @@ public class SPUtils {
 
 
     /**
-     * 获取指定数据
+     * 查
      */
     public static Object get(Context context, String key, Object defaultObj) {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);
@@ -73,7 +69,7 @@ public class SPUtils {
     }
 
     /**
-     * 删除指定数据
+     * 删
      */
     public static void remove(Context context, String key) {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, context.MODE_PRIVATE);

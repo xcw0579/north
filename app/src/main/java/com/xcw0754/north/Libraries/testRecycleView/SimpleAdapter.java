@@ -30,6 +30,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
     @Override
     public int getItemCount() {
+
         return mDatas.size();
     }
 
@@ -40,10 +41,11 @@ public class SimpleAdapter extends RecyclerView.Adapter<MyViewHolder>{
         holder.tv.setText(mDatas.get(pos));
     }
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup arg, int arg1) {
 //        创建ViewHolder
-        View view = mInflater.inflate(R.layout.item_single_textview, arg, false);
+        View view = mInflater.inflate(R.layout.tab_sort_recyclerview_item, arg, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         return viewHolder;
     }
@@ -56,7 +58,6 @@ class MyViewHolder extends RecyclerView.ViewHolder{
     TextView tv;
     public MyViewHolder(View arg) {
         super(arg);
-
-        tv = (TextView) arg.findViewById(R.id.id_tv);
+        tv = (TextView) arg.findViewById(R.id.id_tv_item);
     }
 }

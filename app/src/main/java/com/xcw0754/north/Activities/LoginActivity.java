@@ -3,6 +3,8 @@ package com.xcw0754.north.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,14 +13,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.kevinsawicki.http.HttpRequest;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.R;
+
+import java.util.concurrent.Semaphore;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";  //debug专用
-    private static final int REQUEST_SIGNUP = 0;
+    public static final int RESULT_CODE = 1;
 
 
     @Bind(R.id.input_email)     EditText _emailText;
@@ -26,30 +34,38 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.btn_login)       Button _loginButton;
     @Bind(R.id.link_signup)     TextView _signupLink;
 
+
+    final private Semaphore sema = new Semaphore(0);
+    private boolean islogin = false;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-//        监听登录按钮。
-        _loginButton.setOnClickListener(new View.OnClickListener() {
+        ButterKnife.bind(this); //使上面的bind注解生效
 
+
+        // 监听登录按钮。
+        _loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
             }
         });
-//        监听注册按钮。
-        _signupLink.setOnClickListener(new View.OnClickListener() {
 
+        // 监听注册按钮。
+        _signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 启动Signup activity页面
                 Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                startActivity(intent);
             }
         });
     }
+
+
 
     public void login() {
 //        登录过程的逻辑
@@ -64,57 +80,79 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setEnabled(false);
 
 //        验证悬浮框
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
+//        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+//                R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setIndeterminate(true);  // true则可以设置当前进度值
+        progressDialog.setCanceledOnTouchOutside(false);    // 设置在点击Dialog外是否取消Dialog进度条
         progressDialog.setMessage("验证中...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
-//        实现自己的验证登录板块。
+        final String email = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
+        // 的验证登录。
+        sendLoginMessage(email, password);
 
-
-//        延迟3秒钟，再跳转到登录成功的相关页面
+        // 延迟3秒钟，再跳转到登录成功的相关页面
         new android.os.Handler().postDelayed(
                 new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
+                        public void run() {
+                            try {
+                                sema.acquire();
+                                if( islogin==true )
+                                    onLoginSuccess(email, password); // 注册成功
+                                else
+                                    onLoginFailed();   //注册失败
+                                sema.release();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            progressDialog.dismiss();//  隐藏进度条
+                        }
                 }, 3000);
     }
 
+    /**
+     * 发送帐号密码邮件到服务器
+     */
+    public void sendLoginMessage(final String email,final String passwd) {
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
+        Runnable requestTask = new Runnable() {
+            @Override
+            public void run() {
+                String response = HttpRequest.get("http://10.0.3.2:5000/login", true,
+                        "passwd", passwd, "email", email).body();
 
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                // 默认是结束此activity，然后自动登录
-                this.finish();
+                JsonObject json = new JsonParser().parse(response).getAsJsonObject();
+
+                String errcode = json.get("errcode").getAsString();
+                String errmsg = json.get("errmsg").getAsString() ;
+                if ( errcode.equals("1000") ) {
+                    islogin = true;
+                } else {
+                    Log.d("network", "登录失败原因："+ errmsg );
+                }
+                sema.release();
             }
-        }
+        };
+        new Thread(requestTask).start();
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        // 按下后退键之后：直接退出整个界面
-//        moveTaskToBack(true);
-//    }
-
     /**
-     * 登录成功
+     * 登录成功，将个人信息等数据存进本地数据库中
      */
-    public void onLoginSuccess() {
+    public void onLoginSuccess(String email,String passwd) {
+
+        SPUtils.put(getApplicationContext(), "email", email);
+        SPUtils.put(getApplicationContext(), "passwd", passwd);
+
         _loginButton.setEnabled(true);
+        //TODO 通过网络将个人信息数据拉下来
+        Intent intent=new Intent();
+        intent.putExtra("islogin", true);
+        setResult(RESULT_CODE, intent);
         finish();
     }
 
@@ -144,8 +182,8 @@ public class LoginActivity extends AppCompatActivity {
             _emailText.setError(null);
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-            _passwordText.setError("between 4 and 10 alphanumeric characters");
+        if (password.isEmpty() || password.length() < 4 || password.length() > 16) {
+            _passwordText.setError("between 4 and 16 alphanumeric characters");
             valid = false;
         } else {
             _passwordText.setError(null);
@@ -154,6 +192,12 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
+
+//    @Override
+//    public void onBackPressed() {
+//        // 按下后退键之后：直接退出整个界面
+//        moveTaskToBack(true);
+//    }
 
 
 }

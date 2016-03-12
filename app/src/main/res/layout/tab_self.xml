@@ -36,12 +36,13 @@
                     android:gravity="center">
                     <ImageView
                         android:id="@+id/id_self_iv_head"
+                        android:gravity="center"
                         android:visibility="gone"
-                        android:layout_marginTop="80dp"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/a_photo_head" />
+
                     <Button
                         android:id="@+id/id_self_btn_login"
                         android:gravity="center"

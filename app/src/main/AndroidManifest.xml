@@ -3,6 +3,12 @@
     package="com.xcw0754.north">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
 
     <application
         android:name=".MyApp"
@@ -22,7 +28,7 @@
         <activity android:name=".Activities.SignupActivity" />
         <activity android:name=".Activities.FragmentActivity" />
         <activity android:name=".Libraries.volley.VolleyActivity" />
-        <activity android:name=".Libraries.testRecycleView.RecycleActivity"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"

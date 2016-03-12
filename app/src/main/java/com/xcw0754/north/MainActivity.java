@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.xcw0754.north.Libraries.testRecycleView.RecycleActivity;
+import com.xcw0754.north.Activities.FragmentActivity;
 
 
 /**
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //  切换activity
-//        Intent intent = new Intent(this, FragmentActivity.class);
-        Intent intent = new Intent(this, RecycleActivity.class);
+        Intent intent = new Intent(this, FragmentActivity.class);
         startActivity(intent);
     }
 

@@ -9,15 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.github.kevinsawicki.http.HttpRequest;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.xcw0754.north.R;
+
+import org.json.JSONObject;
+
+import java.util.concurrent.Semaphore;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
 public class SignupActivity extends AppCompatActivity {
-
-
 
     private static final String TAG = "SignupActivity";
 
@@ -26,6 +31,10 @@ public class SignupActivity extends AppCompatActivity {
     @Bind(R.id.input_password)  EditText _passwordText;
     @Bind(R.id.btn_signup)  Button _signupButton;
 //    @Bind(R.id.link_login) TextView _loginLink;
+
+
+    final private Semaphore sema = new Semaphore(1);
+    private boolean issignup = false;
 
 
     @Override
@@ -45,12 +54,15 @@ public class SignupActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View v) {
 //                // Finish the registration screen and return to the Login activity
-//                     进行注册：将注册信息存到服务器上。
+//                     登录：将注册信息存到服务器上。
 //                finish();
 //            }
 //        });
     }
 
+    /**
+     * 注册过程
+     */
     public void signup() {
         Log.d(TAG, "Signup");
 
@@ -62,8 +74,8 @@ public class SignupActivity extends AppCompatActivity {
 
         _signupButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+//                R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("注册中...");
         progressDialog.show();      // 一直显示注册进度条，直到下面销毁这个activity。
@@ -71,52 +83,91 @@ public class SignupActivity extends AppCompatActivity {
         //  取出注册信息
         String name = _nameText.getText().toString();
         String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        String passwd = _passwordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
         // 提交注册信息到数据库
-
+        sendSignupMessage(name, email, passwd);
 
         /**
-         * 延迟3秒后调用run()函数。
-         * 真实情况下并不需要延迟，只要注册成功了就可以返回了。
+         * 延迟调用
          */
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
-
-                        //  隐藏进度条
-                        progressDialog.dismiss();
+                        try {
+                            sema.acquire();
+                            if( issignup==true )
+                                onSignupSuccess();// 注册成功
+                            else
+                                onSignupFailed();   //注册失败
+                            sema.release();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.dismiss();//  隐藏进度条
                     }
                 }, 3000);
     }
 
+    /**
+     * 发送帐号密码邮件到服务器
+     */
+    public void sendSignupMessage(final String name,final String email,final String passwd) {
+
+        Runnable requestTask = new Runnable() {
+            @Override
+            public void run() {
+                String response = HttpRequest.get("http://10.0.3.2:5000/signup", true,
+                        "user", name, "passwd", passwd, "email", email).body();
+                JsonObject json = new JsonParser().parse(response).getAsJsonObject();
+
+                String errcode = json.get("errcode").getAsString();
+                String errmsg = json.get("errmsg").getAsString() ;
+                if ( errcode.equals("1001") ) {
+                    try {
+                        sema.acquire();
+                        issignup = true;
+                        sema.release();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Log.d( "network", "注册帐号失败原因："+ errmsg );
+                }
+            }
+        };
+        new Thread(requestTask).start();
+    }
 
     /**
      * 注册成功：返回注册的帐号给登录界面，由登录界面来存储登录帐号。
      */
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
-        finish();
+        Toast.makeText(getBaseContext(), "注册成功", Toast.LENGTH_LONG).show();
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        finish();
+                    }
+                }, 1000);
+
+//        setResult(RESULT_OK, null);
+//        finish();
+
     }
 
     /**
      * 注册失败：进行提示
      */
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }
 
-
     /**
-     * 验证注册信息是否符合规范
+     * 检测注册信息是否符合规范
      */
     public boolean validate() {
         boolean valid = true;
@@ -148,4 +199,17 @@ public class SignupActivity extends AppCompatActivity {
 
         return valid;
     }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
