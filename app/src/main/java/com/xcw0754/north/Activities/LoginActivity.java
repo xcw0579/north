@@ -126,7 +126,6 @@ public class LoginActivity extends AppCompatActivity {
                         "passwd", passwd, "email", email).body();
 
                 JsonObject json = new JsonParser().parse(response).getAsJsonObject();
-
                 String errcode = json.get("errcode").getAsString();
                 String errmsg = json.get("errmsg").getAsString() ;
                 if ( errcode.equals("1000") ) {

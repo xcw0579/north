@@ -3,8 +3,7 @@
     android:layout_height="100dp"
     android:layout_width="match_parent">
     <LinearLayout
-        android:layout_margin="3dp"
-        android:background="#ff3c95a9"
+        android:layout_margin="1px"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,12 +11,15 @@
             android:id="@+id/id_iv_item"
             android:layout_gravity="center"
             android:src="@drawable/a_photo_head"
-            android:layout_width="72dp"
-            android:layout_height="72dp"/>
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/id_tv_item"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="洗衣机"
             android:layout_gravity="center"/>
     </LinearLayout>

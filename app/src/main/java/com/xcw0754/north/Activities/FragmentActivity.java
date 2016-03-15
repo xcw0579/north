@@ -1,7 +1,9 @@
 package com.xcw0754.north.Activities;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,14 +18,32 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+
+import com.github.kevinsawicki.http.HttpRequest;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.squareup.picasso.Downloader;
+import com.squareup.picasso.Picasso;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
+import com.xcw0754.north.Libraries.testRecycleView.MyEndpointInterface;
 import com.xcw0754.north.Libraries.testRecycleView.MyLayoutManager;
-import com.xcw0754.north.Libraries.testRecycleView.SimpleAdapter;
+import com.xcw0754.north.Libraries.testRecycleView.RecyclerViewAdapter;
+
+import com.xcw0754.north.Libraries.testRecycleView.SimpleAdapter2;
 import com.xcw0754.north.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class FragmentActivity extends AppCompatActivity {
@@ -50,12 +70,13 @@ public class FragmentActivity extends AppCompatActivity {
     private final static int REQUEST_CODE=1;
 
     // 产品分类
-    private RecyclerView mRVkind;
-    private RecyclerView mRVbrand;
-    private List<String> mDatas1;
-    private List<String> mDatas2;
-    private SimpleAdapter mmAdapter1;
-    private SimpleAdapter mmAdapter2;
+    private List<ImageView> ivList;
+    private List<RecyclerView> rvList;
+    private List<RecyclerViewAdapter> rvaList;
+    private List<Integer> num;
+
+    // 同步信号量
+    final private Semaphore sema = new Semaphore(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,37 +120,98 @@ public class FragmentActivity extends AppCompatActivity {
         }
     }
 
-    private void handleSort() {
+    private void handleSort() throws InterruptedException {
         //TODO 需要事先保存的数据，待展示出来的，应该从服务器抓取
-        if ( mDatas1==null ) {
-            mRVkind = (RecyclerView) findViewById(R.id.id_sort_rv_kind);
-            mRVbrand = (RecyclerView) findViewById(R.id.id_sort_rv_brand);
+        if ( num==null ) {
 
-            mDatas1 = new ArrayList<String>();
-            mDatas2 = new ArrayList<String>();
+            final ArrayList<String> blocks = new ArrayList<>();
+            blocks.add("tjpp");blocks.add("cfxd");blocks.add("cwdd");blocks.add("ghjk");
+            blocks.add("shdq");blocks.add("djd");blocks.add("wjtz");
+            num = new ArrayList<>();
 
-            for (int i = 0; i < 10; i++) {
-                mDatas1.add("热水器");
+            // 这个事得先干
+            Runnable requestTask = new Runnable() {
+                @Override
+                public void run() {
+                    String url = "http://10.0.3.2:5000/count/source/sort/product/";
+
+                    for (int i = 0; i < 7; i++) {
+                        String response = HttpRequest.get(url + blocks.get(i)).body();
+                        JsonObject json = new JsonParser().parse(response).getAsJsonObject();
+                        num.add(json.get("count").getAsInt());
+                    }
+                    sema.release();
+                }
+            };
+            new Thread(requestTask).start();
+
+            // 7个imageview
+            ImageView iv_title1 = (ImageView)  findViewById(R.id.id_sort_iv_title1);
+            ImageView iv_title2 = (ImageView)  findViewById(R.id.id_sort_iv_title2);
+            ImageView iv_title3 = (ImageView)  findViewById(R.id.id_sort_iv_title3);
+            ImageView iv_title4 = (ImageView)  findViewById(R.id.id_sort_iv_title4);
+            ImageView iv_title5 = (ImageView)  findViewById(R.id.id_sort_iv_title5);
+            ImageView iv_title6 = (ImageView)  findViewById(R.id.id_sort_iv_title6);
+            ImageView iv_title7 = (ImageView)  findViewById(R.id.id_sort_iv_title7);
+            // 对象装进数组中
+            ivList = new ArrayList<>();
+            ivList.add(iv_title1);
+            ivList.add(iv_title2);
+            ivList.add(iv_title3);
+            ivList.add(iv_title4);
+            ivList.add(iv_title5);
+            ivList.add(iv_title6);
+            ivList.add(iv_title7);
+            // 加载7个title个
+            for (int i = 0; i<7 ; i++ ) {
+                Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/sort/title/title"+ i +".jpg")
+                        .into( ivList.get(i) );
             }
-            for (int i = 0; i < 10; i++) {
-                mDatas2.add("西门子");
+
+            // ***********************************************************************
+
+            RecyclerView mRV1 = (RecyclerView) findViewById(R.id.id_sort_rv1);
+            RecyclerView mRV2 = (RecyclerView) findViewById(R.id.id_sort_rv2);
+            RecyclerView mRV3 = (RecyclerView) findViewById(R.id.id_sort_rv3);
+            RecyclerView mRV4 = (RecyclerView) findViewById(R.id.id_sort_rv4);
+            RecyclerView mRV5 = (RecyclerView) findViewById(R.id.id_sort_rv5);
+            RecyclerView mRV6 = (RecyclerView) findViewById(R.id.id_sort_rv6);
+            RecyclerView mRV7 = (RecyclerView) findViewById(R.id.id_sort_rv7);
+
+            rvList = new ArrayList<>();
+            rvList.add(mRV1);rvList.add(mRV2);rvList.add(mRV3);rvList.add(mRV4);
+            rvList.add(mRV5);rvList.add(mRV6);rvList.add(mRV7);
+
+
+            sema.acquire();
+            Log.d("sort", "num数量:"+num.size());
+            Log.d("sort", "block数量:"+blocks.size());
+            rvaList = new ArrayList<>();
+
+            for (int i = 0; i<7 ; i++ ) {
+                rvaList.add( new RecyclerViewAdapter(this, num.get(i), blocks.get(i))  );
             }
-            mmAdapter1 =  new SimpleAdapter(this, mDatas1 );
-            mmAdapter2 =  new SimpleAdapter(this, mDatas2 );
-            mRVkind.setAdapter( mmAdapter1 );
-            mRVbrand.setAdapter( mmAdapter2 );
+
+            // 设置Adapter
+            for (int i = 0; i<7; i++) {
+                rvList.get(i).setAdapter( rvaList.get(i) );
+                rvList.get(i).setLayoutManager( new MyLayoutManager(getApplicationContext(), 3) );
+            }
+
+//
+//                    mmAdapter1 =  new SimpleAdapter(getApplicationContext(), mDatas1 );
+//                    mmAdapter2 =  new SimpleAdapter2(getApplicationContext(), mDatas2 );
+//                    mRVkind.setAdapter( mmAdapter1 );
+//                    mRVbrand.setAdapter( mmAdapter2 );
 
             // 设置recycleview布局管理
-            MyLayoutManager gridLayoutManager1 = new MyLayoutManager(this, 3); //三列
-            gridLayoutManager1.setSmoothScrollbarEnabled(true);
-            mRVkind.setLayoutManager(gridLayoutManager1);
+//                    MyLayoutManager gridLayoutManager1 = new MyLayoutManager(getApplicationContext(), 3); //三列
+//                    mRVkind.setLayoutManager(gridLayoutManager1);
 
-            MyLayoutManager gridLayoutManager2 = new MyLayoutManager(this, 2); //两列
-            gridLayoutManager1.setSmoothScrollbarEnabled(true);
-            mRVbrand.setLayoutManager(gridLayoutManager2);
+            Log.d("sort", "又产生一次资源访问的请求");
 
-            Log.d("sort", "又产生一次");
         }
+
 
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
     }
@@ -243,17 +325,21 @@ public class FragmentActivity extends AppCompatActivity {
                 resetImg();
                 switch (currentItem) {
                     case 0:
-                        mHomeImg.setImageResource(R.drawable.tab_icon_01_pressed);
+                        mHomeImg.setImageResource(R.drawable.tab_icon_home_pressed);
                         break;
                     case 1:
-                        mSortImg.setImageResource(R.drawable.tab_icon_01_pressed);
-                        handleSort();
+                        mSortImg.setImageResource(R.drawable.tab_icon_sort_pressed);
+                        try {
+                            handleSort();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     case 2:
-                        mSearchImg.setImageResource(R.drawable.tab_icon_01_pressed);
+                        mSearchImg.setImageResource(R.drawable.tab_icon_search_pressed);
                         break;
                     case 3:
-                        mSelfImg.setImageResource(R.drawable.tab_icon_01_pressed);
+                        mSelfImg.setImageResource(R.drawable.tab_icon_self_pressed);
                         handleSelf();
                         break;
                 }
