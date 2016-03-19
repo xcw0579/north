@@ -1,17 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<LinearLayout
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:text="第二个TAB页面"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+
+            <!--项目1-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--title1-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_sort_iv_title1"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="@color/black2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="推荐品牌"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_sort_rv1" />
+            </LinearLayout>
+
+            <!--项目2-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--title1-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_sort_iv_title2"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="@color/black2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="厨房小电"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_sort_rv2" />
+            </LinearLayout>
+
+            <!--项目3-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--title1-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_sort_iv_title3"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="@color/black2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="厨卫大电"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_sort_rv3" />
+            </LinearLayout>
+
+            <!--项目4-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--title1-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_sort_iv_title4"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="@color/black2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                    android:text="个护健康"
+                    android:layout_margin="15px"
+                    android:textStyle="bold"
+                    android:textSize="50px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_sort_rv4" />
+            </LinearLayout>
+
+            <!--项目5-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--title1-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_sort_iv_title5"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/black2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="生活电器"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_sort_rv5" />
+            </LinearLayout>
+
+            <!--项目6-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--title1-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_sort_iv_title6"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@color/black2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="大家电"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_sort_rv6" />
+            </LinearLayout>
+
+            <!--项目7-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--title1-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_sort_iv_title7"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:background="@color/black2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="五金套装"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="50px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/id_sort_rv7" />
+            </LinearLayout>
 
 
 
+            <!--&lt;!&ndash;项目item&ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--&lt;!&ndash;title1&ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/sort_iv_title">-->
+                    <!--<ImageView-->
+                        <!--android:id="@+id/id_sort_iv_title1"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="fill_parent" />-->
+                <!--</LinearLayout>-->
+                <!--<TextView-->
+                    <!--android:text="主营产品"-->
+                    <!--android:layout_margin="15px"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textSize="50px"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/id_sort_rv1" />-->
+            <!--</LinearLayout>-->
+
+            <!--&lt;!&ndash;横条&ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:background="#159"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/sort_iv_title">-->
+                <!--<ImageView-->
+                    <!--android:id="@+id/id_sort_iv_title2"-->
+                    <!--android:scaleType="centerCrop"-->
+                    <!--android:background="#951"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="fill_parent" />-->
+            <!--</LinearLayout>-->
+
+            <!--&lt;!&ndash;项目item&ndash;&gt;-->
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:id="@+id/id_sort_rv_brand" />-->
+            <!--</RelativeLayout>-->
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

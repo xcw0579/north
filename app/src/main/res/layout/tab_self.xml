@@ -20,28 +20,41 @@
 
             <!--头像区域-->
             <RelativeLayout
-                android:id="@+id/view_user"
-                android:layout_width="fill_parent"
-                android:layout_height="200dp"
-                android:paddingBottom="5dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_horizontal"
-                android:background="@drawable/selector_setting_item">
-
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/head_bg_default_height"
+                android:gravity="center">
                 <ImageView
-                    android:id="@+id/head"
-                    android:layout_marginTop="50dp"
-                    android:layout_width="120.0dip"
-                    android:layout_height="120.0dip"
-                    android:src="@drawable/a_photo_head" />
+                    android:id="@+id/layout_header_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/head_bg_default_height"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/self_head_bg"/>
+                <RelativeLayout
+                    android:id="@+id/layout_header_image2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/head_bg_default_height"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/id_self_iv_head"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/a_photo_head" />
 
+                    <Button
+                        android:id="@+id/id_self_btn_login"
+                        android:gravity="center"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:text="登录"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/selector_signup_button"/>
+                </RelativeLayout>
             </RelativeLayout>
-
-            <!--头像与按钮的分割条-->
-            <View
-                android:background="@color/aluminum"
-                android:layout_width="fill_parent"
-                android:layout_height="1px" />
 
             <!--头像下面的3个按钮-->
             <RelativeLayout
@@ -334,7 +347,6 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </LinearLayout>

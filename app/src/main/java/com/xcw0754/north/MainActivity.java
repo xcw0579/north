@@ -10,13 +10,8 @@ import com.xcw0754.north.Activities.FragmentActivity;
 /**
  * 记录一些知识的信息：
  * 1) 绑定事件的三种方式：http://www.nowamagic.net/academy/detail/50120258
+ *  这里讲得更加详细：http://blog.csdn.net/primer_programer/article/details/23056147
  */
-
-
-
-
-
-
 
 
 
