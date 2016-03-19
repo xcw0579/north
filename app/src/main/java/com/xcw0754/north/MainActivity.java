@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.xcw0754.north.Activities.FragmentActivity;
+import com.xcw0754.north.Libraries.Introduction.IntroActivity;
 
 
 /**
@@ -31,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE); 跟AppCompatActivity不兼容？
         setContentView(R.layout.activity_main);
 
+
+
         //  切换activity
-        Intent intent = new Intent(this, FragmentActivity.class);
+        Intent intent = new Intent(this, IntroActivity.class);
         startActivity(intent);
     }
 

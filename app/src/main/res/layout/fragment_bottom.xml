@@ -19,9 +19,10 @@
         android:orientation="vertical">
         <ImageButton
             android:id="@+id/id_tab_home_img"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="#00000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:clickable="false"
             android:src="@drawable/tab_icon_home_pressed"/>
         <TextView
@@ -43,8 +44,9 @@
         <ImageButton
             android:id="@+id/id_tab_sort_img"
             android:background="#00000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:clickable="false"
             android:src="@drawable/tab_icon_sort_normal"/>
         <TextView
@@ -66,8 +68,9 @@
         <ImageButton
             android:id="@+id/id_tab_search_img"
             android:background="#00000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:clickable="false"
             android:src="@drawable/tab_icon_search_normal"/>
         <TextView
@@ -89,8 +92,9 @@
         <ImageButton
             android:id="@+id/id_tab_self_img"
             android:background="#00000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:clickable="false"
             android:src="@drawable/tab_icon_self_normal"/>
         <TextView
