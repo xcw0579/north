@@ -1,13 +1,10 @@
 package com.xcw0754.north.Activities;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,33 +19,22 @@ import android.widget.LinearLayout;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.squareup.picasso.Downloader;
 import com.squareup.picasso.Picasso;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
-import com.xcw0754.north.Libraries.testRecycleView.MyEndpointInterface;
 import com.xcw0754.north.Libraries.testRecycleView.MyLayoutManager;
 import com.xcw0754.north.Libraries.testRecycleView.RecyclerViewAdapter;
 
-import com.xcw0754.north.Libraries.testRecycleView.SimpleAdapter2;
 import com.xcw0754.north.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
-
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class FragmentActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
+
     private PagerAdapter mAdapter;
     private List<View> mViews = new ArrayList<View>();
 
@@ -77,6 +63,7 @@ public class FragmentActivity extends AppCompatActivity {
 
     // 同步信号量
     final private Semaphore sema = new Semaphore(0);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -401,4 +388,8 @@ public class FragmentActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

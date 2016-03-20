@@ -5,6 +5,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -16,6 +19,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!--卡位置的-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp">
+            </LinearLayout>
 
 
             <!--项目1-->
@@ -260,61 +268,6 @@
                     android:layout_height="match_parent"
                     android:id="@+id/id_sort_rv7" />
             </LinearLayout>
-
-
-
-            <!--&lt;!&ndash;项目item&ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--&lt;!&ndash;title1&ndash;&gt;-->
-                <!--<LinearLayout-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/sort_iv_title">-->
-                    <!--<ImageView-->
-                        <!--android:id="@+id/id_sort_iv_title1"-->
-                        <!--android:scaleType="centerCrop"-->
-                        <!--android:layout_width="fill_parent"-->
-                        <!--android:layout_height="fill_parent" />-->
-                <!--</LinearLayout>-->
-                <!--<TextView-->
-                    <!--android:text="主营产品"-->
-                    <!--android:layout_margin="15px"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:textSize="50px"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:id="@+id/id_sort_rv1" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash;横条&ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:background="#159"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/sort_iv_title">-->
-                <!--<ImageView-->
-                    <!--android:id="@+id/id_sort_iv_title2"-->
-                    <!--android:scaleType="centerCrop"-->
-                    <!--android:background="#951"-->
-                    <!--android:layout_width="fill_parent"-->
-                    <!--android:layout_height="fill_parent" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash;项目item&ndash;&gt;-->
-            <!--<RelativeLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-                <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:id="@+id/id_sort_rv_brand" />-->
-            <!--</RelativeLayout>-->
 
         </LinearLayout>
 
