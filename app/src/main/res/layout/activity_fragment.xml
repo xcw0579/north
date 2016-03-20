@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <include layout="@layout/fragment_top" />
+    <!--参照位置-->
+    <RelativeLayout
+        android:id="@+id/id_layout_topbar"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="1dp">
+    </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/id_viewpager"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
-    </android.support.v4.view.ViewPager>
 
-    <include layout="@layout/fragment_bottom" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_below="@+id/id_layout_topbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v4.view.ViewPager
+                android:layout_weight="1"
+                android:id="@+id/id_viewpager"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent">
+            </android.support.v4.view.ViewPager>
+            <include layout="@layout/fragment_bottom" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_below="@+id/id_layout_topbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <include layout="@layout/fragment_top"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
+<!--<android.support.v4.view.ViewPager-->
+<!--android:id="@+id/id_viewpager"-->
+<!--android:layout_width="fill_parent"-->
+<!--android:layout_height="0dp"-->
+<!--android:layout_weight="1" >-->
+<!--</android.support.v4.view.ViewPager>-->

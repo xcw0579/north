@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--这是主体框架的顶栏，用于显示当前页面名称-->
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="55dp"
-    android:background="@color/gray"
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/current_text01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="点购"
-        android:textSize="22sp"
-        android:textStyle="bold"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/touming"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_action_previous_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/current_text01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="家电购物"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/black"
+        android:layout_marginBottom="1px"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
 </LinearLayout>

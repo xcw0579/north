@@ -8,6 +8,7 @@
     android:background="@color/gray"
     android:orientation="horizontal">
 
+
     <!--首页-->
     <LinearLayout
         android:id="@+id/id_tab_home"
