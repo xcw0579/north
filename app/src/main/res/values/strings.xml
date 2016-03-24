@@ -11,13 +11,24 @@
     <string name="login_name">登录</string>
     <string name="sign_up">注册新账户</string>
 
+
+
+
     <string name="input_password">密码</string>
     <string name="input_username">账户名</string>
     <string name="input_email">e-mail</string>
 
+
+
+
     <string name="no_account">还没有账户？</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_self">个人中心</string>
+
+
+
+
+
 
     <string name="localmachine">10.0.3.2</string>
 

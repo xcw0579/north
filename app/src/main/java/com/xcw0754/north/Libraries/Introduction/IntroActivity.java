@@ -1,17 +1,12 @@
 package com.xcw0754.north.Libraries.Introduction;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.xcw0754.north.Activities.FragmentActivity;
-import com.xcw0754.north.Activities.ReleaseSource;
 import com.xcw0754.north.R;
 
 

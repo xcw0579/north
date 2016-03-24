@@ -11,6 +11,7 @@ import android.view.View;
 
 /**
  * Created by Administrator on 2016/3/4.
+ * RecyclerView用于画格子之间的分割线。（暂时没有用于项目中）
  */
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {

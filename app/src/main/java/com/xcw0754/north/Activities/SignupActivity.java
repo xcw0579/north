@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.kevinsawicki.http.HttpRequest;
@@ -20,9 +22,12 @@ import java.util.concurrent.Semaphore;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 
-public class SignupActivity extends AppCompatActivity {
+//public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends SwipeBackActivity {
 
     private static final String TAG = "SignupActivity";
 
@@ -30,8 +35,9 @@ public class SignupActivity extends AppCompatActivity {
     @Bind(R.id.input_email)     EditText    _emailText;
     @Bind(R.id.input_password)  EditText    _passwordText;
     @Bind(R.id.btn_signup)      Button      _signupButton;
-//    @Bind(R.id.link_login) TextView _loginLink;
+    @Bind(R.id.id_common_title) TextView    _title;
 
+//    @Bind(R.id.link_login) TextView _loginLink;
 
     final private Semaphore sema = new Semaphore(1);
     private boolean issignup = false;
@@ -42,6 +48,9 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
+        _title.setText("注册");
+
+
 
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +67,13 @@ public class SignupActivity extends AppCompatActivity {
 //                finish();
 //            }
 //        });
+    }
+
+
+    // 后退按钮的点击事件
+    @OnClick(R.id.id_btn_common_back)
+    public void moveback(ImageButton ibtn) {
+        finish();
     }
 
     /**

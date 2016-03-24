@@ -11,4 +11,16 @@
 
     <!--sort页面的title大小-->
     <dimen name="sort_iv_title">150dp</dimen>
+
+
+    <dimen name="top_title_gap">50dp</dimen>
+
+
+
+    <!--页面的title-->
+    <dimen name="CommonTitleSize">20sp</dimen>
+    <!--登录页面的字体大小-->
+    <dimen name="LoginTextSize">17dp</dimen>
+
+
 </resources>

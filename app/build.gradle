@@ -38,4 +38,6 @@ dependencies {
     compile 'com.squareup.okio:okio:1.6.0'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.github.paolorotolo:appintro:3.4.0'
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+    compile 'com.facebook.fresco:fresco:0.9.0+'
 }

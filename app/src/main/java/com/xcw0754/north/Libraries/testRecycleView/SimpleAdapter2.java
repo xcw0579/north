@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by xiao on 16-3-13.
+ * 用于recyclerview获取数据以及切换。（暂时没有用于项目中，用RecyclerViewAdapter和RecyclerViewHolder两个类代替了。）
  */
 
 public class SimpleAdapter2 extends RecyclerView.Adapter<MyViewHolder2>{

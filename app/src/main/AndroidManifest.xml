@@ -24,10 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.SignupActivity" />
+        <activity android:name=".Activities.LoginActivity" android:theme="@style/CommonTheme" />
+        <activity android:name=".Activities.SignupActivity" android:theme="@style/CommonTheme"  />
         <activity android:name=".Activities.FragmentActivity" />
-        <activity android:name=".Libraries.volley.VolleyActivity" />
         <activity android:name=".Libraries.Introduction.IntroActivity" android:theme="@style/FullscreenTheme"/>
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for

@@ -27,16 +27,28 @@ import com.xcw0754.north.Libraries.Introduction.IntroActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean isdebug;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_NO_TITLE); 跟AppCompatActivity不兼容？
         setContentView(R.layout.activity_main);
 
-
+        isdebug = true;
+        Intent intent = null;
 
         //  切换activity
-        Intent intent = new Intent(this, IntroActivity.class);
+        if ( isdebug ) {
+            intent = new Intent(this, FragmentActivity.class);
+            Log.d("mainpage", "跳过引导页");
+        }else{
+            intent = new Intent(this, IntroActivity.class);
+            Log.d("mainpage", "没有跳过引导页。");
+        }
         startActivity(intent);
     }
 

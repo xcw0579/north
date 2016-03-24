@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#994644aa"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fitsSystemWindows="true"
-    android:fillViewport="true"
-    android:touchscreenBlocksFocus="false">
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:text="@string/sign_up"-->
+    <!--android:textSize="32dp"-->
+    <!--android:layout_gravity="center_horizontal" />-->
+    <!--title-->
+    <include layout="@layout/common_header2" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="#46248a"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="80dp"
+        android:layout_marginTop="20dp"
         android:paddingLeft="40dp"
-        android:paddingRight="40dp">
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-        <!--android:text="@string/sign_up"-->
-        <!--android:textSize="32dp"-->
-        <!--android:layout_gravity="center_horizontal" />-->
-
-        <ImageView android:src="@drawable/a_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal" />
-
-
+        android:paddingRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <!-- Name Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
+                android:textSize="@dimen/LoginTextSize"
                 android:hint="@string/input_username" />
         </android.support.design.widget.TextInputLayout>
 
@@ -55,6 +46,7 @@
             <EditText android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/LoginTextSize"
                 android:inputType="textEmailAddress"
                 android:hint="@string/input_email" />
         </android.support.design.widget.TextInputLayout>
@@ -66,31 +58,34 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_password"
+                android:textSize="@dimen/LoginTextSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="@string/input_password"/>
         </android.support.design.widget.TextInputLayout>
 
-        <!-- Signup Button -->
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_signup"
-            android:background="@color/primary_dark"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:textSize="17dp"
-            android:text="@string/next_step"/>
 
-        <!--<TextView android:id="@+id/link_login"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginBottom="24dp"-->
-        <!--android:text="Already a member? Login"-->
-        <!--android:gravity="center"-->
-        <!--android:textSize="16dip"/>-->
 
     </LinearLayout>
-</ScrollView>
+
+    <!-- Signup Button -->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_signup"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:textSize="@dimen/LoginTextSize"
+        android:text="@string/next_step"/>
+
+
+    <!--<TextView android:id="@+id/link_login"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="24dp"-->
+    <!--android:text="Already a member? Login"-->
+    <!--android:gravity="center"-->
+    <!--android:textSize="16dip"/>-->
+
+</LinearLayout>

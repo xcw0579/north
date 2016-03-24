@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +24,11 @@ import java.util.concurrent.Semaphore;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
-public class LoginActivity extends AppCompatActivity {
+//public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends SwipeBackActivity {
     private static final String TAG = "LoginActivity";  //debug专用
     public static final int RESULT_CODE = 1;
 
@@ -32,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.input_email)     EditText _emailText;
     @Bind(R.id.input_password)  EditText _passwordText;
     @Bind(R.id.btn_login)       Button _loginButton;
-    @Bind(R.id.link_signup)     TextView _signupLink;
+    @Bind(R.id.link_signup)     Button _signupLink;
+    @Bind(R.id.id_common_title) TextView _title;
 
 
     final private Semaphore sema = new Semaphore(0);
@@ -44,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this); //使上面的bind注解生效
+
+        _title.setText("登录");
 
 
         // 监听登录按钮。
@@ -189,6 +196,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    // 后退按钮的点击事件
+    @OnClick(R.id.id_btn_common_back)
+    public void moveback(ImageButton ibtn) {
+        finish();
     }
 
 

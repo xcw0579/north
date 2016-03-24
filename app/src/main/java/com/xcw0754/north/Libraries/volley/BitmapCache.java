@@ -7,6 +7,8 @@ import com.android.volley.toolbox.ImageLoader;
 
 /**
  * Created by Administrator on 2016/3/3.
+ * 本目录下的文件都是测试用的，没有应用到项目中。即volley框架。
+ *
  */
 public class BitmapCache implements ImageLoader.ImageCache{
     public LruCache<String, Bitmap> cache;

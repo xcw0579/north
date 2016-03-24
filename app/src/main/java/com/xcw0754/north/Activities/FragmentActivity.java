@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,8 +50,9 @@ public class FragmentActivity extends AppCompatActivity {
     private ImageButton mSelfImg;
 
     // 个人中心
-    private Button btn_self_login;
+    private ImageButton btn_self_login;
     private ImageView iv_self_head;
+    private ImageView iv_self_head_bg;
     private final static int REQUEST_CODE=1;
 
     // 产品分类
@@ -82,8 +82,13 @@ public class FragmentActivity extends AppCompatActivity {
     private void handleSelf() {
         if ( iv_self_head==null ) {
             iv_self_head = (ImageView) findViewById(R.id.id_self_iv_head);
-            btn_self_login = (Button) findViewById(R.id.id_self_btn_login);
+            btn_self_login = (ImageButton) findViewById(R.id.id_self_btn_login);
+            iv_self_head_bg = (ImageView) findViewById(R.id.id_iv_self_head_bg);
+            Picasso.with(getApplicationContext())   //很卡的头像背景
+                    .load(R.drawable.tab_image_self_head_bg)
+                    .into(iv_self_head_bg);
         }
+
 
         // 如果已经登录过了，就可以直接登录，不用弹出登录头像。
         if ( SPUtils.contains(getApplicationContext(), "email") ) {
@@ -151,7 +156,8 @@ public class FragmentActivity extends AppCompatActivity {
             ivList.add(iv_title7);
             // 加载7个title个
             for (int i = 0; i<7 ; i++ ) {
-                Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/sort/title/title"+ i +".jpg")
+                Picasso.with(getApplicationContext())
+                        .load("http://10.0.3.2:5000/source/sort/title/title"+ i +".jpg")
                         .into( ivList.get(i) );
             }
 
@@ -347,7 +353,7 @@ public class FragmentActivity extends AppCompatActivity {
 
 
     /**
-     * 将所有的图片切换为暗色（即未选中状态）
+     * 将底标的图片切换为暗色（即未选中状态）
      */
     private void resetImg() {
         mHomeImg.setImageResource(R.drawable.tab_icon_home_normal);
@@ -355,6 +361,12 @@ public class FragmentActivity extends AppCompatActivity {
         mSearchImg.setImageResource(R.drawable.tab_icon_search_normal);
         mSelfImg.setImageResource(R.drawable.tab_icon_self_normal);
     }
+
+    @Override
+    public void onBackPressed() {
+        //在此页面禁止往后退
+    }
+
 
     /**
      * 内部类：底下4个图标的单击事件
@@ -388,8 +400,4 @@ public class FragmentActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-
-    }
 }
