@@ -1,8 +1,9 @@
-package com.xcw0754.north.Libraries.testRecycleView;
+package com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.xcw0754.north.R;
 
@@ -11,10 +12,9 @@ import com.xcw0754.north.R;
  */
 public class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
-    public ImageView iv;
+    public ImageView    iv;
 
     public RecyclerViewHolder(View arg) {
-
         super(arg);
         iv = (ImageView) arg.findViewById(R.id.id_iv_item);
     }

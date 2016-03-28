@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--这个是示例的，跟recyclerview2对应的。暂时没有用于项目中-->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="100dp"
     android:layout_width="match_parent">

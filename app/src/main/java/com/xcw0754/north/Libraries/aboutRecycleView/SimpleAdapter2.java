@@ -1,4 +1,4 @@
-package com.xcw0754.north.Libraries.testRecycleView;
+package com.xcw0754.north.Libraries.aboutRecycleView;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

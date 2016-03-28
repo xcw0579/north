@@ -20,8 +20,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.squareup.picasso.Picasso;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
-import com.xcw0754.north.Libraries.testRecycleView.MyLayoutManager;
-import com.xcw0754.north.Libraries.testRecycleView.RecyclerViewAdapter;
+import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.MyLayoutManager;
+import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewAdapter;
 
 import com.xcw0754.north.R;
 
@@ -121,7 +121,7 @@ public class FragmentActivity extends AppCompatActivity {
             blocks.add("shdq");blocks.add("djd");blocks.add("wjtz");
             num = new ArrayList<>();
 
-            // 这个事得先干
+            // 计算各个类别中有多少个item
             Runnable requestTask = new Runnable() {
                 @Override
                 public void run() {
@@ -182,7 +182,19 @@ public class FragmentActivity extends AppCompatActivity {
             rvaList = new ArrayList<>();
 
             for (int i = 0; i<7 ; i++ ) {
-                rvaList.add( new RecyclerViewAdapter(this, num.get(i), blocks.get(i))  );
+                RecyclerViewAdapter rva = new RecyclerViewAdapter(this, num.get(i), blocks.get(i));
+                rva.setOnItemClickListener(new RecyclerViewAdapter.OnRecyclerViewItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, String data) {
+                        Log.d("sort","分类item被点击了。");
+                        //TODO 点击item后将调出其他的activity进行显示，得传参数进去
+                        Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                        intent.putExtra("msg", data);
+                        startActivity(intent);
+                    }
+                });
+                // 绑定点击事件后才装进数组
+                rvaList.add(rva);
             }
 
             // 设置Adapter
@@ -191,13 +203,13 @@ public class FragmentActivity extends AppCompatActivity {
                 rvList.get(i).setLayoutManager( new MyLayoutManager(getApplicationContext(), 3) );
             }
 
-//
+
 //                    mmAdapter1 =  new SimpleAdapter(getApplicationContext(), mDatas1 );
 //                    mmAdapter2 =  new SimpleAdapter2(getApplicationContext(), mDatas2 );
 //                    mRVkind.setAdapter( mmAdapter1 );
 //                    mRVbrand.setAdapter( mmAdapter2 );
 
-            // 设置recycleview布局管理
+//                    设置recycleview布局管理
 //                    MyLayoutManager gridLayoutManager1 = new MyLayoutManager(getApplicationContext(), 3); //三列
 //                    mRVkind.setLayoutManager(gridLayoutManager1);
 
@@ -211,7 +223,7 @@ public class FragmentActivity extends AppCompatActivity {
 
 
     /**
-     *
+     * 调用其他的activity后从其返回的数据，一般指的是login是否成功。
      * @param requestCode   请求码，在本class
      * @param resultCode    返回码，在被调用的activity
      * @param data          装进intent的数据，在被调用的activity

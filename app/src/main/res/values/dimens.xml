@@ -16,11 +16,11 @@
     <dimen name="top_title_gap">50dp</dimen>
 
 
-
     <!--页面的title-->
     <dimen name="CommonTitleSize">20sp</dimen>
     <!--登录页面的字体大小-->
     <dimen name="LoginTextSize">17dp</dimen>
 
-
+    <dimen name="common_productlist_head">17sp</dimen>
+    <dimen name="star_size">19dp</dimen>
 </resources>

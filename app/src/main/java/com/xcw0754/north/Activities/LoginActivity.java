@@ -61,7 +61,7 @@ public class LoginActivity extends SwipeBackActivity {
             }
         });
 
-        // 监听注册按钮。
+        // 注册按钮的点击事件。
         _signupLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +156,7 @@ public class LoginActivity extends SwipeBackActivity {
 
         _loginButton.setEnabled(true);
         //TODO 通过网络将个人信息数据拉下来
+
         Intent intent=new Intent();
         intent.putExtra("islogin", true);
         setResult(RESULT_CODE, intent);

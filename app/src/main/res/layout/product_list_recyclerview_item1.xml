@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+
+    android:layout_height="130dp"
+    android:layout_width="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--图片-->
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/id_iv_item1"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/template_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <!--文字-->
+        <LinearLayout
+            android:layout_weight="6"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <!--品牌标题-->
+            <TextView
+                android:id="@+id/id_product_title_profile"
+                android:text="乐迪（Natridy）"
+                android:textSize="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <!--型号介绍-->
+            <TextView
+                android:id="@+id/id_product_title_detail"
+                android:text="BEL-12C涡轮空气对流循环扇/电风扇 黑色"
+                android:textSize="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!--价格-->
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="￥"
+                    android:textColor="@color/primary"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/id_product_price"
+                    android:text="9999.99"
+                    android:textColor="@color/primary"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/id_product_shoucang_true"
+                    android:background="@drawable/ic_action_favorite"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <ImageView
+                    android:id="@+id/id_product_shoucang_false"
+                    android:background="@drawable/ic_action_favorite"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+            </RelativeLayout>
+            <!--占位-->
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"></RelativeLayout>
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/id_product_goumai"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_action_settings"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

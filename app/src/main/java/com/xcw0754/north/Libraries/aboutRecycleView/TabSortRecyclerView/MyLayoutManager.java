@@ -1,4 +1,4 @@
-package com.xcw0754.north.Libraries.testRecycleView;
+package com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,7 +27,7 @@ public class MyLayoutManager extends GridLayoutManager {
             return ;
         }
 
-
+        // 手动计算出layout的高度
         View view = recycler.getViewForPosition(0);
         if( view != null ) {
             measureChild(view, widthSpec, heightSpec);

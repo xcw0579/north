@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.xcw0754.north.Activities.FragmentActivity;
+import com.xcw0754.north.Activities.ProductListActivity;
 import com.xcw0754.north.Libraries.Introduction.IntroActivity;
 
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         isdebug = true;
         Intent intent = null;
+
+//        intent = new Intent(this, ProductListActivity.class);
 
         //  切换activity
         if ( isdebug ) {

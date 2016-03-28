@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/top_title_gap"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/white"
+        android:orientation="horizontal">
+        <!--综合-->
+        <TextView
+            android:id="@+id/id_product_list_synthesize"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/common_productlist_head"
+            android:text="综合"
+            android:textColor="@color/primary_darked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <!--销量-->
+        <TextView
+            android:id="@+id/id_product_list_sale"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/common_productlist_head"
+            android:text="销量"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <!--价格-->
+        <TextView
+            android:id="@+id/id_product_list_price"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/common_productlist_head"
+            android:text="价格"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <!--筛选-->
+        <TextView
+            android:id="@+id/id_product_list_filter"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/common_productlist_head"
+            android:text="筛选"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/iron"
+        android:layout_marginBottom="1px"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+</LinearLayout>
