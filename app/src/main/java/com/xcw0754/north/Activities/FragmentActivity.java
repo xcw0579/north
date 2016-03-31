@@ -88,6 +88,21 @@ public class FragmentActivity extends AppCompatActivity {
                     .load(R.drawable.tab_image_self_head_bg)
                     .into(iv_self_head_bg);
         }
+        //很多按钮需要绑定click
+        LinearLayout psn_msg = (LinearLayout) findViewById(R.id.id_layout_personel_message);
+        psn_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PersonelMessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
+
 
 
         // 如果已经登录过了，就可以直接登录，不用弹出登录头像。
@@ -111,8 +126,10 @@ public class FragmentActivity extends AppCompatActivity {
             });
         }
     }
-
-    private void handleSort() throws InterruptedException {
+    /**
+     * 分类
+     */
+    private void handleSort(){
         //TODO 需要事先保存的数据，待展示出来的，应该从服务器抓取
         if ( num==null ) {
 
@@ -175,10 +192,11 @@ public class FragmentActivity extends AppCompatActivity {
             rvList.add(mRV1);rvList.add(mRV2);rvList.add(mRV3);rvList.add(mRV4);
             rvList.add(mRV5);rvList.add(mRV6);rvList.add(mRV7);
 
-
-            sema.acquire();
-            Log.d("sort", "num数量:"+num.size());
-            Log.d("sort", "block数量:"+blocks.size());
+            try {
+                sema.acquire();     //因为这个才需要exception
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             rvaList = new ArrayList<>();
 
             for (int i = 0; i<7 ; i++ ) {
@@ -202,24 +220,26 @@ public class FragmentActivity extends AppCompatActivity {
                 rvList.get(i).setAdapter( rvaList.get(i) );
                 rvList.get(i).setLayoutManager( new MyLayoutManager(getApplicationContext(), 3) );
             }
-
-
-//                    mmAdapter1 =  new SimpleAdapter(getApplicationContext(), mDatas1 );
-//                    mmAdapter2 =  new SimpleAdapter2(getApplicationContext(), mDatas2 );
-//                    mRVkind.setAdapter( mmAdapter1 );
-//                    mRVbrand.setAdapter( mmAdapter2 );
-
-//                    设置recycleview布局管理
-//                    MyLayoutManager gridLayoutManager1 = new MyLayoutManager(getApplicationContext(), 3); //三列
-//                    mRVkind.setLayoutManager(gridLayoutManager1);
-
             Log.d("sort", "又产生一次资源访问的请求");
-
         }
-
-
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
     }
+
+    /**
+     * 收藏
+     */
+    private void handleSearch() {
+        //TODO 将所有的收藏读出来，显示出来。（只作资源请求，而不提交本地数据到后台）
+        /*
+        先把数组转为String类型。使用String s=Arrays.toString(String[] arr);
+        使用SharedPreferences.getEditor().put("arr",s).commit(); 保存
+        通过SharedPreferences.get("arr") 得到String串
+        然后把String 转为 Array 即可
+        */
+
+
+
+    }
+
 
 
     /**
@@ -334,14 +354,11 @@ public class FragmentActivity extends AppCompatActivity {
                         break;
                     case 1:
                         mSortImg.setImageResource(R.drawable.tab_icon_sort_pressed);
-                        try {
-                            handleSort();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        handleSort();
                         break;
                     case 2:
                         mSearchImg.setImageResource(R.drawable.tab_icon_search_pressed);
+                        handleSearch();
                         break;
                     case 3:
                         mSelfImg.setImageResource(R.drawable.tab_icon_self_pressed);

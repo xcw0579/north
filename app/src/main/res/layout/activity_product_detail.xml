@@ -3,14 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <include layout="@layout/common_header1" />
     <TextView
-        android:id="@+id/id_tv_search_hint"
-        android:text="你还没有任何收藏喔~"
+        android:text="物品详情"
         android:gravity="center"
-        android:textSize="20dp"
+        android:textSize="30sp"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include layout="@layout/product_store_buybar" />
+    <LinearLayout
+        android:id="@+id/id_layout_buybar"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <include layout="@layout/product_detail_buybar" />
+    </LinearLayout>
+
 </LinearLayout>

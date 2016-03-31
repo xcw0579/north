@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black2"
+    android:orientation="vertical">
+    <include layout="@layout/common_header1" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:background="@color/white"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--头像-->
+                <LinearLayout
+                    android:id="@+id/id_personel_head"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="头像" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_head_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+                <!--用户名-->
+                <LinearLayout
+                    android:id="@+id/id_personel_user"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="用户名" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_user_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+                <!--昵称-->
+                <LinearLayout
+                    android:id="@+id/id_personel_nick"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="昵称" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_nick_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+                <!--性别-->
+                <LinearLayout
+                    android:id="@+id/id_personel_sex"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="性别" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_sex_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+                <!--出生日期-->
+                <LinearLayout
+                    android:id="@+id/id_personel_born"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="出生日期" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_born_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+            </LinearLayout>
+
+            <!--分割条-->
+            <View
+                android:background="@color/black2"
+                android:layout_width="match_parent"
+                android:layout_height="20px" />
+
+            <LinearLayout
+                android:background="@color/white"
+                android:paddingRight="10dp"
+                android:paddingLeft="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <!--会员-->
+                <LinearLayout
+                    android:id="@+id/id_personel_vip"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="会员" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_vip_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+                <!--俱乐部-->
+                <LinearLayout
+                    android:id="@+id/id_personel_club"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="俱乐部" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_club_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+                <!--地址管理-->
+                <LinearLayout
+                    android:id="@+id/id_personel_addr"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="收货地址" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_addr_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+                <!--账户安全-->
+                <LinearLayout
+                    android:id="@+id/id_personel_safe"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/personel_page_item_height">
+                    <TextView
+                        android:layout_weight="3"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/personel_page_text"
+                        android:gravity="center_vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="账户安全" />
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/id_personel_safe_content"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/personel_page_text2"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="我是信息内容" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/icon_nor_arrow_right"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:background="@color/black2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1px" />
+
+
+
+
+            </LinearLayout>
+
+            <!--占空间-->
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="250dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

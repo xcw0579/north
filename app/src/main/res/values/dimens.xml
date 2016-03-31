@@ -23,4 +23,13 @@
 
     <dimen name="common_productlist_head">17sp</dimen>
     <dimen name="star_size">19dp</dimen>
+
+    <!--个人中心页面的配置（因为项比较多）-->
+    <dimen name="personel_page_text">18dp</dimen>
+    <dimen name="personel_page_text2">15dp</dimen>
+    <dimen name="personel_page_item_height">60dp</dimen>
+
+    <!--信息修改页面:文本框的高度-->
+    <dimen name="modify_page_height">55dp</dimen>
+
 </resources>

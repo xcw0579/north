@@ -1,9 +1,6 @@
-package com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView;
+package com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView;
 
-import android.animation.FloatArrayEvaluator;
-import android.animation.IntArrayEvaluator;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +12,8 @@ import android.view.ViewGroup;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.squareup.picasso.Downloader;
 import com.squareup.picasso.Picasso;
-import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewAdapter;
-import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewHolder;
+import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.RecyclerViewHolder1;
 import com.xcw0754.north.R;
 
 import java.util.ArrayList;
@@ -29,7 +24,7 @@ import java.util.Comparator;
 /**
  * Created by xiao on 16-3-13.
  */
-public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolder1> implements View.OnClickListener {
+public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder1> implements View.OnClickListener {
 
     private LayoutInflater mInflater;
     private Context mContxt;
@@ -49,7 +44,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
      * @param context   上下文
      * @param datas     有多少个item，即几个产品
      */
-    public RecyclerViewAdapter1(Context context, int datas)  {
+    public RecyclerViewAdapter2(Context context, int datas)  {
         this.mContxt = context;
         this.mDatas = datas;
         mInflater = LayoutInflater.from(context);

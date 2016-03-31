@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import com.xcw0754.north.Libraries.aboutRecycleView.DividerItemDecoration;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.MyLayoutManager1;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.RecyclerViewAdapter1;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.MyLayoutManager;
+import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewAdapter;
 import com.xcw0754.north.R;
 
 import java.util.ArrayList;
@@ -30,11 +33,14 @@ public class ProductListActivity extends SwipeBackActivity {
     @Bind(R.id.id_product_list_filter)      TextView tv_filter;
     @Bind(R.id.id_product_list_recyclerview)RecyclerView rcv;
 
-
     private int oldcolor;
-
-
     private RecyclerViewAdapter1 mmAdapter1;
+    //TODO 最好在切换page的时候先loading一下更好
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,24 +58,22 @@ public class ProductListActivity extends SwipeBackActivity {
 //        String whichone = bundle.getString("msg");
 //
 
+
         mmAdapter1 =  new RecyclerViewAdapter1(this, 15);
+        mmAdapter1.setOnItemClickListener(new RecyclerViewAdapter1.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, String data) {
+                Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                intent.putExtra("msg", data);       //传必要的数据,一般是产品编号
+                startActivity(intent);
+            }
+        });
+
         rcv.setAdapter(mmAdapter1);
         rcv.setLayoutManager(new MyLayoutManager1(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         rcv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+
     }
-
-
-    //TODO 最好在切换page的时候先loading一下更好
-
-
-
-
-
-
-
-
-
-
 
 
     private void itemChanged() {

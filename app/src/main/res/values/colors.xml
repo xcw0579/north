@@ -30,6 +30,7 @@
 
     <!--个人中心界面的分割线-->
     <color name="black2">#ffeeeeee</color>
+    <color name="black3">#e6e6e6</color>
 
     <!--个人中心：注册/登录按钮-->
     <color name="btn_register_normal">#2F4F4F</color>

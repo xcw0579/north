@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/CommonTheme" />
@@ -34,6 +33,21 @@
         <activity
             android:name=".Libraries.Introduction.IntroActivity"
             android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".Activities.ProductListActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.ProductDetailActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.PersonelMessageActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.MessageModifyActivity"
+            android:theme="@style/CommonTheme" ></activity>
+
+
+
 
         <!--
      ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -43,9 +57,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".Activities.ProductListActivity"
-            android:theme="@style/CommonTheme" />
     </application>
 
 </manifest>

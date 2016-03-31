@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black3"
+    android:orientation="vertical">
+    <include layout="@layout/common_header2" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="@color/white"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/modify_page_height">
+            <EditText
+                android:id="@+id/id_modify_page_edittext"
+                android:hint="请输入修改内容"
+                android:textSize="20dp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!--<EditText-->
+            <!--android:id="@+id/input_password"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_weight="13"-->
+            <!--android:background="@color/white"-->
+            <!--android:hint="请输入密码"-->
+            <!--android:inputType="textPassword"-->
+            <!--android:textSize="@dimen/LoginTextSize" />-->
+        </LinearLayout>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:text="4-20个字符,可由中英文、数字、_、-等组成。"
+            android:textSize="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</LinearLayout>
