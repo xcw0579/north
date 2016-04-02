@@ -52,7 +52,7 @@ public class ProductListActivity extends SwipeBackActivity {
         oldcolor = tv_sale.getCurrentTextColor();
 
 
-        //取出消息，是字符串形式的，以分类的简称+/+图片的数字，比如“tjpp/4”
+        //取出产品类型，是字符串形式的，以分类的简称+/+图片的数字，比如“tjpp/4”
 //        Intent intent = getIntent();
 //        Bundle bundle = intent.getExtras();
 //        String whichone = bundle.getString("msg");
@@ -76,13 +76,6 @@ public class ProductListActivity extends SwipeBackActivity {
     }
 
 
-    private void itemChanged() {
-//        for (int i=0; i<mmAdapter1.getItemCount(); i++) {
-//            mmAdapter1.notifyItemChanged(i);
-//        }
-    }
-
-
 //    将4个textview都变成黑色
     private void clearAllTextColor() {
         tv_synthesize.setTextColor(oldcolor);
@@ -98,7 +91,6 @@ public class ProductListActivity extends SwipeBackActivity {
         tv_synthesize.setTextColor(getResources().getColor(R.color.primary_darked));
         //综合排序
         mmAdapter1.changeOrder(0);
-        this.itemChanged();
     }
 //    销量
     @OnClick(R.id.id_product_list_sale)
@@ -107,7 +99,6 @@ public class ProductListActivity extends SwipeBackActivity {
         tv_sale.setTextColor(getResources().getColor(R.color.primary_darked));
         //销量排序
         mmAdapter1.changeOrder(1);
-        this.itemChanged();
     }
 //    价格
     @OnClick(R.id.id_product_list_price)
@@ -116,7 +107,6 @@ public class ProductListActivity extends SwipeBackActivity {
         tv_price.setTextColor(getResources().getColor(R.color.primary_darked));
         //价格排序
         mmAdapter1.changeOrder(2);
-        this.itemChanged();
     }
 //    过滤
     @OnClick(R.id.id_product_list_filter)
@@ -125,7 +115,6 @@ public class ProductListActivity extends SwipeBackActivity {
         tv_filter.setTextColor(getResources().getColor(R.color.primary_darked));
         //TODO 显示带筛选的排序，暂时不做
         mmAdapter1.changeOrder(3);
-        this.itemChanged();
     }
 
     // 后退按钮的点击事件

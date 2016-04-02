@@ -13,13 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.squareup.picasso.Downloader;
 import com.squareup.picasso.Picasso;
+import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewAdapter;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewHolder;
 import com.xcw0754.north.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,10 +78,6 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
                 JsonObject json = new JsonParser().parse(response).getAsJsonObject();
                 String errcode = json.get("errcode").getAsString();
                 if ( errcode.equals("1002") ) {
-//                    holder.tv_price.setText(json.get("price").getAsString());
-//                    holder.tv_title1.setText(msg.what+json.get("title1").getAsString());
-//                    holder.tv_title2.setText(json.get("title2").getAsString());
-//                    holder.pos = msg.what;  //模拟产品的编号
                     products.set(msg.what,
                             new oneProduct(msg.what,
                                 json.get("price").getAsString(),
@@ -119,12 +120,58 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
         //更新ui
         UIHandler = new Handler(){
             @Override
-            public void handleMessage(Message msg) {
-                RecyclerViewHolder1 holder = rvhList.get(msg.what);
+            public void handleMessage(final Message msg) {
+                final RecyclerViewHolder1 holder = rvhList.get(msg.what);
                 Picasso.with(mContxt).load(products.get(msg.what).url).into(holder.iv);
                 holder.tv_price.setText(products.get(msg.what).price);
                 holder.tv_title1.setText(products.get(msg.what).title1);
                 holder.tv_title2.setText(products.get(msg.what).title2);
+//
+//                // 收藏
+//                holder.favoriteFalse.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        //反转图标
+//                        holder.favoriteFalse.setVisibility(View.GONE);
+//                        holder.favoriteTrue.setVisibility(View.VISIBLE);
+//
+//                        //TODO 将产品添加到收藏列表
+//
+//                        //如果还没有任何收藏
+//                        if( !SPUtils.contains(mContxt, "favorite") ) {
+//                            JsonObject json = new JsonObject();
+//                            SPUtils.put(mContxt, "favorite", json.toString());
+//                        }
+//
+//                        // 取出来解析，再装进去
+//                        String content = (String) SPUtils.get(mContxt, "favorite", "");
+//                        JsonArray json = new JsonParser().parse(content).getAsJsonArray();
+//                        json.add(""+msg.what);
+//                        SPUtils.put(mContxt, "favorite", json.toString());
+//                    }
+//                });
+//
+//                // 取消收藏
+//                holder.favoriteTrue.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        //反转图标
+//                        holder.favoriteFalse.setVisibility(View.VISIBLE);
+//                        holder.favoriteTrue.setVisibility(View.GONE);
+//
+//                        // 取出来解析，删除掉what，再装回去
+//                        String content = (String) SPUtils.get(mContxt, "favorite", "");
+//                        JsonArray json = new JsonParser().parse(content).getAsJsonArray();
+//                        for(int i=0; i<json.size(); i++) {
+//                            if( json.get(i).getAsString()==""+msg.what ) {
+//                                json.remove();
+//                            }
+//                        }
+//
+//                        SPUtils.put(mContxt, "favorite", json.toString());
+//                    }
+//                });
+
             }
         };
 
@@ -165,8 +212,6 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
     public void onBindViewHolder(final RecyclerViewHolder1 holder, final int pos) {
 
         //只需要将排序好的products跟holder对号入座即可。
-        //TODO 这里可能需要使用到同步机制，或者说再弄一个helper？让新线程去睡眠等待资源？再提醒helper更新ui
-
         rvhList.set(pos, holder);
         UIHandler.post(new Runnable() {   //handler并不是另开线程的
             @Override
@@ -191,33 +236,6 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
                 new Thread(requestTask).start();
             }
         });
-
-
-
-//        // 绑定ViewHolder，先把图片load进去
-//        String url = "http://10.0.3.2:5000/source/sort/itemlist/cfxd/0/"+ pos+".jpg";
-//        Picasso.with(mContxt).load(url).into(holder.iv);
-//        holder.itemView.setTag(pos);   //将产品编号绑在itemView的Tag中，以便点击时进行获取。
-//
-//        rvhList.set(pos, holder);
-//        handler.post(new Runnable() {   //handler并不是另开线程的
-//                @Override
-//                public void run() {
-//                    //have to 另开线程
-//                    Runnable requestTask = new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Message msg = new Message();
-//                            String finalUrl = "http://10.0.3.2:5000/ask/product/detail/0/"+pos;
-//                            String response = HttpRequest.get(finalUrl).body();
-//                            msg.what = pos;             //这个是array的adapter的下标
-//                            msg.obj = response;
-//                            handler.sendMessage(msg);   // 丢一个what和obj给主线程处理
-//                        }
-//                    };
-//                    new Thread(requestTask).start();
-//                }
-//            });
     }
 
 
@@ -240,6 +258,10 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
         View view = mInflater.inflate(R.layout.product_list_recyclerview_item1, arg0, false);
         RecyclerViewHolder1 viewHolder = new RecyclerViewHolder1(view);
         view.setOnClickListener(this);  //启动监听事件
+
+
+
+
         return viewHolder;
     }
 

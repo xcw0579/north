@@ -2,9 +2,13 @@ package com.xcw0754.north.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +24,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.squareup.picasso.Picasso;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
+import com.xcw0754.north.Libraries.aboutRecycleView.DividerItemDecoration;
+import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.MyLayoutManager1;
+import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.RecyclerViewAdapter1;
+import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.RecyclerViewAdapter2;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.MyLayoutManager;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewAdapter;
 
@@ -61,8 +69,25 @@ public class FragmentActivity extends AppCompatActivity {
     private List<RecyclerViewAdapter> rvaList;
     private List<Integer> num;
 
+    //收藏
+    private RecyclerViewAdapter2 rvaSearch;
+    private RecyclerView rcvSearch;
+
+
+
     // 同步信号量
     final private Semaphore sema = new Semaphore(0);
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Override
@@ -229,14 +254,42 @@ public class FragmentActivity extends AppCompatActivity {
      */
     private void handleSearch() {
         //TODO 将所有的收藏读出来，显示出来。（只作资源请求，而不提交本地数据到后台）
+        //TODO 隐藏提示信息
         /*
         先把数组转为String类型。使用String s=Arrays.toString(String[] arr);
         使用SharedPreferences.getEditor().put("arr",s).commit(); 保存
         通过SharedPreferences.get("arr") 得到String串
         然后把String 转为 Array 即可
         */
+        //有收藏则显示出来
+        int cnt = 0;
+        if( SPUtils.contains(getApplicationContext(), "favorite") ) {
+            String product = (String) SPUtils.get(getApplicationContext(), "favorite", "");
+            JsonObject json = new JsonParser().parse(product).getAsJsonObject();
 
+            // 统计数量
+            while( true ) {
+                if( json.get(""+cnt)==null ) {
+                    break;
+                }
+                cnt++;
+            }
+        }
 
+        rvaSearch =  new RecyclerViewAdapter2(this, cnt);
+//        rvaSearch.setOnItemClickListener(new RecyclerViewAdapter1.OnRecyclerViewItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, String data) {
+//                Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+//                intent.putExtra("msg", data);       //传必要的数据,一般是产品编号
+//                startActivity(intent);
+//            }
+//        });
+
+        rcvSearch.setAdapter(rvaSearch);
+        rcvSearch.setLayoutManager(new MyLayoutManager1(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        rcvSearch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        rcvSearch.setItemAnimator(new DefaultItemAnimator());   //默认的增删动画
 
     }
 
