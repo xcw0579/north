@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.Libraries.aboutRecycleView.DividerItemDecoration;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.MyLayoutManager1;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.RecyclerViewAdapter1;
@@ -61,12 +62,30 @@ public class ProductListActivity extends SwipeBackActivity {
 
         mmAdapter1 =  new RecyclerViewAdapter1(this, 15);
         mmAdapter1.setOnItemClickListener(new RecyclerViewAdapter1.OnRecyclerViewItemClickListener() {
+            //整个item的点击
             @Override
             public void onItemClick(View view, String data) {
                 Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
                 intent.putExtra("msg", data);       //传必要的数据,一般是产品编号
                 startActivity(intent);
             }
+            //item中的部件的点击，data是产品编号
+            @Override
+            public void onFavoriteClick(View view, String data) {
+
+                //根据data判断是否已经被收藏了，再设置对应的图片给收藏按钮
+                if( SPUtils.check(getApplicationContext(), "favorite", data) ) {
+                    //显示实心，并加入收藏
+                    SPUtils.checkIn(getApplicationContext(), "favorite", data);
+
+                } else {
+                    //取消收藏，再显示空心（刷新一下UI即可）
+                    SPUtils.checkOut(getApplicationContext(), "favorite", data);
+                }
+                mmAdapter1.sendMessageToHanler(1, Integer.parseInt(data) );
+
+            }
+
         });
 
         rcv.setAdapter(mmAdapter1);

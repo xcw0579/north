@@ -6,6 +6,11 @@ package com.xcw0754.north.Libraries.SharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.google.android.gms.common.api.BooleanResult;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import java.util.Map;
 
@@ -106,4 +111,61 @@ public class SPUtils {
         return sp.contains(key);
     }
 
+
+    /**
+     * 检查某个value（是个数组的）中是否含有某个字符串
+     * @param context
+     */
+    public static Boolean check(Context context, String key, String targetStr) {
+        // 取出来解析，增加item，再装进去
+        String content = (String) get(context, key, "");
+        if( content=="" )   return false;
+        JsonArray json = new JsonParser().parse(content).getAsJsonArray();
+
+        for(int i=0; i<json.size(); i++) {
+            if( json.get(i).toString()==targetStr )
+                return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 为key-value中value增加一个元素
+     * @param context
+     * @param key
+     * @param targetStr
+     */
+    public static void checkIn(Context context, String key, String targetStr) {
+        String content = (String) get(context, key, "");
+        JsonArray json = new JsonParser().parse(content).getAsJsonArray();
+
+        for(int i=0; i<json.size(); i++) {
+            if( json.get(i).toString()==targetStr ) {
+                return ;    //已经有了
+            }
+        }
+        json.add(targetStr);
+        put(context, key, json.toString()); //放回去
+    }
+
+
+    /**
+     * 删除某个key-value中value的某个元素
+     * @param context
+     * @param key
+     * @param targetStr
+     */
+    public static void checkOut(Context context, String key, String targetStr) {
+        String content = (String) get(context, key, "");
+        JsonArray json = new JsonParser().parse(content).getAsJsonArray();
+
+        for(int i=0; i<json.size(); i++) {
+            if( json.get(i).toString()==targetStr ) {   //如果存在，删除即可
+                json.remove(i);
+                break;
+            }
+        }
+        put(context, key, json.toString()); //放回去
+    }
 }

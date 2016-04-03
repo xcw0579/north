@@ -12,7 +12,7 @@ import com.xcw0754.north.R;
 /**
  * Created by xiao on 16-3-13.
  */
-public class RecyclerViewHolder1 extends RecyclerView.ViewHolder{
+public class RecyclerViewHolder1 extends RecyclerView.ViewHolder implements View.OnContextClickListener{
 
 
     public ImageView iv;
@@ -22,12 +22,12 @@ public class RecyclerViewHolder1 extends RecyclerView.ViewHolder{
     public int pos;
 
     //按钮的
-    public ImageButton favoriteTrue;
-    public ImageButton favoriteFalse;
+    public ImageButton favorite;
     public ImageButton buyItNow;
 
     public RecyclerViewHolder1(View arg) {
         super(arg);
+
         // 绑定各个item上面的view即可
         iv = (ImageView) arg.findViewById(R.id.id_iv_item1);
         tv_price = (TextView) arg.findViewById(R.id.id_product_price);
@@ -35,8 +35,19 @@ public class RecyclerViewHolder1 extends RecyclerView.ViewHolder{
         tv_title2 = (TextView) arg.findViewById(R.id.id_product_title_detail);
         pos = 0;
 
-        favoriteTrue = (ImageButton) arg.findViewById(R.id.id_product_shoucang_true);
-        favoriteFalse = (ImageButton) arg.findViewById(R.id.id_product_shoucang_false);
+        favorite = (ImageButton) arg.findViewById(R.id.id_product_favorite);
+        favorite.setClickable(true);
         buyItNow = (ImageButton) arg.findViewById(R.id.id_product_goumai);
+        buyItNow.setOnClickListener(this);
     }
+
+    @Override
+    public boolean onContextClick(View v) {
+        return false;
+    }
+
+
+
+
+
 }

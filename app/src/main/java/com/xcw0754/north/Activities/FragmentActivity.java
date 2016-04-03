@@ -17,9 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.squareup.picasso.Picasso;
@@ -27,6 +29,7 @@ import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.Libraries.aboutRecycleView.DividerItemDecoration;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.MyLayoutManager1;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.RecyclerViewAdapter1;
+import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.MyLayoutManager2;
 import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.RecyclerViewAdapter2;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.MyLayoutManager;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewAdapter;
@@ -72,6 +75,7 @@ public class FragmentActivity extends AppCompatActivity {
     //收藏
     private RecyclerViewAdapter2 rvaSearch;
     private RecyclerView rcvSearch;
+    private TextView tvSearchHint;
 
 
 
@@ -232,7 +236,7 @@ public class FragmentActivity extends AppCompatActivity {
                         Log.d("sort","分类item被点击了。");
                         //TODO 点击item后将调出其他的activity进行显示，得传参数进去
                         Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
-                        intent.putExtra("msg", data);
+                        intent.putExtra("msg", data);   //data是什么数据？
                         startActivity(intent);
                     }
                 });
@@ -262,21 +266,31 @@ public class FragmentActivity extends AppCompatActivity {
         然后把String 转为 Array 即可
         */
         //有收藏则显示出来
-        int cnt = 0;
-        if( SPUtils.contains(getApplicationContext(), "favorite") ) {
-            String product = (String) SPUtils.get(getApplicationContext(), "favorite", "");
-            JsonObject json = new JsonParser().parse(product).getAsJsonObject();
+        if( tvSearchHint==null ) {
+            tvSearchHint = (TextView) findViewById(R.id.id_tv_search_hint);
 
-            // 统计数量
-            while( true ) {
-                if( json.get(""+cnt)==null ) {
-                    break;
-                }
-                cnt++;
-            }
+        }
+        if( rcvSearch==null ) {
+            rcvSearch = (RecyclerView) findViewById(R.id.id_search_rv);
         }
 
-        rvaSearch =  new RecyclerViewAdapter2(this, cnt);
+        if( SPUtils.contains(getApplicationContext(), "favorite")==true ) {
+
+
+            String product = (String) SPUtils.get(getApplicationContext(), "favorite", "[]");
+            Log.d("msg", product);
+            if( product=="" ) return ;    //没有数据？可能是被取消完了
+
+            tvSearchHint.setVisibility(View.GONE);  //有了收藏的产品就要隐藏起来
+            rcvSearch.setVisibility(View.VISIBLE);
+
+
+            JsonArray json = new JsonParser().parse(product).getAsJsonArray();
+
+            rvaSearch =  new RecyclerViewAdapter2(this, json.size());
+
+
+            //点击进去详情页面的监听事件
 //        rvaSearch.setOnItemClickListener(new RecyclerViewAdapter1.OnRecyclerViewItemClickListener() {
 //            @Override
 //            public void onItemClick(View view, String data) {
@@ -286,10 +300,15 @@ public class FragmentActivity extends AppCompatActivity {
 //            }
 //        });
 
-        rcvSearch.setAdapter(rvaSearch);
-        rcvSearch.setLayoutManager(new MyLayoutManager1(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        rcvSearch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-        rcvSearch.setItemAnimator(new DefaultItemAnimator());   //默认的增删动画
+            rcvSearch.setAdapter(rvaSearch);
+            rcvSearch.setLayoutManager(new MyLayoutManager2(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+            rcvSearch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+            rcvSearch.setItemAnimator(new DefaultItemAnimator());   //默认的增删动画
+
+        } else {
+            tvSearchHint.setVisibility(View.VISIBLE);  //有了收藏的产品就要隐藏起来
+            rcvSearch.setVisibility(View.GONE);
+        }
 
     }
 
