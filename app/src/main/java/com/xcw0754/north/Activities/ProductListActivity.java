@@ -75,14 +75,13 @@ public class ProductListActivity extends SwipeBackActivity {
 
                 //根据data判断是否已经被收藏了，再设置对应的图片给收藏按钮
                 if( SPUtils.check(getApplicationContext(), "favorite", data) ) {
-                    //显示实心，并加入收藏
-                    SPUtils.checkIn(getApplicationContext(), "favorite", data);
-
+                    //已经有收藏了，则取消收藏
+                    SPUtils.checkOut(getApplicationContext(), "favorite", data);
                 } else {
                     //取消收藏，再显示空心（刷新一下UI即可）
-                    SPUtils.checkOut(getApplicationContext(), "favorite", data);
+                    SPUtils.checkIn(getApplicationContext(), "favorite", data);
                 }
-                mmAdapter1.sendMessageToHanler(1, Integer.parseInt(data) );
+                mmAdapter1.sendMessageToHanler(1, Integer.parseInt(data) ); //更新ui
 
             }
 

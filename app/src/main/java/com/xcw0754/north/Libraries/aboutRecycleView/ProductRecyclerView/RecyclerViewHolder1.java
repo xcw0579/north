@@ -12,7 +12,7 @@ import com.xcw0754.north.R;
 /**
  * Created by xiao on 16-3-13.
  */
-public class RecyclerViewHolder1 extends RecyclerView.ViewHolder implements View.OnContextClickListener{
+public class RecyclerViewHolder1 extends RecyclerView.ViewHolder {
 
 
     public ImageView iv;
@@ -36,15 +36,11 @@ public class RecyclerViewHolder1 extends RecyclerView.ViewHolder implements View
         pos = 0;
 
         favorite = (ImageButton) arg.findViewById(R.id.id_product_favorite);
-        favorite.setClickable(true);
         buyItNow = (ImageButton) arg.findViewById(R.id.id_product_goumai);
-        buyItNow.setOnClickListener(this);
+
     }
 
-    @Override
-    public boolean onContextClick(View v) {
-        return false;
-    }
+
 
 
 

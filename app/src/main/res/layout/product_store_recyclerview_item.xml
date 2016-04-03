@@ -50,6 +50,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_width="0dp"
             android:layout_height="match_parent">
@@ -95,29 +96,27 @@
         </LinearLayout>
 
         <!--购买-->
-        <LinearLayout
-            android:layout_weight="1.5"
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-            <!--占位-->
-            <RelativeLayout
-                android:layout_weight="4"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"/>
-            <RelativeLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_action_settings"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp" />
-            </RelativeLayout>
-
-
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_weight="1.5"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent">-->
+            <!--&lt;!&ndash;占位&ndash;&gt;-->
+            <!--<RelativeLayout-->
+                <!--android:layout_weight="4"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"/>-->
+            <!--<RelativeLayout-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<ImageView-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/ic_action_settings"-->
+                    <!--android:layout_width="35dp"-->
+                    <!--android:layout_height="35dp" />-->
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
 
     </LinearLayout>
 

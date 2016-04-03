@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -76,6 +77,8 @@ public class FragmentActivity extends AppCompatActivity {
     private RecyclerViewAdapter2 rvaSearch;
     private RecyclerView rcvSearch;
     private TextView tvSearchHint;
+    private LinearLayout LlayoutNO;
+    private RelativeLayout LlayoutYES;
 
 
 
@@ -257,6 +260,8 @@ public class FragmentActivity extends AppCompatActivity {
      * 收藏
      */
     private void handleSearch() {
+        Log.d("msg", "更新再一次。");
+
         //TODO 将所有的收藏读出来，显示出来。（只作资源请求，而不提交本地数据到后台）
         //TODO 隐藏提示信息
         /*
@@ -266,48 +271,42 @@ public class FragmentActivity extends AppCompatActivity {
         然后把String 转为 Array 即可
         */
         //有收藏则显示出来
-        if( tvSearchHint==null ) {
-            tvSearchHint = (TextView) findViewById(R.id.id_tv_search_hint);
-
+        if( LlayoutNO==null ) {
+            LlayoutNO = (LinearLayout) findViewById(R.id.id_layout_no_favorite);
+            LlayoutYES = (RelativeLayout) findViewById(R.id.id_layout_favorite_page);
         }
+
         if( rcvSearch==null ) {
             rcvSearch = (RecyclerView) findViewById(R.id.id_search_rv);
         }
 
-        if( SPUtils.contains(getApplicationContext(), "favorite")==true ) {
+        if( SPUtils.contains(getApplicationContext(), "favorite")  ) {
 
-
-            String product = (String) SPUtils.get(getApplicationContext(), "favorite", "[]");
-            Log.d("msg", product);
-            if( product=="" ) return ;    //没有数据？可能是被取消完了
-
-            tvSearchHint.setVisibility(View.GONE);  //有了收藏的产品就要隐藏起来
-            rcvSearch.setVisibility(View.VISIBLE);
-
-
+            String product = (String) SPUtils.get(getApplicationContext(), "favorite", "");
             JsonArray json = new JsonParser().parse(product).getAsJsonArray();
+            Log.d("msg", product);  //收藏的东西
+            if( json.size()==0 ) {  //并没有收藏
 
-            rvaSearch =  new RecyclerViewAdapter2(this, json.size());
+                LlayoutNO.setVisibility(View.VISIBLE);  //有了收藏的产品就要隐藏起来
+                LlayoutYES.setVisibility(View.GONE);
 
+            } else {
 
-            //点击进去详情页面的监听事件
-//        rvaSearch.setOnItemClickListener(new RecyclerViewAdapter1.OnRecyclerViewItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, String data) {
-//                Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
-//                intent.putExtra("msg", data);       //传必要的数据,一般是产品编号
-//                startActivity(intent);
-//            }
-//        });
+                LlayoutNO.setVisibility(View.GONE);  //有了收藏的产品就要隐藏起来
+                LlayoutYES.setVisibility(View.VISIBLE);
 
-            rcvSearch.setAdapter(rvaSearch);
-            rcvSearch.setLayoutManager(new MyLayoutManager2(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-            rcvSearch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-            rcvSearch.setItemAnimator(new DefaultItemAnimator());   //默认的增删动画
+                rvaSearch =  new RecyclerViewAdapter2(this, json.size());
 
+                rcvSearch.setAdapter(rvaSearch);
+                rcvSearch.setLayoutManager(new MyLayoutManager2(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+                rcvSearch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+                rcvSearch.setItemAnimator(new DefaultItemAnimator());   //默认的增删动画
+
+            }
         } else {
-            tvSearchHint.setVisibility(View.VISIBLE);  //有了收藏的产品就要隐藏起来
-            rcvSearch.setVisibility(View.GONE);
+
+            LlayoutNO.setVisibility(View.VISIBLE);  //有了收藏的产品就要隐藏起来
+            LlayoutYES.setVisibility(View.GONE);
         }
 
     }

@@ -72,7 +72,6 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
         dataCacheHandler = new Handler(){
             @Override
             public void handleMessage(Message msg){
-//                RecyclerViewHolder1 holder = rvhList.get(msg.what);
                 String response = (String) msg.obj;
 
                 JsonObject json = new JsonParser().parse(response).getAsJsonObject();
@@ -127,6 +126,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
                 //收藏按钮: 必须实时check才行
                 if( SPUtils.check(mContxt,"favorite", ""+products.get(msg.what).pos) ) {
                     //TODO 实心的照片
+                    Log.d("msg", "生效了？》");
                     holder.favorite.setBackground(
                             mContxt.getResources().getDrawable(R.drawable.ic_action_settings));
                 } else {
@@ -135,40 +135,11 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
                     holder.favorite.setBackground(
                             mContxt.getResources().getDrawable(R.drawable.ic_action_favorite));
                 }
+                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
 
                 holder.tv_price.setText(products.get(msg.what).price);
                 holder.tv_title1.setText(products.get(msg.what).title1);
                 holder.tv_title2.setText(products.get(msg.what).title2);
-
-
-
-
-
-//                // 收藏
-//                holder.favoriteFalse.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        //反转图标
-//                        holder.favoriteFalse.setVisibility(View.GONE);
-//                        holder.favoriteTrue.setVisibility(View.VISIBLE);
-//
-//                        //TODO 将产品添加到收藏列表
-//
-//                        //如果还没有任何收藏
-//                        if( !SPUtils.contains(mContxt, "favorite") ) {
-//                            JsonArray json = new JsonArray();
-//                            SPUtils.put(mContxt, "favorite", json.toString());
-//                        }
-//
-//                        // 取出来解析，增加item，再装进去
-//                        String content = (String) SPUtils.get(mContxt, "favorite", "");
-//                        JsonArray json = new JsonParser().parse(content).getAsJsonArray();
-//                        json.add(""+products.get(msg.what).pos );
-//                        Log.d("msg",""+products.get(msg.what).pos);
-//                        SPUtils.put(mContxt, "favorite", json.toString());
-//                    }
-//                });
-
             }
         };
 
@@ -211,7 +182,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
 
 
     @Override
-    public void onBindViewHolder(final RecyclerViewHolder1 holder, final int pos) {
+    public void onBindViewHolder(final RecyclerViewHolder1 holder, int pos) {
 
 
         //只需要将排序好的products跟holder对号入座即可。
@@ -219,8 +190,9 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
         holder.itemView.setTag(pos);
         holder.favorite.setTag(pos);
         holder.buyItNow.setTag(pos);
-        holder.favorite.setClickable(true);
-        holder.buyItNow.setClickable(true);
+        holder.itemView.setOnClickListener(this);
+        holder.favorite.setOnClickListener(this);
+        holder.buyItNow.setOnClickListener(this);
         sendMessageToHanler(1, pos);
 
 //        UIHandler.post(new Runnable() {   //handler并不是另开线程的

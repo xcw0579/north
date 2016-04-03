@@ -2,7 +2,10 @@ package com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 
 
 /**
@@ -10,24 +13,17 @@ import android.util.AttributeSet;
  */
 public class MyLayoutManager2 extends LinearLayoutManager {
 
-    public MyLayoutManager2(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    public MyLayoutManager2(Context context) {
-        super(context);
-    }
 
     public MyLayoutManager2(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
 
 
-    /*
-    @Override
-    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-        return null;
-    }
+//
+//    @Override
+//    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+//        return null;
+//    }
 
 
     //绘制整块的面积用的，grid比较需要
@@ -38,18 +34,22 @@ public class MyLayoutManager2 extends LinearLayoutManager {
         int itemCount = getItemCount() ;
         if( itemCount == 0 ) {
             super.onMeasure(recycler, state, widthSpec, heightSpec);
-            Log.d("my", "没有item。");
+            Log.d("msg", "没有item。");
             return ;
         }
 
         // 手动计算出layout的高度
-        View view = recycler.getViewForPosition(0);
+        View view = recycler.getViewForPosition(0); //这里可能会导致多次绘制首个item
+
+        int extra = 0;
+        if( itemCount>=4 )  extra = 120;
         if( view != null ) {
             measureChild(view, widthSpec, heightSpec);
             int measuredWidth = View.MeasureSpec.getSize(widthSpec);
-            int measuredHeight = itemCount;
-            setMeasuredDimension(measuredWidth, measuredHeight );
+            int measuredHeight = (view.getMeasuredHeight() + 8) * itemCount + extra;
+            setMeasuredDimension(measuredWidth, measuredHeight);
         }
-    }*/
 
+
+    }
 }

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.android.gms.common.api.BooleanResult;
+import com.google.android.gms.common.server.converter.StringToIntConverter;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
@@ -112,19 +113,36 @@ public class SPUtils {
     }
 
 
+
+
+
+
+    //*************************下面是为了支持保存数组****************************************************************
+
+
+
+
+
+
+
     /**
      * 检查某个value（是个数组的）中是否含有某个字符串
      * @param context
      */
     public static Boolean check(Context context, String key, String targetStr) {
+        ensureExist(context, key);  //得先保证存在
+
         // 取出来解析，增加item，再装进去
         String content = (String) get(context, key, "");
-        if( content=="" )   return false;
         JsonArray json = new JsonParser().parse(content).getAsJsonArray();
 
         for(int i=0; i<json.size(); i++) {
-            if( json.get(i).toString()==targetStr )
+
+            if( targetStr.equals(json.get(i).getAsString()) ) {
+//                Log.d("msg", json.get(i).getAsString()+"等于"+targetStr);
                 return true;
+            }
+//            Log.d("msg", json.get(i).getAsString()+"不等于"+targetStr);
         }
         return false;
     }
@@ -137,12 +155,13 @@ public class SPUtils {
      * @param targetStr
      */
     public static void checkIn(Context context, String key, String targetStr) {
+        ensureExist(context, key);  //得先保证存在
         String content = (String) get(context, key, "");
         JsonArray json = new JsonParser().parse(content).getAsJsonArray();
 
         for(int i=0; i<json.size(); i++) {
-            if( json.get(i).toString()==targetStr ) {
-                return ;    //已经有了
+            if( targetStr.equals(json.get(i).getAsString()) ) {
+                return ;    //已经有了，重复则不插入
             }
         }
         json.add(targetStr);
@@ -157,15 +176,26 @@ public class SPUtils {
      * @param targetStr
      */
     public static void checkOut(Context context, String key, String targetStr) {
+        ensureExist(context, key);  //得先保证存在
         String content = (String) get(context, key, "");
         JsonArray json = new JsonParser().parse(content).getAsJsonArray();
 
         for(int i=0; i<json.size(); i++) {
-            if( json.get(i).toString()==targetStr ) {   //如果存在，删除即可
+            if( targetStr.equals(json.get(i).getAsString()) ) { //如果存在，删除即可
                 json.remove(i);
                 break;
             }
         }
         put(context, key, json.toString()); //放回去
+    }
+
+
+
+
+
+    private static void ensureExist(Context context, String key) {
+        if( contains(context, key) )  return ;
+        JsonArray array = new JsonArray();
+        put(context, key, array.toString());
     }
 }

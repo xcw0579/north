@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.JsonArray;
@@ -38,6 +39,9 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
 
     private ArrayList<RecyclerViewHolder2> rvhList;
     private ArrayList<oneProduct> products;
+
+    //选中的item
+    private ArrayList<Integer>  checkList;
 
 
     /**
@@ -115,9 +119,10 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
         //更新ui
         UIHandler = new Handler(){
             @Override
-            public void handleMessage(final Message msg) {
-                final RecyclerViewHolder2 holder = rvhList.get(msg.what);
+            public void handleMessage(Message msg) {
+                RecyclerViewHolder2 holder = rvhList.get(msg.what);
                 Picasso.with(mContxt).load(products.get(msg.what).url).into(holder.iv);
+                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
                 holder.tv_price.setText(products.get(msg.what).price);
                 holder.tv_title1.setText(products.get(msg.what).title1);
                 holder.tv_title2.setText(products.get(msg.what).title2);
@@ -126,31 +131,82 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
     }
 
 
+    /**
+     * 获取所有的选中的item
+     */
+    public ArrayList<Integer> getCheckList() {
+        return checkList;
+    }
+
+
+
+
+    /**
+     * 方便外部更新ui用的，相当于刷新
+     * @param which
+     */
+    public void sendMessageToHanler(int which, final int pos) {
+        if( which==1 ) {    //UI handler
+            UIHandler.post(new Runnable() {   //handler并不是另开线程的
+                @Override
+                public void run() {
+                    Runnable requestTask = new Runnable() {
+                        @Override
+                        public void run() {
+                            while( products.get(pos)==null ) {
+                                try{
+                                    Thread.sleep(500);
+                                }catch( InterruptedException e){
+                                    Log.d("msg", "等待资源的ui线程被杀。");
+                                }
+                            }
+                            Message msg = new Message();
+                            msg.what = pos;
+                            UIHandler.sendMessage(msg);
+                        }
+                    };
+                    new Thread(requestTask).start();
+                }
+            });
+
+        } else {        //可以搞其他事情
+
+        }
+    }
+
     @Override
     public void onBindViewHolder(final RecyclerViewHolder2 holder, final int pos) {
         //只需要将排序好的products跟holder对号入座即可。
-        rvhList.set(pos, holder);
-        UIHandler.post(new Runnable() {   //handler并不是另开线程的
-            @Override
-            public void run() {
-                Runnable requestTask = new Runnable() {
-                    @Override
-                    public void run() {
-                        while ( products.get(pos)==null ) {
-                            try{
-                                Thread.sleep(500);
-                            }catch( InterruptedException e){
+        Log.d("msg", "本次更新的是................... "+ pos);
 
-                            }
-                        }
-                        Message msg = new Message();
-                        msg.what = pos;     //要更新的数据在products的下标
-                        UIHandler.sendMessage(msg);
-                    }
-                };
-                new Thread(requestTask).start();
-            }
-        });
+
+        rvhList.set(pos, holder);
+        holder.itemView.setTag(pos);
+        holder.itemView.setOnClickListener(this);
+
+        sendMessageToHanler(1, pos);
+
+//        UIHandler.post(new Runnable() {   //handler并不是另开线程的
+//            @Override
+//            public void run() {
+//                Runnable requestTask = new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        while( products.get(pos)==null ) {
+//                            try{
+//                                Thread.sleep(500);
+//                            }catch( InterruptedException e){
+//                                Log.d("msg", "竟然死了。");
+//                            }
+//                        }
+//                        Message msg = new Message();
+//                        msg.what = pos;     //要更新的数据在products的下标
+//                        UIHandler.sendMessage(msg);
+//                    }
+//                };
+//                new Thread(requestTask).start();
+//            }
+//        });
     }
 
 
@@ -165,6 +221,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
         return mDatas;
     }
 
+
     @Override
     public RecyclerViewHolder2 onCreateViewHolder(ViewGroup arg0, int arg1) {
         // 创建ViewHolder
@@ -174,6 +231,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
         return viewHolder;
     }
 
+
     //item的点击事件，仅需在外部调用setOnItemClickListener设置listener即可。
     @Override
     public void onClick(View v) {
@@ -182,6 +240,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
             mOnItemClickListener.onItemClick(v, (String)v.getTag());//传给下一个activity
         }
     }
+
 
     // 类似listview的监听接口，仅需调用此函数即可
     public static interface OnRecyclerViewItemClickListener {
