@@ -14,11 +14,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.github.kevinsawicki.http.HttpRequest;
@@ -38,6 +41,8 @@ import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.Recycler
 import com.xcw0754.north.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -79,8 +84,9 @@ public class FragmentActivity extends AppCompatActivity {
     private TextView tvSearchHint;
     private LinearLayout LlayoutNO;
     private RelativeLayout LlayoutYES;
-
-
+    private Button deleteButton;
+    private Button carButton;
+    private int showItemCount = 0;
 
     // 同步信号量
     final private Semaphore sema = new Semaphore(0);
@@ -260,7 +266,7 @@ public class FragmentActivity extends AppCompatActivity {
      * 收藏
      */
     private void handleSearch() {
-        Log.d("msg", "更新再一次。");
+
 
         //TODO 将所有的收藏读出来，显示出来。（只作资源请求，而不提交本地数据到后台）
         //TODO 隐藏提示信息
@@ -274,11 +280,17 @@ public class FragmentActivity extends AppCompatActivity {
         if( LlayoutNO==null ) {
             LlayoutNO = (LinearLayout) findViewById(R.id.id_layout_no_favorite);
             LlayoutYES = (RelativeLayout) findViewById(R.id.id_layout_favorite_page);
+            rcvSearch = (RecyclerView) findViewById(R.id.id_search_rv);
+
+            deleteButton = (Button) findViewById(R.id.id_btn_detail_delete);
+            carButton = (Button) findViewById(R.id.id_btn_detail_addincar);
         }
 
-        if( rcvSearch==null ) {
-            rcvSearch = (RecyclerView) findViewById(R.id.id_search_rv);
-        }
+
+
+
+
+
 
         if( SPUtils.contains(getApplicationContext(), "favorite")  ) {
 
@@ -289,19 +301,96 @@ public class FragmentActivity extends AppCompatActivity {
 
                 LlayoutNO.setVisibility(View.VISIBLE);  //有了收藏的产品就要隐藏起来
                 LlayoutYES.setVisibility(View.GONE);
-
             } else {
+                if( showItemCount==json.size() )   return ;    //已经设置过一遍了，防止原来类中的array被析构了。
+                showItemCount = json.size();
+                Log.d("msg", "更新再一次。");
+                rvaSearch = new RecyclerViewAdapter2(this, json.size());
+                rvaSearch.setOnItemClickListener(new RecyclerViewAdapter2.OnRecyclerViewItemClickListener() {
+                    //整个item的点击
+                    @Override
+                    public void onItemClick(View view, String data) {
+//                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+//                        intent.putExtra("msg", data);       //传必要的数据,一般是产品编号
+//                        startActivity(intent);
+                    }
 
-                LlayoutNO.setVisibility(View.GONE);  //有了收藏的产品就要隐藏起来
-                LlayoutYES.setVisibility(View.VISIBLE);
+                    //item中的选中按钮的点击，data是产品编号
+                    @Override
+                    public void onCheckClick(View view, String data) {
+                        //TODO 在array中，如果存在，则删除，如果不存在，则添加进去
+                        int pos =  Integer.parseInt(data);
 
-                rvaSearch =  new RecyclerViewAdapter2(this, json.size());
+                        if( view.isSelected() ) {
+                            rvaSearch.delCheckList(pos);
+                        } else {
+                            rvaSearch.putCheckList(Integer.parseInt(data));
+                        }
 
+//                        //检测是否存在
+//                        ArrayList<Integer> checkList =  rvaSearch.getCheckList();
+//                        if( checkList==null || checkList.size()==0 )   return ;    //没有任何选中
+//                        for(int i=0; i<checkList.size(); i++) {
+//                            if( checkList.get(i)==pos ) {
+//                                rvaSearch.delCheckList(pos);
+//                                return ;
+//                            }
+//                        }
+//                        rvaSearch.putCheckList(Integer.parseInt(data));
+                        Log.d("msg", "checklist成功点击。");
+                    }
+                });
+                //TODO 一旦有新的物品加入的话，勾选的框都会被取消调了。
                 rcvSearch.setAdapter(rvaSearch);
                 rcvSearch.setLayoutManager(new MyLayoutManager2(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
                 rcvSearch.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
                 rcvSearch.setItemAnimator(new DefaultItemAnimator());   //默认的增删动画
 
+                //删除按钮
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("msg", "删除按钮被点击了。");
+                        //将所有选中的物品从收藏夹删除
+                        //搜出选中的物品，添加到购物车中。
+                        ArrayList<Integer> checkList =  rvaSearch.getCheckList();
+                        if( checkList.size()<=0 ) {
+                            Toast.makeText(getBaseContext(), "未选中任何物品", Toast.LENGTH_LONG).show();
+                            return ;    //没有任何选中
+                        }
+
+                        Collections.sort(checkList);
+                        for(int i=checkList.size()-1; i>=0; i--) { //要按holder逆序，不然删的时候就麻烦了
+                            String num = String.valueOf( rvaSearch.posTonum(checkList.get(i)) );
+                            SPUtils.checkOut(getApplicationContext(), "favorite", num);
+                            //通知更新ui
+                            rvaSearch.sendMessageToHanler(2, checkList.get(i));    //这个得记录它的adapter的下标啊，不是产品编号啊
+                        }
+                    }
+                });
+                //加入购物车按钮
+                carButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //搜出选中的物品，添加到购物车中。
+                        ArrayList<Integer> checkList =  rvaSearch.getCheckList();
+                        if( checkList.size()==0 )   return ;    //没有任何选中
+
+                        if( !SPUtils.contains(getApplicationContext(), "car") ) {
+                            SPUtils.check(getApplicationContext(), "car", "abc");   //保证其存在
+                        }
+                        for(int i=0; i<checkList.size(); i++) {
+                            SPUtils.checkIn(getApplicationContext(), "car", checkList.get(i).toString() );
+                        }
+                        //添加成功则用显示框提示成功。
+                        Toast.makeText(getBaseContext(), "成功添加到购物车", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                //显示出来
+                LlayoutNO.setVisibility(View.GONE);
+                LlayoutYES.setVisibility(View.VISIBLE);
             }
         } else {
 

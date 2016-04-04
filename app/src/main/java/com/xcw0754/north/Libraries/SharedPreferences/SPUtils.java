@@ -182,6 +182,7 @@ public class SPUtils {
 
         for(int i=0; i<json.size(); i++) {
             if( targetStr.equals(json.get(i).getAsString()) ) { //如果存在，删除即可
+                Log.d("msg", "文件中删除了" + json.get(i).getAsString());
                 json.remove(i);
                 break;
             }

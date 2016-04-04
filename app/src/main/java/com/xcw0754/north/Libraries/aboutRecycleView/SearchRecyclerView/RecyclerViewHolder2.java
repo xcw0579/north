@@ -2,6 +2,8 @@ package com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -19,7 +21,7 @@ public class RecyclerViewHolder2 extends RecyclerView.ViewHolder{
     public TextView tv_title1;  //大标题
     public TextView tv_title2;  //小标题
     public int pos;             //产品编号（后台的编号）
-    public RadioButton rb_checkbox; //勾选按钮
+    public CheckBox cb_checkbox; //勾选按钮
 
 
     public RecyclerViewHolder2(View arg) {
@@ -30,6 +32,6 @@ public class RecyclerViewHolder2 extends RecyclerView.ViewHolder{
         tv_title1 = (TextView) arg.findViewById(R.id.id_product_title_profile);
         tv_title2 = (TextView) arg.findViewById(R.id.id_product_title_detail);
         pos = 0;
-        rb_checkbox = (RadioButton) arg.findViewById(R.id.id_rbtn_store_product);
+        cb_checkbox = (CheckBox) arg.findViewById(R.id.id_cb_store_product);
     }
 }

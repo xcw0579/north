@@ -169,7 +169,7 @@ public class SignupActivity extends SwipeBackActivity {
                 }, 1000);
 
 //        setResult(RESULT_OK, null);
-//        finish();
+//        finish(); 不往回跳了
 
     }
 

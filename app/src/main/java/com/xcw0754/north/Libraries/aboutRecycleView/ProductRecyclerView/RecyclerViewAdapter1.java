@@ -126,23 +126,22 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
                 //收藏按钮: 必须实时check才行
                 if( SPUtils.check(mContxt,"favorite", ""+products.get(msg.what).pos) ) {
                     //TODO 实心的照片
-                    Log.d("msg", "生效了？》");
+//                    Log.d("msg", "生效了？》");
                     holder.favorite.setBackground(
                             mContxt.getResources().getDrawable(R.drawable.ic_action_settings));
                 } else {
-                    Log.d("msg", "竟然执行这里。");
+//                    Log.d("msg", "竟然执行这里。");
                     //TODO 这里的照片可能需要换成空心
                     holder.favorite.setBackground(
                             mContxt.getResources().getDrawable(R.drawable.ic_action_favorite));
                 }
-                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
+//                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
 
                 holder.tv_price.setText(products.get(msg.what).price);
                 holder.tv_title1.setText(products.get(msg.what).title1);
                 holder.tv_title2.setText(products.get(msg.what).title2);
             }
         };
-
 
     }
 
@@ -241,7 +240,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
 
-            Log.d("msg", "接收点击的是:"+v.getId());
+//            Log.d("msg", "接收点击的是:"+v.getId());
 
             //TODO 这里应该取出item的什么数据才是有用的？
             switch(v.getId()) {

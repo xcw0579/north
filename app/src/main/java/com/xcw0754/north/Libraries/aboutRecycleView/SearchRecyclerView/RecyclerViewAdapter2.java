@@ -41,7 +41,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
     private ArrayList<oneProduct> products;
 
     //选中的item
-    private ArrayList<Integer>  checkList;
+    private ArrayList<Integer>  checkList ;
 
 
     /**
@@ -53,10 +53,11 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
         this.mContxt = context;
         this.mDatas = datas;
         mInflater = LayoutInflater.from(context);
-
+        checkList = new ArrayList<>();
 
         // 装recyclerviewadapter的list先填空
         rvhList = new ArrayList<>();
+
         products = new ArrayList<>();
         for (int i=0; i<datas; i++) {
             rvhList.add(null);
@@ -122,7 +123,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
             public void handleMessage(Message msg) {
                 RecyclerViewHolder2 holder = rvhList.get(msg.what);
                 Picasso.with(mContxt).load(products.get(msg.what).url).into(holder.iv);
-                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
+//                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
                 holder.tv_price.setText(products.get(msg.what).price);
                 holder.tv_title1.setText(products.get(msg.what).title1);
                 holder.tv_title2.setText(products.get(msg.what).title2);
@@ -132,11 +133,43 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
 
 
     /**
-     * 获取所有的选中的item
+     * 下面4个是为了批量选中收藏品而提供的接口。
+     * 获取所有的选中的item，供清除/加入购物车用
      */
     public ArrayList<Integer> getCheckList() {
         return checkList;
     }
+
+    public void replaceCheckList(ArrayList<Integer> array) {
+        if( array==null )   return ;    //可能会清空，但不会null
+        this.checkList = array;
+    }
+
+    public void putCheckList(int num) {
+        if( num<0 ) return ;
+        this.checkList.add(num);
+    }
+
+    public void delCheckList(int num) {
+        if( num<0 ) return ;
+        for(int i=0; i<checkList.size(); i++) {
+            if(checkList.get(i)==num) {
+                checkList.remove(i);
+                return ;
+            }
+        }
+    }
+
+
+    public int posTonum(Integer pos) {
+        if( pos<products.size() && pos>=0)
+            return products.get(pos).pos;
+        else
+            return products.get(products.size()-1).pos;
+    }
+
+
+
 
 
 
@@ -146,6 +179,9 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
      * @param which
      */
     public void sendMessageToHanler(int which, final int pos) {
+        //函数名比较怪异，其实这里面还丢了很多东西，方便外部调用的，因为接口都差不多，你懂得。
+
+
         if( which==1 ) {    //UI handler
             UIHandler.post(new Runnable() {   //handler并不是另开线程的
                 @Override
@@ -169,44 +205,34 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
                 }
             });
 
-        } else {        //可以搞其他事情
+        } else if( which==2 ) {        //删除item
+            Log.d("msg", "发来的顺序是"+pos + "。而当前product的size是"+products.size());
 
+            if( pos < products.size() ) {
+                mDatas = mDatas - 1;    //这三个的size是保持一致的
+                products.remove(pos);
+                rvhList.remove(pos);
+                Log.d("msg", "现在一共有" + mDatas + "个收藏品。  products的大小为"+products.size()+"rvhList的大小为"+rvhList.size());
+
+                notifyItemRemoved(pos);
+            }
         }
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerViewHolder2 holder, final int pos) {
+    public void onBindViewHolder(final RecyclerViewHolder2 holder, int pos) {
         //只需要将排序好的products跟holder对号入座即可。
-        Log.d("msg", "本次更新的是................... "+ pos);
+//        Log.d("msg", "本次更新的是................... "+ pos + "而holder是" + holder.pos);
 
+        if( pos>=rvhList.size() ) return;
 
         rvhList.set(pos, holder);
         holder.itemView.setTag(pos);
         holder.itemView.setOnClickListener(this);
+        holder.cb_checkbox.setTag(pos);
+        holder.cb_checkbox.setOnClickListener(this);
 
         sendMessageToHanler(1, pos);
-
-//        UIHandler.post(new Runnable() {   //handler并不是另开线程的
-//            @Override
-//            public void run() {
-//                Runnable requestTask = new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        while( products.get(pos)==null ) {
-//                            try{
-//                                Thread.sleep(500);
-//                            }catch( InterruptedException e){
-//                                Log.d("msg", "竟然死了。");
-//                            }
-//                        }
-//                        Message msg = new Message();
-//                        msg.what = pos;     //要更新的数据在products的下标
-//                        UIHandler.sendMessage(msg);
-//                    }
-//                };
-//                new Thread(requestTask).start();
-//            }
-//        });
     }
 
 
@@ -236,8 +262,14 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {
-            //TODO 这里应该取出item的什么数据才是有用的？
-            mOnItemClickListener.onItemClick(v, (String)v.getTag());//传给下一个activity
+
+            switch(v.getId()) {
+                case R.id.id_cb_store_product:
+                    mOnItemClickListener.onCheckClick(v, v.getTag().toString());
+                    break;
+                default:
+                    mOnItemClickListener.onItemClick(v, v.getTag().toString());//传给下一个activity，这就是data
+            }
         }
     }
 
@@ -245,6 +277,9 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
     // 类似listview的监听接口，仅需调用此函数即可
     public static interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, String data);
+
+        // item中收藏部件的点击
+        void onCheckClick(View view, String data);
     }
 
 

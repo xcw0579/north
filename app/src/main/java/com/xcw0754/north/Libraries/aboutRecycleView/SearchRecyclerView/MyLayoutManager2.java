@@ -37,7 +37,7 @@ public class MyLayoutManager2 extends LinearLayoutManager {
             Log.d("msg", "没有item。");
             return ;
         }
-
+        //TODO 这里在item为0时取这个就会出错。
         // 手动计算出layout的高度
         View view = recycler.getViewForPosition(0); //这里可能会导致多次绘制首个item
 
