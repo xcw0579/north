@@ -1,9 +1,8 @@
-package com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView;
+package com.xcw0754.north.Libraries.aboutRecycleView.ShopCarRecyclerView;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
@@ -11,59 +10,33 @@ import android.view.View;
 /**
  * Created by xiao on 16-3-12.
  */
-public class MyLayoutManager2 extends LinearLayoutManager {
+public class MyLayoutManager3 extends LinearLayoutManager {
 
-
-    public MyLayoutManager2(Context context, int orientation, boolean reverseLayout) {
+    public MyLayoutManager3(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
 
-
-//
-//    @Override
-//    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-//        return null;
-//    }
-
-
-    //绘制整块的面积用的，grid比较需要
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
                           int widthSpec, int heightSpec) {
         // 防止 0 item的情况
-        int itemCount = getItemCount() ;
-        if( itemCount == 0 ) {
+        int itemCount = getItemCount();
+        if (itemCount == 0) {
             super.onMeasure(recycler, state, widthSpec, heightSpec);
             Log.d("msg", "没有item。");
-            return ;
+            return;
         }
         //TODO 这里在item为0时取这个就会出错。
         // 手动计算出layout的高度
-        View view = null;
-
-        try{
-            view = recycler.getViewForPosition(0); //这里可能会导致多次绘制首个item
-        }catch (Exception e) {
-
-        }
-        if( view==null ) {
-            try{
-                view = recycler.getViewForPosition(1); //这里可能会导致多次绘制首个item
-            }catch (Exception e) {
-
-            }
-        }
-
+        View view = recycler.getViewForPosition(0); //这里可能会导致多次绘制首个item
 
         int extra = 0;
-        if( itemCount>=4 )  extra = 120;
-        if( view != null ) {
+        if (itemCount >= 4) extra = 120;
+        if (view != null) {
             measureChild(view, widthSpec, heightSpec);
             int measuredWidth = View.MeasureSpec.getSize(widthSpec);
             int measuredHeight = (view.getMeasuredHeight() + 8) * itemCount + extra;
             setMeasuredDimension(measuredWidth, measuredHeight);
         }
-
-
     }
 }

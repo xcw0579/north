@@ -33,11 +33,13 @@ public class ProductListActivity extends SwipeBackActivity {
     @Bind(R.id.id_product_list_price)       TextView tv_price;
     @Bind(R.id.id_product_list_filter)      TextView tv_filter;
     @Bind(R.id.id_product_list_recyclerview)RecyclerView rcv;
+    @Bind(R.id.id_common_title)             TextView tv_title;
 
     private int oldcolor;
     private RecyclerViewAdapter1 mmAdapter1;
-    //TODO 最好在切换page的时候先loading一下更好
 
+    //TODO 最好在切换page的时候先loading一下更好
+    //TODO 有个bug：在点击排序的按钮后再收藏的话，出现部分收藏不了的情况
 
 
 
@@ -50,14 +52,17 @@ public class ProductListActivity extends SwipeBackActivity {
         ButterKnife.bind(this); //使上面的bind注解生效
 
         //初始化
-        oldcolor = tv_sale.getCurrentTextColor();
+        oldcolor = tv_sale.getCurrentTextColor();   //那个颜色总是找不到
 
 
         //取出产品类型，是字符串形式的，以分类的简称+/+图片的数字，比如“tjpp/4”
-//        Intent intent = getIntent();
-//        Bundle bundle = intent.getExtras();
-//        String whichone = bundle.getString("msg");
-//
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        String whichone = bundle.getString("msg");
+        whichone = "电风扇";    //直接设置为电风扇了，不需要的时候要改。
+        tv_title.setText(whichone);
+
+
 
 
         mmAdapter1 =  new RecyclerViewAdapter1(this, 15);

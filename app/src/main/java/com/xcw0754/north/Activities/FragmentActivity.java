@@ -70,7 +70,7 @@ public class FragmentActivity extends AppCompatActivity {
     private ImageButton btn_self_login;
     private ImageView iv_self_head;
     private ImageView iv_self_head_bg;
-    private final static int REQUEST_CODE=1;
+    private final static int REQUEST_CODE=1;    //用于登录后传递消息
 
     // 产品分类
     private List<ImageView> ivList;
@@ -81,7 +81,6 @@ public class FragmentActivity extends AppCompatActivity {
     //收藏
     private RecyclerViewAdapter2 rvaSearch;
     private RecyclerView rcvSearch;
-    private TextView tvSearchHint;
     private LinearLayout LlayoutNO;
     private RelativeLayout LlayoutYES;
     private Button deleteButton;
@@ -126,7 +125,8 @@ public class FragmentActivity extends AppCompatActivity {
                     .load(R.drawable.tab_image_self_head_bg)
                     .into(iv_self_head_bg);
         }
-        //很多按钮需要绑定click
+        //TODO 很多按钮需要绑定click，简单实现重要的几个即可。直接用临时变量了。
+        //个人信息
         LinearLayout psn_msg = (LinearLayout) findViewById(R.id.id_layout_personel_message);
         psn_msg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,8 +135,15 @@ public class FragmentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
+        //购物车
+        LinearLayout addincar = (LinearLayout) findViewById(R.id.id_self_shop_car);
+        addincar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ShopCarActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -267,7 +274,6 @@ public class FragmentActivity extends AppCompatActivity {
      */
     private void handleSearch() {
 
-
         //TODO 将所有的收藏读出来，显示出来。（只作资源请求，而不提交本地数据到后台）
         //TODO 隐藏提示信息
         /*
@@ -287,11 +293,6 @@ public class FragmentActivity extends AppCompatActivity {
         }
 
 
-
-
-
-
-
         if( SPUtils.contains(getApplicationContext(), "favorite")  ) {
 
             String product = (String) SPUtils.get(getApplicationContext(), "favorite", "");
@@ -304,7 +305,7 @@ public class FragmentActivity extends AppCompatActivity {
             } else {
                 if( showItemCount==json.size() )   return ;    //已经设置过一遍了，防止原来类中的array被析构了。
                 showItemCount = json.size();
-                Log.d("msg", "更新再一次。");
+//                Log.d("msg", "更新再一次。");
                 rvaSearch = new RecyclerViewAdapter2(this, json.size());
                 rvaSearch.setOnItemClickListener(new RecyclerViewAdapter2.OnRecyclerViewItemClickListener() {
                     //整个item的点击
@@ -365,6 +366,7 @@ public class FragmentActivity extends AppCompatActivity {
                             SPUtils.checkOut(getApplicationContext(), "favorite", num);
                             //通知更新ui
                             rvaSearch.sendMessageToHanler(2, checkList.get(i));    //这个得记录它的adapter的下标啊，不是产品编号啊
+                            rvaSearch.delCheckList(checkList.get(i));
                         }
                     }
                 });
@@ -381,7 +383,8 @@ public class FragmentActivity extends AppCompatActivity {
                             SPUtils.check(getApplicationContext(), "car", "abc");   //保证其存在
                         }
                         for(int i=0; i<checkList.size(); i++) {
-                            SPUtils.checkIn(getApplicationContext(), "car", checkList.get(i).toString() );
+                            String num = String.valueOf( rvaSearch.posTonum(checkList.get(i)) );
+                            SPUtils.checkIn(getApplicationContext(), "car", num );
                         }
                         //添加成功则用显示框提示成功。
                         Toast.makeText(getBaseContext(), "成功添加到购物车", Toast.LENGTH_LONG).show();
