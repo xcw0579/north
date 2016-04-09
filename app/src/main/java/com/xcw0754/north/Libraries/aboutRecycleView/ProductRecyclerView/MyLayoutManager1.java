@@ -27,33 +27,33 @@ public class MyLayoutManager1 extends LinearLayoutManager {
     }
 
 
-    /*
-    @Override
-    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-        return null;
-    }
-
-
-    //绘制整块的面积用的，grid比较需要
-    @Override
-    public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
-                          int widthSpec, int heightSpec) {
-        // 防止 0 item的情况
-        int itemCount = getItemCount() ;
-        if( itemCount == 0 ) {
-            super.onMeasure(recycler, state, widthSpec, heightSpec);
-            Log.d("my", "没有item。");
-            return ;
-        }
-
-        // 手动计算出layout的高度
-        View view = recycler.getViewForPosition(0);
-        if( view != null ) {
-            measureChild(view, widthSpec, heightSpec);
-            int measuredWidth = View.MeasureSpec.getSize(widthSpec);
-            int measuredHeight = itemCount;
-            setMeasuredDimension(measuredWidth, measuredHeight );
-        }
-    }*/
+//
+//    @Override
+//    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+//        return null;
+//    }
+//
+//
+//    //绘制整块的面积用的，grid比较需要
+//    @Override
+//    public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
+//                          int widthSpec, int heightSpec) {
+//        // 防止 0 item的情况
+//        int itemCount = getItemCount() ;
+//        if( itemCount == 0 ) {
+//            super.onMeasure(recycler, state, widthSpec, heightSpec);
+//            Log.d("my", "没有item。");
+//            return ;
+//        }
+//
+//        // 手动计算出layout的高度
+//        View view = recycler.getViewForPosition(0);
+//        if( view != null ) {
+//            measureChild(view, widthSpec, heightSpec);
+//            int measuredWidth = View.MeasureSpec.getSize(widthSpec);
+//            int measuredHeight = itemCount;
+//            setMeasuredDimension(measuredWidth, measuredHeight );
+//        }
+//    }
 
 }

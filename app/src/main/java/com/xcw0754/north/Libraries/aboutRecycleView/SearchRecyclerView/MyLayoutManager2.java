@@ -40,30 +40,21 @@ public class MyLayoutManager2 extends LinearLayoutManager {
         //TODO 这里在item为0时取这个就会出错。
         // 手动计算出layout的高度
         View view = null;
-
-        try{
-            view = recycler.getViewForPosition(0); //这里可能会导致多次绘制首个item
-        }catch (Exception e) {
-
-        }
-        if( view==null ) {
-            try{
-                view = recycler.getViewForPosition(1); //这里可能会导致多次绘制首个item
-            }catch (Exception e) {
-
+        for(int i=0; i<itemCount; i++) {
+            if( view==null ) {
+                try{
+                    view = recycler.getViewForPosition(i); //这里可能会导致多次绘制首个item
+                }catch (Exception e) {
+                    Log.d("msg", "改成获取第" + i + "个item失败了");
+                }
             }
         }
 
-
         int extra = 0;
         if( itemCount>=4 )  extra = 120;
-        if( view != null ) {
-            measureChild(view, widthSpec, heightSpec);
-            int measuredWidth = View.MeasureSpec.getSize(widthSpec);
-            int measuredHeight = (view.getMeasuredHeight() + 8) * itemCount + extra;
-            setMeasuredDimension(measuredWidth, measuredHeight);
-        }
-
-
+        measureChild(view, widthSpec, heightSpec);
+        int measuredWidth = View.MeasureSpec.getSize(widthSpec);
+        int measuredHeight = (view.getMeasuredHeight() + 8) * itemCount + extra;
+        setMeasuredDimension(measuredWidth, measuredHeight);
     }
 }

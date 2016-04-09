@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import com.google.gson.internal.ObjectConstructor;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.Libraries.aboutRecycleView.DividerItemDecoration;
 import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.MyLayoutManager2;
@@ -42,9 +43,6 @@ public class ShopCarActivity extends SwipeBackActivity {
     @Bind(R.id.id_btn_car_delete) Button deleteButton;
     @Bind(R.id.id_btn_car_buy) Button buyButton;
 
-    private int showItemCount = 0;  //最新一次显示的产品数量
-
-
 
 
     @Override
@@ -60,6 +58,8 @@ public class ShopCarActivity extends SwipeBackActivity {
         //TODO 将所有的收藏读出来，显示出来。（只作资源请求，而不提交本地数据到后台）
         //TODO 隐藏提示信息
 
+
+
         //有产品则显示出来
         if( SPUtils.contains(getApplicationContext(), "car")  ) {
 
@@ -72,30 +72,26 @@ public class ShopCarActivity extends SwipeBackActivity {
                 LlayoutYES.setVisibility(View.GONE);
             } else {
 
-                if( showItemCount==json.size() )   return ;    //已经设置过一遍了，防止又刷新一遍。
-                showItemCount = json.size();
-
                 rvaCar = new RecyclerViewAdapter3(this, json.size());
                 rvaCar.setOnItemClickListener(new RecyclerViewAdapter3.OnRecyclerViewItemClickListener() {
                     //整个item的点击
                     @Override
                     public void onItemClick(View view, String data) {
                         //TODO 暂时不让点击进去
-//                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
-//                        intent.putExtra("msg", data);       //传必要的数据,一般是产品编号
-//                        startActivity(intent);
                     }
 
                     //item中的选中按钮的点击，data是产品编号
                     @Override
-                    public void onCheckClick(View view, String data) {
-                        //TODO 在array中，如果存在，则删除，如果不存在，则添加进去
-                        int pos =  Integer.parseInt(data);
-                        Log.d("msg", "勾选框被点击了");
+                    public void onCheckClick(View view, Object data) {
+                        //在array中，如果存在，则删除，如果不存在，则添加进去
                         if( view.isSelected() ) {
-                            rvaCar.delCheckList(pos);
+                            rvaCar.delCheckList(data);
+                            view.setSelected(false);
+                            Log.d("msg", "checklist删除。。");
                         } else {
-                            rvaCar.putCheckList(Integer.parseInt(data));
+                            rvaCar.putCheckList(data);
+                            view.setSelected(true);
+                            Log.d("msg", "checklist变黑了。");
                         }
                     }
                 });
@@ -112,39 +108,14 @@ public class ShopCarActivity extends SwipeBackActivity {
                     @Override
                     public void onClick(View v) {
                         Log.d("msg", "删除按钮被点击了。");
-                        ArrayList<Integer> checkList =  rvaCar.getCheckList();
-                        if( checkList.size()<=0 ) {
-                            Toast.makeText(getBaseContext(), "未选中任何物品", Toast.LENGTH_LONG).show();
-                            return ;    //没有任何选中
-                        }
-
-                        Collections.sort(checkList);
-                        for(int i=checkList.size()-1; i>=0; i--) { //要按holder逆序，不然删的时候就麻烦了
-                            String num = String.valueOf( rvaCar.posTonum(checkList.get(i)) );
-                            SPUtils.checkOut(getApplicationContext(), "car", num);
-                            //通知更新ui
-                            rvaCar.sendMessageToHanler(2, checkList.get(i));    //这个得记录它的adapter的下标啊，不是产品编号啊
-                            rvaCar.delCheckList(checkList.get(i));
-                        }
+                        rvaCar.deleteAllChecked();
                     }
                 });
-                //购买按钮
+                //TODO 购物车界面的购买按钮，未实现
                 buyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//
-//                        //搜出选中的物品，添加到购物车中。
-//                        ArrayList<Integer> checkList =  rvaCar.getCheckList();
-//                        if( checkList.size()==0 )   return ;    //没有任何选中
-//
-//                        if( !SPUtils.contains(getApplicationContext(), "car") ) {
-//                            SPUtils.check(getApplicationContext(), "car", "");   //保证其存在
-//                        }
-//                        for(int i=0; i<checkList.size(); i++) {
-//                            SPUtils.checkIn(getApplicationContext(), "car", checkList.get(i).toString() );
-//                        }
-//                        //添加成功则用显示框提示成功。
-//                        Toast.makeText(getBaseContext(), "成功添加到购物车", Toast.LENGTH_LONG).show();
+
                     }
                 });
 

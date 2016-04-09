@@ -3,17 +3,20 @@ package com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.internal.ObjectConstructor;
 import com.squareup.picasso.Picasso;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.RecyclerViewHolder2;
@@ -41,7 +44,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
     private ArrayList<oneProduct> products;
 
     //选中的item
-    private ArrayList<Integer>  checkList ;
+    private ArrayList<oneProduct>  checkList ;
 
 
     /**
@@ -123,10 +126,13 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
             public void handleMessage(Message msg) {
                 RecyclerViewHolder2 holder = rvhList.get(msg.what);
                 Picasso.with(mContxt).load(products.get(msg.what).url).into(holder.iv);
-//                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
                 holder.tv_price.setText(products.get(msg.what).price);
                 holder.tv_title1.setText(products.get(msg.what).title1);
                 holder.tv_title2.setText(products.get(msg.what).title2);
+
+                holder.itemView.setTag(products.get(msg.what)); //直接丢一个对象进去
+                holder.cb_checkbox.setTag(products.get(msg.what));
+
             }
         };
     }
@@ -136,42 +142,64 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
      * 下面4个是为了批量选中收藏品而提供的接口。
      * 获取所有的选中的item，供清除/加入购物车用
      */
-    public ArrayList<Integer> getCheckList() {
-        return checkList;
+
+    public void deleteAllChecked() {
+        //将所有选中的物品从收藏夹删除
+        //搜出选中的物品，添加到购物车中。
+        Log.d("msg", "即将删除的顺序有"+checkList.toString());
+        if( checkList.size()<=0 ) {
+            Toast.makeText(mContxt, "未选中任何物品", Toast.LENGTH_LONG).show();
+            return ;    //没有任何选中
+        }
+
+
+        Collections.sort(checkList, new Comp());
+        for(int i=checkList.size()-1; i>=0; i--) {      //要按holder逆序
+            SPUtils.checkOut(mContxt, "favorite", String.valueOf(checkList.get(i).pos));
+            //先找出来，再通知其更新ui
+            for(int j=0; j<products.size(); j++) {
+                if( products.get(j).pos==checkList.get(i).pos ) {
+                    sendMessageToHanler(2, j);    //这个得记录它的adapter的下标啊，不是产品编号啊
+                    break;
+                }
+            }
+        }
+        checkList=new ArrayList<>();
+        //解决bug：删除后部分的item竟然还是打勾的
+        for(int i=0; i<rvhList.size(); i++) {
+            rvhList.get(i).cb_checkbox.setSelected(false);
+        }
     }
 
-    public void replaceCheckList(ArrayList<Integer> array) {
-        if( array==null )   return ;    //可能会清空，但不会null
-        this.checkList = array;
+    public void putCheckList(Object obj) {
+        oneProduct pro = (oneProduct) obj;
+        for(int i=0; i<checkList.size(); i++){
+            if(checkList.get(i).pos==pro.pos)   return;
+        }
+        checkList.add(pro);
     }
 
-    public void putCheckList(int num) {
-        if( num<0 ) return ;
-        this.checkList.add(num);
-    }
-
-    public void delCheckList(int num) {
-        if( num<0 ) return ;
+    public void delCheckList(Object obj) {
+        oneProduct pro = (oneProduct) obj;
         for(int i=0; i<checkList.size(); i++) {
-            if(checkList.get(i)==num) {
+            if(checkList.get(i).pos==pro.pos) {
                 checkList.remove(i);
                 return ;
             }
         }
     }
 
+    public boolean addInCar() {
+        if( checkList.size()==0 )   return false;    //没有任何选中
 
-    public int posTonum(Integer pos) {
-        if( pos<products.size() && pos>=0)
-            return products.get(pos).pos;
-        else
-            return products.get(products.size()-1).pos;
+        if( !SPUtils.contains(mContxt, "car") )
+            SPUtils.check(mContxt, "car", "");   //保证其存在即可。
+
+        for(int i=0; i<checkList.size(); i++) {
+            SPUtils.checkIn(mContxt, "car", String.valueOf(checkList.get(i).pos) ); //产品编号
+        }
+        return true;
     }
-
-
-
-
-
 
 
     /**
@@ -208,30 +236,21 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
         } else if( which==2 ) {        //删除item
             Log.d("msg", "发来的顺序是"+pos + "。而当前product的size是"+products.size());
 
-            if( pos < products.size() ) {
-                mDatas = mDatas - 1;    //这三个的size是保持一致的
-                products.remove(pos);
-                rvhList.remove(pos);
-                Log.d("msg", "现在一共有" + mDatas + "个收藏品。  products的大小为"+products.size()+"rvhList的大小为"+rvhList.size());
+            mDatas = mDatas - 1;    //这三个的size是保持一致的
+            products.remove(pos);
+            rvhList.remove(pos);
+            Log.d("msg", "现在一共有" + mDatas + "个收藏品。  products的大小为"+products.size()+"rvhList的大小为"+rvhList.size());
 
-                notifyItemRemoved(pos);
-            }
+            notifyItemRemoved(pos);
         }
     }
 
     @Override
     public void onBindViewHolder(final RecyclerViewHolder2 holder, int pos) {
         //只需要将排序好的products跟holder对号入座即可。
-//        Log.d("msg", "本次更新的是................... "+ pos + "而holder是" + holder.pos);
-
-        if( pos>=rvhList.size() ) return;
-
         rvhList.set(pos, holder);
-        holder.itemView.setTag(pos);
         holder.itemView.setOnClickListener(this);
-        holder.cb_checkbox.setTag(pos);
         holder.cb_checkbox.setOnClickListener(this);
-
         sendMessageToHanler(1, pos);
     }
 
@@ -265,7 +284,7 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
 
             switch(v.getId()) {
                 case R.id.id_cb_store_product:
-                    mOnItemClickListener.onCheckClick(v, v.getTag().toString());
+                    mOnItemClickListener.onCheckClick(v,  v.getTag());
                     break;
                 default:
                     mOnItemClickListener.onItemClick(v, v.getTag().toString());//传给下一个activity，这就是data
@@ -279,7 +298,26 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
         void onItemClick(View view, String data);
 
         // item中收藏部件的点击
-        void onCheckClick(View view, String data);
+        void onCheckClick(View view, Object data);
+    }
+
+
+    //比较器
+    public class Comp implements Comparator<oneProduct> {
+        public int compare(oneProduct s1, oneProduct s2) {
+            int pos1 =0, pos2 =0;
+            for(int i=0; i<products.size(); i++) {
+                if(products.get(i).pos==s1.pos) pos1=i;
+                if(products.get(i).pos==s2.pos) pos2=i;
+            }
+            if( pos1 < pos2 ){  //小的排前面
+                return 1;
+            }else if( pos1 > pos2 ){
+                return -1;
+            }else{
+                return 0;
+            }
+        }
     }
 
 

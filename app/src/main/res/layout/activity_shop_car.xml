@@ -7,59 +7,68 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--提示-->
-    <LinearLayout
-        android:id="@+id/id_layout_no_chose"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:text="快去挑选你喜欢的东西吧~"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
-    <!--等待购买的产品-->
     <RelativeLayout
-        android:id="@+id/id_layout_buy_page"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:fitsSystemWindows="true"
-            android:fillViewport="true">
-
-            <LinearLayout
-                android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <!--提示-->
+        <LinearLayout
+            android:id="@+id/id_layout_no_chose"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="快去挑选你喜欢的东西吧~"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!--卡位置的-->
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+        <!--等待购买的产品-->
+        <RelativeLayout
+            android:id="@+id/id_layout_buy_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:fitsSystemWindows="true"
+                android:fillViewport="true">
+
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/top_title_gap"/>
-                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/id_shop_car_rv"
+                    <!--卡位置的-->
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="@dimen/top_title_gap"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/id_shop_car_rv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+            </ScrollView>
 
 
 
-        <!--底部工具栏-->
-        <RelativeLayout
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/top_title_gap">
-            <include layout="@layout/shopcar_button" />
+            <!--底部工具栏-->
+            <RelativeLayout
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_title_gap">
+                <include layout="@layout/shopcar_button" />
+            </RelativeLayout>
+
+
         </RelativeLayout>
 
         <!--顶部的toolbar-->
@@ -70,8 +79,7 @@
             <include layout="@layout/common_header1_transparent" />
         </RelativeLayout>
 
-
-
     </RelativeLayout>
+
 
 </LinearLayout>
