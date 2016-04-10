@@ -157,11 +157,13 @@ public class RecyclerViewAdapter3 extends RecyclerView.Adapter<RecyclerViewHolde
                 }
             }
         }
+        /*
         checkList=new ArrayList<>();
         //解决bug：删除后部分的item竟然还是打勾的
         for(int i=0; i<rvhList.size(); i++) {
             rvhList.get(i).cb_checkbox.setSelected(false);
         }
+        */
     }
 
     public void putCheckList(Object obj) {

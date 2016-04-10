@@ -12,10 +12,16 @@ import android.view.View;
  */
 public class MyLayoutManager3 extends LinearLayoutManager {
 
+    private int iwidth = 0;
+    private int iheight = 0;
+
+
+
     public MyLayoutManager3(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
     }
 
+    /*
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
                           int widthSpec, int heightSpec) {
@@ -26,7 +32,8 @@ public class MyLayoutManager3 extends LinearLayoutManager {
             Log.d("msg", "没有item。");
             return ;
         }
-        //TODO 这里在item为0时取这个就会出错。
+
+        // 这里在item为0时取这个就会出错。
         // 手动计算出layout的高度
         View view = null;
         for(int i=0; i<itemCount; i++) {
@@ -38,7 +45,11 @@ public class MyLayoutManager3 extends LinearLayoutManager {
                 }
             }
         }
-        if( view==null )    return ;
+
+        if( view==null ) {
+            setMeasuredDimension(0, 0);
+            return ;
+        }
 
         int extra = 0;
         if( itemCount>=4 )  extra = 120;
@@ -47,4 +58,5 @@ public class MyLayoutManager3 extends LinearLayoutManager {
         int measuredHeight = (view.getMeasuredHeight() + 8) * itemCount + extra;
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
+    */
 }

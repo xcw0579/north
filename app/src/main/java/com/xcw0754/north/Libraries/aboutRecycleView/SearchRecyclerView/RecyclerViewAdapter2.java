@@ -146,7 +146,6 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
     public void deleteAllChecked() {
         //将所有选中的物品从收藏夹删除
         //搜出选中的物品，添加到购物车中。
-        Log.d("msg", "即将删除的顺序有"+checkList.toString());
         if( checkList.size()<=0 ) {
             Toast.makeText(mContxt, "未选中任何物品", Toast.LENGTH_LONG).show();
             return ;    //没有任何选中
@@ -155,8 +154,10 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
 
         Collections.sort(checkList, new Comp());
         for(int i=checkList.size()-1; i>=0; i--) {      //要按holder逆序
+            Log.d("msg", "删除了"+checkList.get(i).pos);
+
             SPUtils.checkOut(mContxt, "favorite", String.valueOf(checkList.get(i).pos));
-            //先找出来，再通知其更新ui
+            //先找出它的位置，再通知其更新ui
             for(int j=0; j<products.size(); j++) {
                 if( products.get(j).pos==checkList.get(i).pos ) {
                     sendMessageToHanler(2, j);    //这个得记录它的adapter的下标啊，不是产品编号啊
@@ -164,11 +165,12 @@ public class RecyclerViewAdapter2 extends RecyclerView.Adapter<RecyclerViewHolde
                 }
             }
         }
+        /*
         checkList=new ArrayList<>();
         //解决bug：删除后部分的item竟然还是打勾的
         for(int i=0; i<rvhList.size(); i++) {
             rvhList.get(i).cb_checkbox.setSelected(false);
-        }
+        }*/
     }
 
     public void putCheckList(Object obj) {

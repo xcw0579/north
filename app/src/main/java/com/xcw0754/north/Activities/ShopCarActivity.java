@@ -42,7 +42,7 @@ public class ShopCarActivity extends SwipeBackActivity {
     @Bind(R.id.id_layout_buy_page) RelativeLayout LlayoutYES;
     @Bind(R.id.id_btn_car_delete) Button deleteButton;
     @Bind(R.id.id_btn_car_buy) Button buyButton;
-
+    @Bind(R.id.id_common_title) TextView tvTitle;
 
 
     @Override
@@ -50,6 +50,10 @@ public class ShopCarActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_car);
         ButterKnife.bind(this);
+        tvTitle.setText("购物车");
+
+
+
         init();
     }
 

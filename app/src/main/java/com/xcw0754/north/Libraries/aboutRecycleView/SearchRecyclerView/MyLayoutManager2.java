@@ -25,7 +25,7 @@ public class MyLayoutManager2 extends LinearLayoutManager {
 //        return null;
 //    }
 
-
+/*
     //绘制整块的面积用的，grid比较需要
     @Override
     public void onMeasure(RecyclerView.Recycler recycler, RecyclerView.State state,
@@ -37,7 +37,7 @@ public class MyLayoutManager2 extends LinearLayoutManager {
             Log.d("msg", "没有item。");
             return ;
         }
-        //TODO 这里在item为0时取这个就会出错。
+        // 这里在item为0时取这个就会出错。
         // 手动计算出layout的高度
         View view = null;
         for(int i=0; i<itemCount; i++) {
@@ -49,6 +49,10 @@ public class MyLayoutManager2 extends LinearLayoutManager {
                 }
             }
         }
+        if( view==null ) {
+            setMeasuredDimension(0, 0);
+            return ;
+        }
 
         int extra = 0;
         if( itemCount>=4 )  extra = 120;
@@ -57,4 +61,5 @@ public class MyLayoutManager2 extends LinearLayoutManager {
         int measuredHeight = (view.getMeasuredHeight() + 8) * itemCount + extra;
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
+    */
 }

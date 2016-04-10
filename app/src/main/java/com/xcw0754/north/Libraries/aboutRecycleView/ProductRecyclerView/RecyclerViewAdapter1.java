@@ -33,6 +33,7 @@ import java.util.Comparator;
 
 /**
  * Created by xiao on 16-3-13.
+ * 从分类点击进来的页面，可以排序筛选。
  */
 public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolder1> implements View.OnClickListener {
 
@@ -235,7 +236,7 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
         this.mOnItemClickListener = listener;
     }
 
-    //item的点击事件，仅需在外部调用setOnItemClickListener设置listener即可。
+    // item的点击事件，仅需在外部调用setOnItemClickListener设置listener即可。
     @Override
     public void onClick(View v) {
         if (mOnItemClickListener != null) {

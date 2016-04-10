@@ -28,38 +28,34 @@
         android:id="@+id/id_layout_favorite_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--<LinearLayout-->
-            <!--android:layout_above="@+id/id_xxx"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent">-->
-            <ScrollView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:fitsSystemWindows="true"
-                android:fillViewport="true">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:fillViewport="true">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <!--卡位置的-->
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/top_title_gap"/>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <!--卡位置的-->
-                    <LinearLayout
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/id_search_rv"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/top_title_gap"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/id_search_rv"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </LinearLayout>
+                        android:layout_height="700dp" />
                 </LinearLayout>
-            </ScrollView>
-        <!--</LinearLayout>-->
+
+            </LinearLayout>
+        </ScrollView>
+
 
         <RelativeLayout
-            android:id="@+id/id_xxx"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="@dimen/top_title_gap">
