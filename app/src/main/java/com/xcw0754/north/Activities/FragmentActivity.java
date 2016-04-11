@@ -1,6 +1,7 @@
 package com.xcw0754.north.Activities;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,13 +25,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.squareup.picasso.Picasso;
+import com.xcw0754.north.Libraries.BigkooConvenientBanner.NetworkImageHolderView;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
 import com.xcw0754.north.Libraries.aboutRecycleView.DividerItemDecoration;
+import com.xcw0754.north.Libraries.aboutRecycleView.MiaoShaRecyclerView.MyLayoutManager4;
+import com.xcw0754.north.Libraries.aboutRecycleView.MiaoShaRecyclerView.RecyclerViewAdapter4;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.MyLayoutManager1;
 import com.xcw0754.north.Libraries.aboutRecycleView.ProductRecyclerView.RecyclerViewAdapter1;
 import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.MyLayoutManager2;
@@ -65,6 +71,23 @@ public class FragmentActivity extends AppCompatActivity {
     private ImageButton mSortImg;
     private ImageButton mSearchImg;
     private ImageButton mSelfImg;
+
+    //首页
+    private ConvenientBanner convenientBanner1;
+    private ArrayList<String> networkImages1 = new ArrayList<>();
+//    private RecyclerViewAdapter4 rvaHomeMiaosha;  先暂时搁着
+//    private RecyclerView rcvHomeMiaosha;
+    private ImageView iv_title1;
+    private RecyclerView rcvBlock1;
+
+    private ImageView iv_title2;
+    private RecyclerView rcvBlock2;
+
+
+    private RecyclerView rcvBlock3;
+    private ConvenientBanner convenientBanner2;
+
+
 
     // 个人中心
     private ImageButton btn_self_login;
@@ -111,6 +134,14 @@ public class FragmentActivity extends AppCompatActivity {
 
         initViews();
         initEvents();
+
+//        非要这样才能正常显示么？
+        new android.os.Handler().postDelayed(new Runnable() {
+                                            public void run() {
+                                                handleHome();
+                                            }
+                                        }, 500);
+
     }
 
     /**
@@ -367,6 +398,115 @@ public class FragmentActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * APP的首页
+     */
+    private void handleHome() {
+        Log.d("msg", "调用了");
+
+        convenientBanner1 = (ConvenientBanner) findViewById(R.id.id_home_adv_convenientBanner1);
+        if( convenientBanner1!=null ) {
+            for(int i=0; i<4; i++)
+                networkImages1.add("http://10.0.3.2:5000/source/home/ban1/" + i + ".jpg");
+
+            convenientBanner1.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+                //顺便构造
+                @Override
+                public NetworkImageHolderView createHolder() {
+                    return new NetworkImageHolderView();
+                }
+            }, networkImages1)
+                    .setPageIndicator(new int[]{R.drawable.ic_page_indicator,
+                            R.drawable.ic_page_indicator_focused});
+        }
+
+
+//        一张图片的导购假象
+        ImageView iv_home_navigation = (ImageView) findViewById(R.id.id_home_navigation);
+        Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/home/navigation/0.jpg").into(iv_home_navigation);
+
+
+
+
+
+
+//        块1
+        iv_title1 = (ImageView)findViewById(R.id.id_home_iv_title1);
+        Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/home/block1/title/0.jpg").into(iv_title1);
+        rcvBlock1 = (RecyclerView)findViewById(R.id.id_home_recyclerview2);
+
+        ArrayList<String>   block1 = new ArrayList<>();
+        for(int i=0; i<6; i++)  block1.add("http://10.0.3.2:5000/source/home/block1/view/"+i+".jpg");
+        RecyclerViewAdapter4 mmAdapter1 =  new RecyclerViewAdapter4(this, block1);
+
+        rcvBlock1.setAdapter(mmAdapter1);
+        rcvBlock1.setLayoutManager(new MyLayoutManager4(getApplicationContext(), 2));
+
+
+
+//        块2
+        iv_title2 = (ImageView)findViewById(R.id.id_home_iv_title2);
+        Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/home/block2/title/0.jpg").into(iv_title2);
+        rcvBlock2 = (RecyclerView)findViewById(R.id.id_home_recyclerview3);
+
+        ArrayList<String>   block2 = new ArrayList<>();
+        for(int i=0; i<6; i++)  block2.add("http://10.0.3.2:5000/source/home/block2/view/"+i+".jpg");
+        RecyclerViewAdapter4 mmAdapter2 =  new RecyclerViewAdapter4(this, block2);
+
+        rcvBlock2.setAdapter(mmAdapter2);
+        rcvBlock2.setLayoutManager(new MyLayoutManager4(getApplicationContext(), 3));
+
+
+
+
+
+
+
+//        块3
+        convenientBanner2 = (ConvenientBanner) findViewById(R.id.id_home_adv_convenientBanner4);
+        ArrayList<String> networkImages2 = new ArrayList<>();
+        for(int i=0; i<3; i++)  networkImages2.add("http://10.0.3.2:5000/source/home/ban3/" + i + ".jpg");
+        convenientBanner2.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+                return new NetworkImageHolderView();
+            }
+        }, networkImages2)
+                .setPageIndicator(new int[]{R.drawable.ic_page_indicator,
+                        R.drawable.ic_page_indicator_focused});
+
+        rcvBlock3 = (RecyclerView)findViewById(R.id.id_home_recyclerview4);
+        ArrayList<String>   block3 = new ArrayList<>();
+        for(int i=0; i<9; i++)  block3.add("http://10.0.3.2:5000/source/home/block3/view/"+i+".jpg");
+        RecyclerViewAdapter4 mmAdapter3 =  new RecyclerViewAdapter4(this, block3);
+        rcvBlock3.setAdapter(mmAdapter3);
+        rcvBlock3.setLayoutManager(new MyLayoutManager4(getApplicationContext(), 3));
+
+
+
+
+
+//        treat统一处理
+
+        ImageView treat0 = (ImageView) findViewById(R.id.id_home_treat0);
+        Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/home/treat/0.jpg").into(treat0);
+
+
+        ImageView treat1 = (ImageView) findViewById(R.id.id_home_treat1);
+        Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/home/treat/1.jpg").into(treat1);
+
+
+        ImageView treat3 = (ImageView) findViewById(R.id.id_home_treat3);
+        Picasso.with(getApplicationContext()).load("http://10.0.3.2:5000/source/home/treat/3.jpg").into(treat3);
+
+
+
+
+
+    }
+
+
+
 
 
     /**
@@ -452,7 +592,7 @@ public class FragmentActivity extends AppCompatActivity {
             }
         };
         mViewPager.setAdapter(mAdapter);
-
+        mViewPager.setCurrentItem(0);
     }
 
 
@@ -475,8 +615,10 @@ public class FragmentActivity extends AppCompatActivity {
                 int currentItem = mViewPager.getCurrentItem();
                 resetImg();
                 switch (currentItem) {
+                    default:
                     case 0:
                         mHomeImg.setImageResource(R.drawable.tab_icon_home_pressed);
+                        handleHome();
                         break;
                     case 1:
                         mSortImg.setImageResource(R.drawable.tab_icon_sort_pressed);
@@ -532,6 +674,7 @@ public class FragmentActivity extends AppCompatActivity {
             Log.i("dbg", "四个底图标所产生点击事件。");
             resetImg();
             switch (v.getId()) {
+                default:
                 case R.id.id_tab_home:
                     mViewPager.setCurrentItem(0);
                     mHomeImg.setImageResource(R.drawable.tab_icon_home_pressed);
@@ -547,8 +690,6 @@ public class FragmentActivity extends AppCompatActivity {
                 case R.id.id_tab_self:
                     mViewPager.setCurrentItem(3);
                     mSelfImg.setImageResource(R.drawable.tab_icon_self_pressed);
-                    break;
-                default:
                     break;
             }
         }

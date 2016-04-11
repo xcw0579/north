@@ -1,29 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true">
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <!--卡位置的-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_title_gap">
+            </LinearLayout>
+
             <!--图片广告栏-->
             <com.bigkoo.convenientbanner.ConvenientBanner
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/id_home_adv_convenientBanner"
+                android:id="@+id/id_home_adv_convenientBanner1"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="170dp"
                 app:canLoop="true" />
 
 
+            <!--这个颜色和图片的背景色一样，然后图片去掉背景色，扣成png-->
+            <LinearLayout
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@color/gray"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="130dp">
+                <ImageView
+                    android:id="@+id/id_home_navigation"
+                    android:layout_weight="1"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
 
+            <!--&lt;!&ndash;提示文字&ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:background="@color/white1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--android:text="在线秒杀"-->
+                    <!--android:layout_margin="15px"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
+            <!--</LinearLayout>-->
+
+            <!--&lt;!&ndash;可左右滑的grid&ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp">-->
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/id_home_miaosha_recyclerview"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent" />-->
+            <!--</LinearLayout>-->
+
+
+
+            <!--意向图-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp">
+                <ImageView
+                    android:id="@+id/id_home_treat0"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+            <!--底部块1-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--广告图-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_home_iv_title1"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+
+                <!--提示文字-->
+                <LinearLayout
+                    android:background="@color/more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="品牌特卖"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!--装成6个图片，三行-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/id_home_recyclerview2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+            <!--底部块2-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--广告图-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sort_iv_title">
+                    <ImageView
+                        android:id="@+id/id_home_iv_title2"
+                        android:scaleType="centerCrop"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+                </LinearLayout>
+
+                <!--提示文字-->
+                <LinearLayout
+                    android:background="@color/white1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="生活品质"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+
+
+
+
+                <!--6个图片-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/id_home_recyclerview3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--意向图-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+                <ImageView
+                    android:id="@+id/id_home_treat1"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+
+            <!--底部块3-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--图片广告栏-->
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/id_home_adv_convenientBanner4"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    app:canLoop="true" />
+
+                <!--提示文字-->
+                <LinearLayout
+                    android:background="@color/white1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="限量销售"
+                        android:layout_margin="15px"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <!--6个图片-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/id_home_recyclerview4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--意向图-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="310dp">
+                <ImageView
+                    android:id="@+id/id_home_treat3"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
 
 
         </LinearLayout>
+
+
+
     </ScrollView>
 
 </LinearLayout>

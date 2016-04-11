@@ -79,15 +79,23 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="49.0dip"
-                            android:layout_height="49.0dip"
-                            android:src="@drawable/icon_shop_cart"/>
+                        <LinearLayout
+                            android:padding="7dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_car_blank"/>
+                        </LinearLayout>
+
                         <TextView
                             android:text="购物车"
+                            android:layout_weight="1"
                             android:textStyle="bold"
                             android:textSize="17sp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -105,15 +113,22 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="36.0dip"
-                            android:layout_height="36.0dip"
-                            android:src="@drawable/icon_self_collection_center"/>
+                        <LinearLayout
+                            android:padding="7dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_heart_blank"/>
+                        </LinearLayout>
                         <TextView
-                            android:text="收藏中心"
+                            android:layout_weight="1"
+                            android:text="礼物盒"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
@@ -131,15 +146,22 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="34.0dip"
-                            android:layout_height="34.0dip"
-                            android:src="@drawable/icon_nor_user"/>
+                        <LinearLayout
+                            android:padding="7dp"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_comment_blank"/>
+                        </LinearLayout>
                         <TextView
-                            android:text="个人信息"
+                            android:layout_weight="1"
+                            android:text="个人区"
                             android:paddingLeft="3dp"
                             android:textSize="17sp"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 

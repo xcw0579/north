@@ -38,7 +38,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 public class ProductDetailActivity extends SwipeBackActivity {
 
-    private ArrayList<Integer> localImages = new ArrayList<>();
+//    private ArrayList<Integer> localImages = new ArrayList<>();
     private ConvenientBanner convenientBanner;
     private ArrayList<String> networkImages = new ArrayList<>();
     private Handler dataCacheHandler;

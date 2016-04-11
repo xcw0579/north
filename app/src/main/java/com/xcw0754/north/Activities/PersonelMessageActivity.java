@@ -32,6 +32,7 @@ public class PersonelMessageActivity extends SwipeBackActivity {
     @Bind(R.id.id_personel_club_content)    TextView    tv_club;
     @Bind(R.id.id_personel_addr_content)    TextView    tv_addr;
     @Bind(R.id.id_personel_safe_content)    TextView    tv_safe;
+    @Bind(R.id.id_common_title)             TextView    tv_title;
 
 
 
@@ -49,6 +50,9 @@ public class PersonelMessageActivity extends SwipeBackActivity {
     }
 
     private void initText() {
+        tv_title.setText("个人中心");
+
+
         tv_head.setText("");
         tv_user.setText("xcw0579@175game.com");
         tv_nick.setText("丛林第一");

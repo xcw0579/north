@@ -127,14 +127,12 @@ public class RecyclerViewAdapter1 extends RecyclerView.Adapter<RecyclerViewHolde
                 //收藏按钮: 必须实时check才行
                 if( SPUtils.check(mContxt,"favorite", ""+products.get(msg.what).pos) ) {
                     //TODO 实心的照片
-//                    Log.d("msg", "生效了？》");
                     holder.favorite.setBackground(
-                            mContxt.getResources().getDrawable(R.drawable.ic_action_settings));
+                            mContxt.getResources().getDrawable(R.drawable.ic_heart_real));
                 } else {
-//                    Log.d("msg", "竟然执行这里。");
                     //TODO 这里的照片可能需要换成空心
                     holder.favorite.setBackground(
-                            mContxt.getResources().getDrawable(R.drawable.ic_action_favorite));
+                            mContxt.getResources().getDrawable(R.drawable.ic_heart_blank));
                 }
 //                Log.d("msg", products.get(msg.what).pos + " ui价格的更新"+products.get(msg.what).price);
 

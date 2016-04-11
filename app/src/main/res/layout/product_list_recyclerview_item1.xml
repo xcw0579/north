@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="match_parent">
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content">
                 <ImageButton
                     android:id="@+id/id_product_favorite"
-                    android:background="@drawable/ic_action_favorite"
+                    android:background="@drawable/ic_heart_blank"
                     android:layout_width="35dp"
                     android:layout_height="35dp" />
             </RelativeLayout>
@@ -102,7 +102,7 @@
                 <ImageButton
                     android:id="@+id/id_product_goumai"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_action_settings"
+                    android:background="@drawable/ic_comment_blank"
                     android:layout_width="35dp"
                     android:layout_height="35dp" />
             </RelativeLayout>
