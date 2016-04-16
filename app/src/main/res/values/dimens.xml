@@ -17,7 +17,7 @@
 
 
     <!--页面的title-->
-    <dimen name="CommonTitleSize">20sp</dimen>
+    <dimen name="CommonTitleSize">19sp</dimen>
     <!--登录页面的字体大小-->
     <dimen name="LoginTextSize">17dp</dimen>
 
@@ -32,4 +32,10 @@
     <!--信息修改页面:文本框的高度-->
     <dimen name="modify_page_height">55dp</dimen>
 
+    <!--个人中心页面每个item的高度-->
+    <dimen name="self_item_height">55dp</dimen>
+    <dimen name="self_item_textsize">18sp</dimen>
+    <dimen name="self_item_marginleft">20dp</dimen>
+    <dimen name="self_item_marginright">10dp</dimen>
+    <dimen name="self_item_imgpadding">5dp</dimen>
 </resources>

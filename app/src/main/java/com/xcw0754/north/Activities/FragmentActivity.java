@@ -60,6 +60,15 @@ public class FragmentActivity extends AppCompatActivity {
     private PagerAdapter mAdapter;
     private List<View> mViews = new ArrayList<View>();
 
+
+    //头顶的页面
+    private LinearLayout Title1;
+    private LinearLayout Title2;
+    private LinearLayout Title3;
+    private LinearLayout Title4;
+
+
+
     // 四个主要的TAB层
     private LinearLayout mTabHome;
     private LinearLayout mTabSort;
@@ -148,6 +157,8 @@ public class FragmentActivity extends AppCompatActivity {
      * 个人中心：所有都自己单独预处理
      */
     private void handleSelf() {
+        Title4.setVisibility(View.VISIBLE);
+
         if ( iv_self_head==null ) {
             iv_self_head = (ImageView) findViewById(R.id.id_self_iv_head);
             btn_self_login = (ImageButton) findViewById(R.id.id_self_btn_login);
@@ -206,6 +217,8 @@ public class FragmentActivity extends AppCompatActivity {
      * 分类
      */
     private void handleSort(){
+        Title2.setVisibility(View.VISIBLE);
+
         //TODO 需要事先保存的数据，待展示出来的，应该从服务器抓取
         if ( num==null ) {
 
@@ -304,7 +317,7 @@ public class FragmentActivity extends AppCompatActivity {
      * 收藏
      */
     private void handleSearch() {
-
+        Title3.setVisibility(View.VISIBLE);
         //TODO 将所有的收藏读出来，显示出来。（只作资源请求，而不提交本地数据到后台）
         //TODO 隐藏提示信息
         /*
@@ -403,7 +416,7 @@ public class FragmentActivity extends AppCompatActivity {
      */
     private void handleHome() {
         Log.d("msg", "调用了");
-
+        Title1.setVisibility(View.VISIBLE);
         convenientBanner1 = (ConvenientBanner) findViewById(R.id.id_home_adv_convenientBanner1);
         if( convenientBanner1!=null ) {
             for(int i=0; i<4; i++)
@@ -538,6 +551,15 @@ public class FragmentActivity extends AppCompatActivity {
      */
     private void initViews() {
 
+
+        Title1 = (LinearLayout) findViewById(R.id.id_title_home);
+        Title2 = (LinearLayout) findViewById(R.id.id_title_sort);
+        Title3 = (LinearLayout) findViewById(R.id.id_title_search);
+        Title4 = (LinearLayout) findViewById(R.id.id_title_self);
+
+
+
+
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
 
         mTabHome = (LinearLayout) findViewById(R.id.id_tab_home);
@@ -653,6 +675,12 @@ public class FragmentActivity extends AppCompatActivity {
      * 将底标的图片切换为暗色（即未选中状态）
      */
     private void resetImg() {
+        Title1.setVisibility(View.GONE);
+        Title2.setVisibility(View.GONE);
+        Title3.setVisibility(View.GONE);
+        Title4.setVisibility(View.GONE);
+
+
         mHomeImg.setImageResource(R.drawable.tab_icon_home_normal);
         mSortImg.setImageResource(R.drawable.tab_icon_sort_normal);
         mSearchImg.setImageResource(R.drawable.tab_icon_search_normal);

@@ -125,7 +125,7 @@
                         </LinearLayout>
                         <TextView
                             android:layout_weight="1"
-                            android:text="礼物盒"
+                            android:text="礼物"
                             android:textSize="17sp"
                             android:textStyle="bold"
                             android:layout_width="0dp"
@@ -158,7 +158,7 @@
                         </LinearLayout>
                         <TextView
                             android:layout_weight="1"
-                            android:text="个人区"
+                            android:text="资料"
                             android:paddingLeft="3dp"
                             android:textSize="17sp"
                             android:layout_width="0dp"
@@ -197,10 +197,15 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <ImageView
-                        android:layout_width="40.0dip"
-                        android:layout_height="40.0dip"
-                        android:src="@drawable/icon_self_wait_pay"/>
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_self_fukuan"/>
+                        </LinearLayout>
+
                         <TextView
                             android:text="待付款"
                             android:textStyle="bold"
@@ -217,10 +222,14 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <ImageView
-                        android:layout_width="40.0dip"
-                        android:layout_height="40.0dip"
-                        android:src="@drawable/icon_self_wait_send"/>
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_self_fahuo"/>
+                        </LinearLayout>
                         <TextView
                             android:text="待发货"
                             android:textStyle="bold"
@@ -237,10 +246,15 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <ImageView
-                        android:layout_width="40.0dip"
-                        android:layout_height="40.0dip"
-                        android:src="@drawable/icon_self_wait_receive"/>
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_self_shouhuo"/>
+                        </LinearLayout>
+
                         <TextView
                             android:text="待收货"
                             android:textStyle="bold"
@@ -257,10 +271,15 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <ImageView
-                        android:layout_width="38.0dip"
-                        android:layout_height="38.0dip"
-                        android:src="@drawable/icon_self_wait_comment"/>
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_self_pingjia"/>
+                        </LinearLayout>
+
                         <TextView
                             android:text="待评价"
                             android:textStyle="bold"
@@ -277,10 +296,15 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
-                        <ImageView
-                        android:layout_width="40.0dip"
-                        android:layout_height="40.0dip"
-                        android:src="@drawable/icon_self_wait_maintenance"/>
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/ic_self_shouhou"/>
+                        </LinearLayout>
+
                         <TextView
                             android:text="售后服务"
                             android:textStyle="bold"
@@ -293,79 +317,341 @@
             </RelativeLayout>
 
 
-            <TextView
-                style="@style/TxtTitle"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:background="@drawable/selector_setting_item"
+
+            <View
+                android:background="@color/black3"
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/icon_tmp_mail"
-                android:drawableRight="@drawable/icon_nor_arrow_right"
-                android:text="相册" />
+                android:layout_height="20dp" />
 
 
-            <TextView
-                style="@style/TxtTitle"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:background="@drawable/selector_setting_item"
+
+
+            <View
+                android:background="@color/black2"
                 android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:layout_marginTop="10dp"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/icon_tmp_mail"
-                android:drawableRight="@drawable/icon_nor_arrow_right"
-                android:text="相册" />
+                android:layout_height="1px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/self_item_marginleft"
+                android:paddingRight="@dimen/self_item_marginright"
+                android:background="@drawable/selector_setting_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/self_item_height">
+                <RelativeLayout
+                    android:padding="@dimen/self_item_imgpadding"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_self_block_liulan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="@dimen/self_item_textsize"
+                        android:layout_marginLeft="@dimen/self_item_marginleft"
+                        android:text="浏览记录"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/icon_nor_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:background="@color/black2"
+                android:layout_width="fill_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/self_item_marginleft"
+                android:paddingRight="@dimen/self_item_marginright"
+                android:background="@drawable/selector_setting_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/self_item_height">
+                <RelativeLayout
+                    android:padding="@dimen/self_item_imgpadding"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_self_block_pingjia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="@dimen/self_item_textsize"
+                        android:layout_marginLeft="@dimen/self_item_marginleft"
+                        android:text="评价嗮单"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/icon_nor_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:background="@color/black2"
+                android:layout_width="fill_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/self_item_marginleft"
+                android:paddingRight="@dimen/self_item_marginright"
+                android:background="@drawable/selector_setting_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/self_item_height">
+                <RelativeLayout
+                    android:padding="@dimen/self_item_imgpadding"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_self_block_zaixian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="@dimen/self_item_textsize"
+                        android:layout_marginLeft="@dimen/self_item_marginleft"
+                        android:text="我的预约"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/icon_nor_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:background="@color/black2"
+                android:layout_width="fill_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/self_item_marginleft"
+                android:paddingRight="@dimen/self_item_marginright"
+                android:background="@drawable/selector_setting_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/self_item_height">
+                <RelativeLayout
+                    android:padding="@dimen/self_item_imgpadding"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_self_block_yuyue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="@dimen/self_item_textsize"
+                        android:layout_marginLeft="@dimen/self_item_marginleft"
+                        android:text="在线报修"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/icon_nor_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:background="@color/black2"
+                android:layout_width="fill_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/self_item_marginleft"
+                android:paddingRight="@dimen/self_item_marginright"
+                android:background="@drawable/selector_setting_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/self_item_height">
+                <RelativeLayout
+                    android:padding="@dimen/self_item_imgpadding"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_self_block_tuihuo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="@dimen/self_item_textsize"
+                        android:layout_marginLeft="@dimen/self_item_marginleft"
+                        android:text="退货记录"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/icon_nor_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:background="@color/black2"
+                android:layout_width="fill_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/self_item_marginleft"
+                android:paddingRight="@dimen/self_item_marginright"
+                android:background="@drawable/selector_setting_item"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/self_item_height">
+                <RelativeLayout
+                    android:padding="@dimen/self_item_imgpadding"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_self_block_fujin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="@dimen/self_item_textsize"
+                        android:layout_marginLeft="@dimen/self_item_marginleft"
+                        android:text="附近门店"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/icon_nor_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
             <View
                 android:background="@color/black2"
                 android:layout_width="fill_parent"
                 android:layout_height="1px" />
 
 
-            <TextView
-                style="@style/TxtTitle"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
-                android:background="@drawable/selector_setting_item"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/icon_tmp_mail"
-                android:drawableRight="@drawable/icon_nor_arrow_right"
-                android:text="相册" />
-            <View
-                android:background="@color/black2"
-                android:layout_width="fill_parent"
-                android:layout_height="1px" />
 
-
-            <TextView
-                style="@style/TxtTitle"
-                android:textSize="16sp"
-                android:gravity="center_vertical"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="@dimen/self_item_marginleft"
+                android:paddingRight="@dimen/self_item_marginright"
                 android:background="@drawable/selector_setting_item"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:layout_marginTop="20dp"
-                android:drawablePadding="10dp"
-                android:drawableLeft="@drawable/icon_tmp_mail"
-                android:drawableRight="@drawable/icon_nor_arrow_right"
-                android:text="相册" />
-            <View
-                android:background="@color/black2"
-                android:layout_width="fill_parent"
-                android:layout_height="1px" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/self_item_height">
+                <RelativeLayout
+                    android:padding="@dimen/self_item_imgpadding"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/ic_self_block_faq"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center_vertical"
+                    android:layout_weight="10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textSize="@dimen/self_item_textsize"
+                        android:layout_marginLeft="@dimen/self_item_marginleft"
+                        android:text="常见问题"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:src="@drawable/icon_nor_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+            </LinearLayout>
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="250dp" />
