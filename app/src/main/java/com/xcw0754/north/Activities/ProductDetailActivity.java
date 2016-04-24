@@ -182,6 +182,12 @@ public class ProductDetailActivity extends SwipeBackActivity {
         finish();
     }
 
+
+
+
+
+
+
 }
 
 

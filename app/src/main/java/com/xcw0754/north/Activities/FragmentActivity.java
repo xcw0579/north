@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -213,6 +214,7 @@ public class FragmentActivity extends AppCompatActivity {
             });
         }
     }
+
     /**
      * 分类
      */
@@ -415,8 +417,12 @@ public class FragmentActivity extends AppCompatActivity {
      * APP的首页
      */
     private void handleHome() {
-        Log.d("msg", "调用了");
+        Log.d("msg", "调用了home页面的初始化函数。");
+
+
         Title1.setVisibility(View.VISIBLE);
+
+
         convenientBanner1 = (ConvenientBanner) findViewById(R.id.id_home_adv_convenientBanner1);
         if( convenientBanner1!=null ) {
             for(int i=0; i<4; i++)
@@ -522,6 +528,7 @@ public class FragmentActivity extends AppCompatActivity {
 
 
 
+
     /**
      * 调用其他的activity后从其返回的数据，一般指的是login是否成功。
      * @param requestCode   请求码，在本class
@@ -617,11 +624,44 @@ public class FragmentActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(0);
     }
 
-
     /**
      * 监听tab切换事件
      */
     private void initEvents() {
+
+        //搜索框的点击事件
+        LinearLayout searchbar = (LinearLayout) findViewById(R.id.id_layout_search_something);
+        searchbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开搜索页面
+                Log.d("msg", "点击了搜索框了啊。");
+                Intent intent = new Intent(getApplicationContext(), SearchSomethingActivity.class);
+                startActivity(intent);
+            }
+        });
+        //搜索框的点击事件
+        LinearLayout titlebar= (LinearLayout) findViewById(R.id.title_common_layout);
+        titlebar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开搜索页面
+                Log.d("msg", "点击了搜索框了。");
+                Intent intent = new Intent(getApplicationContext(), SearchSomethingActivity.class);
+                startActivity(intent);
+            }
+        });
+        //搜索框的点击事件
+        EditText et_search = (EditText) findViewById(R.id.id_et_search_something);
+        et_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开搜索页面
+                Intent intent = new Intent(getApplicationContext(), SearchSomethingActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mTabHome.setOnClickListener(new viewListener());
         mTabSort.setOnClickListener(new viewListener());
@@ -670,7 +710,6 @@ public class FragmentActivity extends AppCompatActivity {
 
     }
 
-
     /**
      * 将底标的图片切换为暗色（即未选中状态）
      */
@@ -691,7 +730,6 @@ public class FragmentActivity extends AppCompatActivity {
     public void onBackPressed() {
         //在此页面禁止往后退
     }
-
 
     /**
      * 内部类：底下4个图标的单击事件
@@ -722,6 +760,7 @@ public class FragmentActivity extends AppCompatActivity {
             }
         }
     }
+
 
 
 }

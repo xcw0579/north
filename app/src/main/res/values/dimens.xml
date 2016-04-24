@@ -38,4 +38,7 @@
     <dimen name="self_item_marginleft">20dp</dimen>
     <dimen name="self_item_marginright">10dp</dimen>
     <dimen name="self_item_imgpadding">5dp</dimen>
+
+    <!--搜索功能的热词字大小-->
+    <dimen name="text_search_size">15dp</dimen>
 </resources>
