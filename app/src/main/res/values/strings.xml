@@ -23,5 +23,6 @@
 
 
     <string name="localmachine">10.0.3.2</string>
+    <string name="title_activity_comment">CommentActivity</string>
 
 </resources>

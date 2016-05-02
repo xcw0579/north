@@ -39,10 +39,25 @@ public class MainActivity extends AppCompatActivity {
 //        requestWindowFeature(Window.FEATURE_NO_TITLE); 跟AppCompatActivity不兼容？
         setContentView(R.layout.activity_main);
 
+        try {
+            Log.d("msg", "main初始化了。");
+            MyApp.updataDelivery(getApplicationContext());     //待发货的产品更新一下
+            MyApp.UpdateXiaoxi();
+
+        } catch (Exception e) {
+            Log.d("msg", "MainActivity调用MyApp更新时出现问题。");
+        }
+
+
+
+
         isdebug = true;
         Intent intent = null;
 
 //        intent = new Intent(this, ProductListActivity.class);
+
+
+
 
         //  切换activity
         if ( isdebug ) {

@@ -9,7 +9,6 @@
     </style>
 
 
-
     <!--全屏-->
     <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -18,17 +17,11 @@
 
 
     <!--透明-->
-    <style name="TransTheme" parent="android:Theme.Holo.Light.DarkActionBar" >
+    <style name="TransTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- API 19 theme customizations can go here. -->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
-
-
-
-
-
-
 
 
     <!--activity切换动画效果-->
@@ -65,18 +58,13 @@
     </style>
 
 
-
-
-
     <!---->
     <!--&lt;!&ndash;登录时验证的悬浮框&ndash;&gt;-->
     <!--<style name="AppTheme_Dark_Dialog">-->
-        <!--<item name="colorAccent">@color/white</item>-->
-        <!--<item name="android:textColorPrimary">@color/iron</item>-->
-        <!--<item name="android:background">@color/primary</item>-->
+    <!--<item name="colorAccent">@color/white</item>-->
+    <!--<item name="android:textColorPrimary">@color/iron</item>-->
+    <!--<item name="android:background">@color/primary</item>-->
     <!--</style>-->
-
-
 
 
     <!-- 图片样式 -->
@@ -95,7 +83,9 @@
         <item name="android:focusable">false</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

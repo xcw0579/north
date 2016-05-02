@@ -15,9 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.google.android.gms.auth.api.consent.GetConsentIntentRequest;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
+import com.xcw0754.north.MyApp;
 import com.xcw0754.north.R;
 
 import java.util.concurrent.Semaphore;
@@ -156,6 +158,13 @@ public class LoginActivity extends SwipeBackActivity {
 
         _loginButton.setEnabled(true);
         //TODO 通过网络将个人信息数据拉下来
+
+
+        MyApp.setEmail(email);
+        MyApp.updataDelivery(getApplicationContext());
+        MyApp.UpdateXiaoxi();
+
+
 
         Intent intent=new Intent();
         intent.putExtra("islogin", true);

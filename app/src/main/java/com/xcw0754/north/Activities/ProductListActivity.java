@@ -59,7 +59,7 @@ public class ProductListActivity extends SwipeBackActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String whichone = bundle.getString("msg");
-        whichone = "电风扇";    //直接设置为电风扇了，不需要的时候要改。
+        //whichone = "电风扇";    //直接设置为电风扇了，不需要的时候要改。
         tv_title.setText(whichone);
 
 

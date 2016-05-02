@@ -41,7 +41,7 @@ public class RecyclerViewAdapter3 extends RecyclerView.Adapter<RecyclerViewHolde
     private ArrayList<oneProduct> products;
 
     //选中的item
-    private ArrayList<oneProduct>  checkList;
+    public ArrayList<oneProduct>  checkList;
 
 
     /**

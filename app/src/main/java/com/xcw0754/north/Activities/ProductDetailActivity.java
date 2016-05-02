@@ -53,6 +53,7 @@ public class ProductDetailActivity extends SwipeBackActivity {
 
 
 
+
     //TODO 产品的详情界面，尽量简单即可
 
     @Override

@@ -104,7 +104,7 @@
                         android:layout_width="1px"
                         android:layout_height="match_parent" />
 
-                    <!--收藏中心-->
+                    <!--礼物-->
                     <LinearLayout
                         android:id="@+id/id_collection_center_layout"
                         android:layout_width="0dp"
@@ -191,6 +191,7 @@
 
                     <!--待付款-->
                     <LinearLayout
+                        android:id="@+id/id_layout_pay"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
@@ -216,6 +217,7 @@
 
                     <!--待发货-->
                     <LinearLayout
+                        android:id="@+id/id_layout_delivery"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
@@ -240,6 +242,7 @@
 
                     <!--待收货-->
                     <LinearLayout
+                        android:id="@+id/id_layout_shouhuo"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
@@ -265,6 +268,7 @@
 
                     <!--待评价-->
                     <LinearLayout
+                        android:id="@+id/id_layout_pingjia"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
@@ -290,6 +294,7 @@
 
                     <!--售后-->
                     <LinearLayout
+                        android:id="@+id/id_layout_shouhou"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
@@ -331,6 +336,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1px" />
             <LinearLayout
+                android:id="@+id/id_layout_step"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/self_item_marginleft"
                 android:paddingRight="@dimen/self_item_marginright"
@@ -355,7 +361,7 @@
                     <TextView
                         android:textSize="@dimen/self_item_textsize"
                         android:layout_marginLeft="@dimen/self_item_marginleft"
-                        android:text="浏览记录"
+                        android:text="快速浏览"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -377,6 +383,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1px" />
             <LinearLayout
+                android:id="@+id/id_layout_comment"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/self_item_marginleft"
                 android:paddingRight="@dimen/self_item_marginright"
@@ -401,7 +408,7 @@
                     <TextView
                         android:textSize="@dimen/self_item_textsize"
                         android:layout_marginLeft="@dimen/self_item_marginleft"
-                        android:text="评价嗮单"
+                        android:text="主题社区"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -423,6 +430,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1px" />
             <LinearLayout
+                android:id="@+id/id_layout_yuyue"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/self_item_marginleft"
                 android:paddingRight="@dimen/self_item_marginright"
@@ -469,6 +477,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1px" />
             <LinearLayout
+                android:id="@+id/id_layout_baoxiu"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/self_item_marginleft"
                 android:paddingRight="@dimen/self_item_marginright"
@@ -515,6 +524,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1px" />
             <LinearLayout
+                android:id="@+id/id_layout_return"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/self_item_marginleft"
                 android:paddingRight="@dimen/self_item_marginright"
@@ -561,6 +571,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1px" />
             <LinearLayout
+                android:id="@+id/id_layout_fujin"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/self_item_marginleft"
                 android:paddingRight="@dimen/self_item_marginright"
@@ -610,6 +621,7 @@
 
 
             <LinearLayout
+                android:id="@+id/id_layout_faq"
                 android:orientation="horizontal"
                 android:layout_marginTop="15dp"
                 android:paddingLeft="@dimen/self_item_marginleft"

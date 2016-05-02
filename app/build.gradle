@@ -35,4 +35,5 @@ dependencies {
     compile 'com.github.paolorotolo:appintro:3.4.0'
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
     compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }

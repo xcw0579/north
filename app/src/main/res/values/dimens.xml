@@ -34,11 +34,12 @@
 
     <!--个人中心页面每个item的高度-->
     <dimen name="self_item_height">55dp</dimen>
-    <dimen name="self_item_textsize">18sp</dimen>
-    <dimen name="self_item_marginleft">20dp</dimen>
+    <dimen name="self_item_textsize">16sp</dimen>
+    <dimen name="self_item_marginleft">15dp</dimen>
     <dimen name="self_item_marginright">10dp</dimen>
     <dimen name="self_item_imgpadding">5dp</dimen>
 
     <!--搜索功能的热词字大小-->
     <dimen name="text_search_size">15dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -44,6 +44,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
+                            android:id="@+id/id_common_search_now"
                             android:src="@drawable/ic_search"
                             android:layout_weight="1"
                             android:layout_width="0dp"

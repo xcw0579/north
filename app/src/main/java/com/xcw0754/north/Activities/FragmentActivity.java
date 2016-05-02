@@ -45,6 +45,7 @@ import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.RecyclerV
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.MyLayoutManager;
 import com.xcw0754.north.Libraries.aboutRecycleView.TabSortRecyclerView.RecyclerViewAdapter;
 
+import com.xcw0754.north.MyApp;
 import com.xcw0754.north.R;
 
 import java.util.ArrayList;
@@ -160,6 +161,7 @@ public class FragmentActivity extends AppCompatActivity {
     private void handleSelf() {
         Title4.setVisibility(View.VISIBLE);
 
+
         if ( iv_self_head==null ) {
             iv_self_head = (ImageView) findViewById(R.id.id_self_iv_head);
             btn_self_login = (ImageButton) findViewById(R.id.id_self_btn_login);
@@ -168,6 +170,49 @@ public class FragmentActivity extends AppCompatActivity {
                     .load(R.drawable.tab_image_self_head_bg)
                     .into(iv_self_head_bg);
         }
+
+        //消息
+        ImageView xiaoxi2 = (ImageView) findViewById(R.id.id_common_xiaoxi1);
+        xiaoxi2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), XiaoxiActivity.class);
+                startActivity(intent);
+            }
+        });
+        //消息
+        ImageView setting = (ImageView) findViewById(R.id.id_common_shezhi);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PersonelMessageActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+        //购物车
+        LinearLayout addincar = (LinearLayout) findViewById(R.id.id_self_shop_car);
+        addincar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ShopCarActivity.class);
+                startActivity(intent);
+            }
+        });
+        //礼物
+        LinearLayout gift = (LinearLayout) findViewById(R.id.id_collection_center_layout);
+        gift.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DefaultActivity.class);
+                intent.putExtra("title", "礼物");
+                intent.putExtra("content", "您还没有收到礼物喔～");
+                startActivity(intent);
+            }
+        });
+
         //TODO 很多按钮需要绑定click，简单实现重要的几个即可。直接用临时变量了。
         //个人信息
         LinearLayout psn_msg = (LinearLayout) findViewById(R.id.id_layout_personel_message);
@@ -178,16 +223,133 @@ public class FragmentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //购物车
-        LinearLayout addincar = (LinearLayout) findViewById(R.id.id_self_shop_car);
-        addincar.setOnClickListener(new View.OnClickListener() {
+
+
+
+        //待付款
+        LinearLayout pay = (LinearLayout) findViewById(R.id.id_layout_pay);
+        pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ShopCarActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PayActivity.class);
+                startActivity(intent);
+            }
+        });
+        //待发货
+        LinearLayout delivery = (LinearLayout) findViewById(R.id.id_layout_delivery);
+        delivery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DeliveryActivity.class);
+                startActivity(intent);
+            }
+        });
+        //待收货
+        LinearLayout shouhuo = (LinearLayout) findViewById(R.id.id_layout_shouhuo);
+        shouhuo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), DefaultActivity.class);
+                intent.putExtra("title", "待收货");
+                intent.putExtra("content", "您当前没有待收货的商品");
+                startActivity(intent);
+            }
+        });
+        //待评价
+        LinearLayout pingjia = (LinearLayout) findViewById(R.id.id_layout_pingjia);
+        pingjia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), DefaultActivity.class);
+                intent.putExtra("title", "待评价");
+                intent.putExtra("content", "您当前没有待评价的商品");
+                startActivity(intent);
+            }
+        });
+        //售后服务
+        LinearLayout shouhou = (LinearLayout) findViewById(R.id.id_layout_shouhou);
+        shouhou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), DefaultActivity.class);
+                intent.putExtra("title", "售后服务");
+                intent.putExtra("content", "此功能正在努力开发中");
                 startActivity(intent);
             }
         });
 
+
+
+
+
+
+        //常见问题
+        LinearLayout faq = (LinearLayout) findViewById(R.id.id_layout_faq);
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FAQActivity.class);
+                startActivity(intent);
+            }
+        });
+        //浏览记录
+        LinearLayout step = (LinearLayout) findViewById(R.id.id_layout_step);
+        step.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), StepActivity.class);
+                startActivity(intent);
+            }
+        });
+        //主题社区
+        LinearLayout comment = (LinearLayout) findViewById(R.id.id_layout_comment);
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CommentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //我的预约
+        LinearLayout yuyue = (LinearLayout) findViewById(R.id.id_layout_yuyue);
+        yuyue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BookActivity.class);
+                startActivity(intent);
+            }
+        });
+        //我的预约
+        LinearLayout baoxiu = (LinearLayout) findViewById(R.id.id_layout_baoxiu);
+        baoxiu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), OnlineActivity.class);
+                startActivity(intent);
+            }
+        });
+        //退货记录
+        LinearLayout ret = (LinearLayout) findViewById(R.id.id_layout_return);
+        ret.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ReturnActivity.class);
+                startActivity(intent);
+            }
+        });
+        //附近门店
+        LinearLayout fujin = (LinearLayout) findViewById(R.id.id_layout_fujin);
+        fujin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FujinActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -204,6 +366,7 @@ public class FragmentActivity extends AppCompatActivity {
             btn_self_login.setVisibility(View.INVISIBLE);
             iv_self_head.setVisibility(View.VISIBLE);
         } else {
+
             //绑定登陆按钮切换到登录界面
             btn_self_login.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -298,6 +461,7 @@ public class FragmentActivity extends AppCompatActivity {
                         Log.d("sort","分类item被点击了。");
                         //TODO 点击item后将调出其他的activity进行显示，得传参数进去
                         Intent intent = new Intent(getApplicationContext(), ProductListActivity.class);
+                        data="电风扇";
                         intent.putExtra("msg", data);   //data是什么数据？
                         startActivity(intent);
                     }
@@ -308,8 +472,8 @@ public class FragmentActivity extends AppCompatActivity {
 
             // 设置Adapter
             for (int i = 0; i<7; i++) {
-                rvList.get(i).setAdapter( rvaList.get(i) );
-                rvList.get(i).setLayoutManager( new MyLayoutManager(getApplicationContext(), 3) );
+                rvList.get(i).setAdapter( rvaList.get(i));
+                rvList.get(i).setLayoutManager( new MyLayoutManager(getApplicationContext(), 3));
             }
             Log.d("sort", "又产生一次资源访问的请求");
         }
@@ -422,6 +586,14 @@ public class FragmentActivity extends AppCompatActivity {
 
         Title1.setVisibility(View.VISIBLE);
 
+        ImageView xiaoxi1 = (ImageView) findViewById(R.id.id_common_xiaoxi2);
+        xiaoxi1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), XiaoxiActivity.class);
+                startActivity(intent);
+            }
+        });
 
         convenientBanner1 = (ConvenientBanner) findViewById(R.id.id_home_adv_convenientBanner1);
         if( convenientBanner1!=null ) {

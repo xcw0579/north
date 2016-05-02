@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context="com.xcw0754.north.Activities.ReturnActivity">
+
+    <!--title-->
+    <include layout="@layout/common_header1" />
+
+
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="17dp"
+        android:text="您当前没有任何退货记录"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

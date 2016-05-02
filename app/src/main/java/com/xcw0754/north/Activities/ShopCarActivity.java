@@ -1,5 +1,6 @@
 package com.xcw0754.north.Activities;
 
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,7 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.internal.ObjectConstructor;
 import com.xcw0754.north.Libraries.SharedPreferences.SPUtils;
@@ -23,10 +26,12 @@ import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.MyLayoutM
 import com.xcw0754.north.Libraries.aboutRecycleView.SearchRecyclerView.RecyclerViewAdapter2;
 import com.xcw0754.north.Libraries.aboutRecycleView.ShopCarRecyclerView.MyLayoutManager3;
 import com.xcw0754.north.Libraries.aboutRecycleView.ShopCarRecyclerView.RecyclerViewAdapter3;
+import com.xcw0754.north.MyApp;
 import com.xcw0754.north.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.Semaphore;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,6 +48,10 @@ public class ShopCarActivity extends SwipeBackActivity {
     @Bind(R.id.id_btn_car_delete) Button deleteButton;
     @Bind(R.id.id_btn_car_buy) Button buyButton;
     @Bind(R.id.id_common_title) TextView tvTitle;
+    final private static Semaphore sema = new Semaphore(0); //同步用
+
+
+
 
 
     @Override
@@ -51,8 +60,6 @@ public class ShopCarActivity extends SwipeBackActivity {
         setContentView(R.layout.activity_shop_car);
         ButterKnife.bind(this);
         tvTitle.setText("购物车");
-
-
 
         init();
     }
@@ -115,11 +122,29 @@ public class ShopCarActivity extends SwipeBackActivity {
                         rvaCar.deleteAllChecked();
                     }
                 });
-                //TODO 购物车界面的购买按钮，未实现
+                //TODO 购物车界面的购买按钮
                 buyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //TODO 提交数据到服务端，更新一下待发货产品
+                        if( rvaCar.checkList.size()>0) {
+                            if( !MyApp.ContainEmail()) {
+                                Toast.makeText(getBaseContext(), "请先登录", Toast.LENGTH_LONG).show();
+                                return;
+                            }
 
+
+                            try {
+                                BuyItNow();
+                                sema.acquire();
+                            } catch (InterruptedException e) {
+                                Log.d("msg", "购买时出现异常了。");
+                                e.printStackTrace();
+                            }
+                            rvaCar.deleteAllChecked();  //必须删光
+                        } else {
+                            Toast.makeText(getBaseContext(), "未选中任何物品", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
@@ -131,6 +156,37 @@ public class ShopCarActivity extends SwipeBackActivity {
             LlayoutNO.setVisibility(View.VISIBLE);  //有了收藏的产品就要隐藏起来
             LlayoutYES.setVisibility(View.GONE);
         }
+    }
+
+
+    // 按下购买按钮之后
+    private void BuyItNow() {
+        Runnable requestTask = new Runnable() {
+            @Override
+            public void run() {
+                JsonObject json;
+                for(int i=0; i<rvaCar.checkList.size(); i++) {
+                    String Url = "http://10.0.3.2:5000/put/delivery";
+                    String response = HttpRequest.get(Url, true,
+                            "email", MyApp.getEmail(), "id", rvaCar.checkList.get(i).pos).body();
+
+                    Log.d("msg", response);
+
+                    json = new JsonParser().parse(response).getAsJsonObject();
+                    String errcode = json.get("errcode").getAsString();
+                    if ( !errcode.equals("1003") ) {
+                        Log.d("msg", "购物车的购买按钮在提交数据到服务端时出错了。");
+                        //Toast.makeText(getBaseContext(), "连接服务器出错", Toast.LENGTH_LONG).show();
+                        return ;
+                    }
+                }
+                sema.release();
+                MyApp.updataDelivery(getApplicationContext());     //待发货的产品更新一下
+            }
+        };
+        new Thread(requestTask).start();
+        Toast.makeText(getApplicationContext(), "购买成功", Toast.LENGTH_LONG).show();
+        Log.d("msg", "立即购买按钮已经被按下，数据应该也请求了。");
     }
 
 

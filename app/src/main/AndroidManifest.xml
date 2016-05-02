@@ -51,6 +51,47 @@
         <activity
             android:name=".Activities.SearchSomethingActivity"
             android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.DeliveryActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.FAQActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.StepActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.XiaoxiActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.BookActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.PayActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.OnlineActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.ReturnActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.FujinActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.CommentActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.DefaultActivity"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".Activities.SettingActivity"
+            android:theme="@style/CommonTheme" />
+
+        <activity
+            android:name=".Activities.WebviewActivity"
+            android:theme="@style/CommonTheme" />
+
 
         <!--
          ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -60,7 +101,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Activities.DeliveryActivity"></activity>
+
     </application>
 
 </manifest>
