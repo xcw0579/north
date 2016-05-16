@@ -596,7 +596,9 @@ public class FragmentActivity extends AppCompatActivity {
         });
 
         convenientBanner1 = (ConvenientBanner) findViewById(R.id.id_home_adv_convenientBanner1);
-        if( convenientBanner1!=null ) {
+        if( convenientBanner1!=null && networkImages1.size()==0 ) {
+            convenientBanner1.setCanLoop(true);
+
             for(int i=0; i<4; i++)
                 networkImages1.add("http://10.0.3.2:5000/source/home/ban1/" + i + ".jpg");
 

@@ -36,4 +36,5 @@ dependencies {
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
     compile 'com.bigkoo:convenientbanner:2.0.5'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.github.dexafree:materiallist:3.2.1'
 }

@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="温暖你的家"
+                android:text="商品分类"
                 android:textSize="@dimen/CommonTitleSize"/>
         </LinearLayout>
 
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="珍惜你的收藏"
+                android:text="我的收藏"
                 android:textSize="@dimen/CommonTitleSize"/>
         </LinearLayout>
 
